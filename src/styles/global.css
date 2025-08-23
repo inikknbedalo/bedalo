@@ -1,0 +1,8 @@
+/* Import Tailwind's base, components, and utilities styles */
+@import "tailwindcss";
+
+/* Import AOS styles */
+@import 'aos/dist/aos.css';
+
+/* Import Font Awesome styles from node_modules */
+@import '@fortawesome/fontawesome-free/css/all.min.css';

@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "backgroundUrl": "../assets/images/ngedan.webp",
+    "judul": "Selamat Datang di Dusun Bedalo",
+    "subjudul": "Menjelajahi Keindahan, Kearifan Lokal, dan Potensi Tersembunyi di Jantung Dusun."
+  },
+  "profilSingkat": {
+    "fotoUrl": "https://placehold.co/300x300/e2e8f0/333333?text=Foto+Kepala+Dusun",
+    "namaKepalaDusun": "Sumindar",
+    "jabatan": "Kepala Dusun Bedalo",
+    "sambutan": [
+      "Assalamu'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Tuhan Yang Maha Esa, kami dapat menghadirkan website resmi Dusun Bedalo. Website ini merupakan wujud komitmen kami untuk memberikan informasi yang transparan dan membuka pintu bagi siapa saja yang ingin mengenal dusun kami lebih dekat.",
+      "Kami berharap, melalui media digital ini, potensi-potensi yang kami miliki, baik dari keindahan alam, kekayaan budaya, hingga kreativitas warga, dapat dikenal lebih luas. Kami mengundang Anda untuk menjelajahi setiap sudut informasi di website ini dan merasakan kehangatan Dusun Bedalo. Selamat datang!"
+    ]
+  },
+  "potensiUnggulan": [
+    {
+      "judul": "UMKM & Produk Lokal",
+      "deskripsi": "Temukan berbagai produk kreatif dan olahan pangan hasil karya tangan-tangan terampil warga.",
+      "link": "potensi.html#umkm"
+    },
+    {
+      "judul": "Pertanian & Perkebunan",
+      "deskripsi": "Lahan subur yang menjadi sumber utama komoditas pangan berkualitas di dusun kami.",
+      "link": "potensi.html#pertanian"
+    },
+    {
+      "judul": "Pariwisata Alam",
+      "deskripsi": "Jelajahi destinasi alam yang masih asri dan memukau, cocok untuk melepas penat.",
+      "link": "pariwisata.html#destinasi"
+    }
+  ],
+  "pariwisata": {
+    "deskripsi": "Dari pemandangan alam yang memukau hingga tradisi yang lestari, Dusun Bedalo menawarkan pengalaman yang tak terlupakan. Temukan destinasi wisata unik dan ikuti kalender acara budaya kami.",
+    "gambar": [
+      {
+        "url": "https://placehold.co/400x400/a0aec0/ffffff?text=Wisata+1",
+        "alt": "Destinasi Wisata 1"
+      },
+      {
+        "url": "https://placehold.co/400x400/b794f4/ffffff?text=Budaya",
+        "alt": "Kesenian Budaya"
+      },
+      {
+        "url": "https://placehold.co/600x400/63b3ed/ffffff?text=Wisata+2",
+        "alt": "Destinasi Wisata 2"
+      },
+      {
+        "url": "https://placehold.co/400x400/f6ad55/ffffff?text=Tradisi",
+        "alt": "Tradisi Lokal"
+      }
+    ]
+  },
+  "galeri": [
+    {
+      "url": "https://placehold.co/600x400/a0aec0/ffffff?text=Kegiatan+Warga",
+      "alt": "Galeri Kegiatan Warga"
+    },
+    {
+      "url": "https://placehold.co/600x400/f6ad55/ffffff?text=Anak-anak",
+      "alt": "Galeri Anak-anak"
+    },
+    {
+      "url": "https://placehold.co/600x400/63b3ed/ffffff?text=Pemandangan",
+      "alt": "Galeri Pemandangan"
+    },
+    {
+      "url": "https://placehold.co/600x400/b794f4/ffffff?text=Upacara+Adat",
+      "alt": "Galeri Upacara Adat"
+    }
+  ]
+}

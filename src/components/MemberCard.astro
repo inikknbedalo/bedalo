@@ -1,0 +1,46 @@
+---
+export interface Props {
+  member: {
+    fotoUrl: string;
+    nama: string;
+    prodi: string;
+    instagramUrl?: string;
+  };
+}
+const { member } = Astro.props;
+
+// For this design, it's clearest to have the full markup inside the conditional.
+// This allows us to apply the hover effects to the entire card link.
+---
+{member.instagramUrl ? (
+  // Clickable version for members with an Instagram link
+  <a 
+    href={member.instagramUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+  >
+    <img 
+      src={member.fotoUrl} 
+      alt={`Foto ${member.nama}`} 
+      class="w-20 h-20 rounded-lg object-cover flex-shrink-0 border-2 border-gray-100" 
+    />
+    <div class="text-left">
+        <h4 class="font-bold text-lg text-gray-800 leading-tight">{member.nama}</h4>
+        <p class="text-gray-500">{member.prodi}</p>
+    </div>
+  </a>
+) : (
+  // Non-clickable version for members without a link
+  <div class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md">
+    <img 
+      src={member.fotoUrl} 
+      alt={`Foto ${member.nama}`} 
+      class="w-20 h-20 rounded-lg object-cover flex-shrink-0 border-2 border-gray-100" 
+    />
+    <div class="text-left">
+      <h4 class="font-bold text-lg text-gray-800 leading-tight">{member.nama}</h4>
+      <p class="text-gray-500">{member.prodi}</p>
+    </div>
+  </div>
+)}

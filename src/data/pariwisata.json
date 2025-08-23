@@ -1,0 +1,98 @@
+{
+  "destinasi": [
+    {
+      "gambarUrl": "https://placehold.co/800x500/a0aec0/ffffff?text=Air+Terjun+Bedalo",
+      "altText": "Pantai Ngedan",
+      "judul": "Pantai Ngedan",
+      "deskripsi": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suara gemericik air yang menenangkan dan udara sejuk menjadikannya tempat sempurna untuk melepas penat.",
+      "petaLink": "#"
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x500/a0aec0/ffffff?text=Air+Terjun+Bedalo",
+      "altText": "Pantai Ngluwen",
+      "judul": "Pantai Ngluwen",
+      "deskripsi": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suara gemericik air yang menenangkan dan udara sejuk menjadikannya tempat sempurna untuk melepas penat.",
+      "petaLink": "#"
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x500/a0aec0/ffffff?text=Air+Terjun+Bedalo",
+      "altText": "Pantai Ngluwen",
+      "judul": "Pantai Butuh",
+      "deskripsi": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suara gemericik air yang menenangkan dan udara sejuk menjadikannya tempat sempurna untuk melepas penat.",
+      "petaLink": "#"
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x500/63b3ed/ffffff?text=Bukit+Harapan",
+      "altText": "Bukit",
+      "judul": "Bukit Harapan",
+      "deskripsi": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Nikmati pemandangan matahari terbit atau terbenam yang spektakuler.",
+      "petaLink": "#"
+    }
+  ],
+  "tradisi": [
+    {
+      "gambarUrl": "https://placehold.co/800x600/f6ad55/ffffff?text=Upacara+Adat",
+      "altText": "Upacara Adat",
+      "judul": "Upacara Sedekah Bumi",
+      "deskripsi": [
+        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Tradisi ini merupakan wujud syukur warga kepada Tuhan atas hasil panen yang melimpah. Diadakan setahun sekali, acara ini diisi dengan doa bersama dan makan-makan.",
+        "Seluruh warga bergotong-royong mempersiapkan acara, menunjukkan kuatnya rasa kebersamaan di dusun kami."
+      ]
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x600/f6ad55/ffffff?text=Upacara+Adat",
+      "altText": "Upacara Adat",
+      "judul": "Upacara Sedekah Ardi",
+      "deskripsi": [
+        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Tradisi ini merupakan wujud syukur warga kepada Tuhan atas hasil panen yang melimpah. Diadakan setahun sekali, acara ini diisi dengan doa bersama dan makan-makan.",
+        "Seluruh warga bergotong-royong mempersiapkan acara, menunjukkan kuatnya rasa kebersamaan di dusun kami."
+      ]
+    }
+  ],
+  "kesenian": [
+    {
+      "gambarUrl": "https://placehold.co/800x600/b794f4/ffffff?text=Tari+Tradisional",
+      "altText": "Tari Tarian",
+      "judul": "Tari Topeng Ireng",
+      "deskripsi": [
+        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Tarian ini merupakan salah satu kesenian kebanggaan Dusun Bedalo yang sering ditampilkan dalam berbagai acara budaya. Gerakannya yang energik dan kostumnya yang unik selalu memukau penonton.",
+        "Sanggar tari kami terbuka bagi siapa saja yang ingin belajar dan melestarikan budaya ini."
+      ]
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x600/b794f4/ffffff?text=Tari+Tradisional",
+      "altText": "Tari Tarian",
+      "judul": "Tari Tarian",
+      "deskripsi": [
+        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Tarian ini merupakan salah satu kesenian kebanggaan Dusun Bedalo yang sering ditampilkan dalam berbagai acara budaya. Gerakannya yang energik dan kostumnya yang unik selalu memukau penonton.",
+        "Sanggar tari kami terbuka bagi siapa saja yang ingin belajar dan melestarikan budaya ini."
+      ]
+    },
+    {
+      "gambarUrl": "https://placehold.co/800x600/b794f4/ffffff?text=Tari+Tradisional",
+      "altText": "Tari Tarian",
+      "judul": "Tari Turu",
+      "deskripsi": [
+        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Tarian ini merupakan salah satu kesenian kebanggaan Dusun Bedalo yang sering ditampilkan dalam berbagai acara budaya. Gerakannya yang energik dan kostumnya yang unik selalu memukau penonton.",
+        "Sanggar tari kami terbuka bagi siapa saja yang ingin belajar dan melestarikan budaya ini."
+      ]
+    }
+  ],
+  "kalender": [
+    {
+      "acara": "Upacara Sedekah Ardi",
+      "deskripsi": "Wujud syukur atas hasil panen.",
+      "tanggal": "Agustus 2024"
+    },
+    {
+      "acara": "Pentas Seni & Budaya",
+      "deskripsi": "Perayaan hari kemerdekaan.",
+      "tanggal": "Agustus 2024"
+    },
+    {
+      "acara": "Festival Dolanan Anak",
+      "deskripsi": "Melestarikan permainan tradisional.",
+      "tanggal": "Oktober 2024"
+    }
+  ]
+}

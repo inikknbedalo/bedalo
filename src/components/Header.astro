@@ -1,0 +1,46 @@
+---
+// The header now accepts a 'currentPage' prop to know which link to highlight.
+export interface Props {
+	currentPage: string;
+}
+const { currentPage } = Astro.props;
+---
+<header class="bg-white shadow-md sticky top-0 z-50 relative">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-gray-800">Dusun Bedalo</a>
+        <div class="hidden md:flex space-x-6 items-center">
+            {/* We use a ternary operator: condition ? if_true : if_false */}
+            <a href="/" class={currentPage === 'Beranda' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Beranda</a>
+            <a href="/profil" class={currentPage === 'Profil' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Profil</a>
+            <a href="/potensi" class={currentPage === 'Potensi' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Potensi</a>
+            <a href="/pariwisata" class={currentPage === 'Pariwisata' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Pariwisata</a>
+            <a href="/galeri" class={currentPage === 'Galeri' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Galeri</a>
+            <a href="/kontak" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">Kontak</a>
+        </div>
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full shadow-lg">
+        <a href="/" class={currentPage === 'Beranda' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Beranda</a>
+        <a href="/profil" class={currentPage === 'Profil' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Profil</a>
+        <a href="/potensi" class={currentPage === 'Potensi' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Potensi</a>
+        <a href="/pariwisata" class={currentPage === 'Pariwisata' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Pariwisata</a>
+        <a href="/galeri" class={currentPage === 'Galeri' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Galeri</a>
+        <a href="/kontak" class={currentPage === 'Kontak' ? 'block px-6 py-3 text-blue-600 bg-gray-100' : 'block px-6 py-3 text-gray-600 hover:bg-gray-100'}>Kontak</a>
+    </div>
+</header>
+
+<script>
+    // Script for mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+</script>

@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import data from '../data/galeri.json';
+---
+<Layout title="Galeri | Website Dusun Bedalo">
+    <Header currentPage="Galeri" />
+
+    <main>
+        <section class="bg-teal-600 text-white py-12">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl font-bold" data-aos="fade-down">Galeri Dusun Bedalo</h1>
+                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Momen dan Kenangan dalam Bingkai</p>
+            </div>
+        </section>
+
+        <section id="foto" class="py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Galeri Foto</h2>
+                <PhotoGallery fotoItems={data.foto} />
+            </div>
+        </section>
+        
+        <section id="video" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Galeri Video</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {data.video.map((item, index) => (
+                        <div class="rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay={100 + index * 100}>
+                           <div class="aspect-w-16 aspect-h-9 bg-black">
+                               <iframe src={item.url} title={item.judul} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                           </div>
+                            <div class="p-4"><h3 class="font-bold text-gray-800">{item.judul}</h3></div>
+                       </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

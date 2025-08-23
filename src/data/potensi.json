@@ -1,0 +1,92 @@
+{
+  "umkm": [
+    {
+      "gambarUrl": "https://placehold.co/600x400/a0aec0/ffffff?text=Produk+1",
+      "altText": "Produk Keripik Singkong",
+      "judul": "Keripik Singkong",
+      "deskripsi": "Renyah dan gurih, dibuat dari singkong pilihan dari kebun sendiri.",
+      "harga": "Rp 15.000",
+      "kontakLink": "https://wa.me/6283107581144"
+    },
+    {
+      "gambarUrl": "https://placehold.co/600x400/f6ad55/ffffff?text=Produk+2",
+      "altText": "Produk Gula Aren",
+      "judul": "Gula Aren Asli",
+      "deskripsi": "Manis alami tanpa bahan pengawet, diproses secara tradisional.",
+      "harga": "Rp 25.000",
+      "kontakLink": "https://wa.me/6283107581144"
+    },
+    {
+      "gambarUrl": "https://placehold.co/600x400/f6ad55/ffffff?text=Produk+2",
+      "altText": "Produk Gula Aren",
+      "judul": "Layangan",
+      "deskripsi": "Manis alami tanpa bahan pengawet, diproses secara tradisional.",
+      "harga": "Rp 25.000",
+      "kontakLink": "https://wa.me/6283107581144"
+    },
+    {
+      "gambarUrl": "https://placehold.co/600x400/63b3ed/ffffff?text=Produk+3",
+      "altText": "Produk Tas Anyaman",
+      "judul": "Tas Anyaman Pandan",
+      "deskripsi": "Kuat dan stylish, hasil kerajinan tangan ibu-ibu dusun.",
+      "harga": "Rp 75.000",
+      "kontakLink": "https://wa.me/6283107581144"
+    },
+    {
+      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+4",
+      "altText": "Produk Kopi Bubuk",
+      "judul": "Kopi Robusta Bedalo",
+      "deskripsi": "Aroma khas dari biji kopi pilihan yang ditanam dan diolah langsung oleh petani lokal.",
+      "harga": "Rp 35.000",
+      "kontakLink": "https://wa.me/6283107581144"
+    },
+    {
+      "judul": "Gaplek",
+      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+5",
+      "deskripsi": "Singkong yang dijemur.",
+      "harga": "Rp 1.600 per kg.",
+      "kontakLink": "08123456789"
+    }
+  ],
+  "pertanian": {
+    "gambarUrl": "https://placehold.co/800x600/a0aec0/ffffff?text=Lahan+Pertanian",
+    "altText": "Lahan Pertanian",
+    "judul": "Kesuburan Tanah Bedalo",
+    "deskripsi": "Lahan pertanian di Dusun Bedalo sangat subur dan menjadi tumpuan hidup sebagian besar warga. Berbagai komoditas unggulan dihasilkan dari sini.",
+    "komoditas": [
+      {
+        "nama": "Padi",
+        "icon": "fas fa-seedling text-green-500"
+      },
+      {
+        "nama": "Sayur-mayur",
+        "icon": "fas fa-leaf text-green-500"
+      },
+      {
+        "nama": "Cabai",
+        "icon": "fas fa-pepper-hot text-red-500"
+      },
+      {
+        "nama": "Buah-buahan",
+        "icon": "fas fa-lemon text-yellow-500"
+      }
+    ]
+  },
+  "lainnya": [
+    {
+      "icon": "fas fa-cow text-5xl text-blue-500 mb-4",
+      "judul": "Peternakan",
+      "deskripsi": "Pengembangan ternak sapi, kambing, dan ayam untuk memenuhi kebutuhan pangan dan ekonomi warga."
+    },
+    {
+      "icon": "fas fa-fish text-5xl text-cyan-500 mb-4",
+      "judul": "Perikanan",
+      "deskripsi": "Pemanfaatan sumber air untuk budidaya ikan air tawar sebagai sumber protein dan pendapatan tambahan."
+    },
+    {
+      "icon": "fas fa-users-cog text-5xl text-gray-500 mb-4",
+      "judul": "Jasa & Keahlian",
+      "deskripsi": "Berbagai keahlian warga seperti pertukangan, kerajinan tangan, dan jasa lainnya yang menopang ekonomi lokal."
+    }
+  ]
+}

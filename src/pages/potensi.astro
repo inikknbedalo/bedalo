@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OriginalSlider from '../components/OriginalSlider.astro';
+import data from '../data/potensi.json';
+---
+<Layout title="Potensi | Website Dusun Bedalo">
+    <Header currentPage="Potensi" />
+
+    <main>
+        <section class="bg-green-600 text-white py-12">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl font-bold" data-aos="fade-down">Potensi Dusun Bedalo</h1>
+                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Sumber Daya dan Kreativitas Warga</p>
+            </div>
+        </section>
+
+        <section id="umkm" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-4" data-aos="fade-up">UMKM & Produk Unggulan</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Karya kreatif dan produk olahan dari tangan-tangan terampil warga Dusun Bedalo.</p>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <OriginalSlider umkmItems={data.umkm} />
+                </div>
+            </div>
+        </section>
+
+        <section id="pertanian" class="py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Pertanian & Perkebunan</h2>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <img src={data.pertanian.gambarUrl} alt={data.pertanian.altText} class="rounded-lg shadow-xl w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">{data.pertanian.judul}</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">{data.pertanian.deskripsi}</p>
+                        <div class="grid grid-cols-2 gap-4 text-gray-700">
+                            {data.pertanian.komoditas.map(k => (
+                                <div class="flex items-center gap-2"><i class={k.icon}></i> {k.nama}</div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lainnya" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Potensi Lainnya</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    {data.lainnya.map((item, index) => (
+                         <div class="text-center p-6 shadow-md rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay={100 + index * 100}>
+                            <i class={item.icon}></i>
+                            <h4 class="text-xl font-bold text-gray-800 my-2">{item.judul}</h4>
+                            <p class="text-gray-600">{item.deskripsi}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>

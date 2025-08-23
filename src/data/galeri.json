@@ -1,0 +1,54 @@
+{
+  "foto": [
+    {
+      "url": "https://placehold.co/600x400/a0aec0/ffffff?text=Kegiatan+Warga",
+      "alt": "Kegiatan Warga"
+    },
+    {
+      "url": "https://placehold.co/600x400/f6ad55/ffffff?text=Anak-anak+Bermain",
+      "alt": "Anak-anak Bermain"
+    },
+    {
+      "url": "https://placehold.co/600x400/63b3ed/ffffff?text=Pemandangan+Sawah",
+      "alt": "Pemandangan Sawah"
+    },
+    {
+      "url": "https://placehold.co/600x400/b794f4/ffffff?text=Upacara+Adat",
+      "alt": "Upacara Adat"
+    },
+    {
+      "url": "https://placehold.co/600x400/48bb78/ffffff?text=Hasil+Panen",
+      "alt": "Hasil Panen"
+    },
+    {
+      "url": "https://placehold.co/600x400/ed8936/ffffff?text=Produk+UMKM",
+      "alt": "Produk UMKM"
+    },
+    {
+      "url": "https://placehold.co/600x400/9f7aea/ffffff?text=Kesenian+Lokal",
+      "alt": "Kesenian Lokal"
+    },
+    {
+      "url": "https://placehold.co/600x400/38b2ac/ffffff?text=Gotong+Royong",
+      "alt": "Gotong Royong"
+    }
+  ],
+  "video": [
+    {
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "judul": "Profil Singkat Dusun Bedalo"
+    },
+    {
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "judul": "Liputan Acara Sedekah Bumi"
+    },
+    {
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "judul": "Keseruan Festival Dolanan Anak"
+    },
+    {
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "judul": "Pentas Seni Tari Topeng Ireng"
+    }
+  ]
+}

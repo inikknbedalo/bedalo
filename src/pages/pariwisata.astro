@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import data from '../data/pariwisata.json';
+---
+<Layout title="Pariwisata & Budaya | Website Dusun Bedalo">
+    <Header currentPage="Pariwisata" />
+
+    <main>
+        <section class="bg-purple-600 text-white py-12">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl font-bold" data-aos="fade-down">Pariwisata & Budaya</h1>
+                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Pesona Alam dan Kekayaan Tradisi Dusun Bedalo</p>
+            </div>
+        </section>
+
+        <section id="destinasi" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-4" data-aos="fade-up">Destinasi Wisata</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Jelajahi sudut-sudut indah di Dusun Bedalo yang menawarkan ketenangan dan pemandangan memukau.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {data.destinasi.map((item, index) => (
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay={200 + index * 100}>
+                            <img src={item.gambarUrl} alt={item.altText} class="w-full h-64 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">{item.judul}</h3>
+                                <p class="text-gray-600 mb-4">{item.deskripsi}</p>
+                                <a href={item.petaLink} class="font-semibold text-blue-600 hover:underline">Lihat di Peta &rarr;</a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section id="tradisi" class="py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Adat Istiadat & Tradisi</h2>
+                {data.tradisi.map((item, index) => {
+                    {/* This is the logic for the alternating layout.
+                        If the index is odd (1, 3, ...), we add the 'md:flex-row-reverse' class.
+                        Otherwise, we add 'md:flex-row'. */}
+                    const layoutClass = index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row';
+                    const fade1 = index % 2 !== 0 ? 'fade-left' : 'fade-right';
+                    const fade2 = index % 2 !== 0 ? 'fade-right' : 'fade-left';
+                    return (
+                        <div class={`flex flex-col ${layoutClass} items-center gap-12 mb-12`}>
+                            <div class="md:w-1/2" data-aos={fade1}>
+                                <img src={item.gambarUrl} alt={item.altText} class="rounded-lg shadow-xl w-full h-full object-cover" />
+                            </div>
+                            <div class="md:w-1/2" data-aos={fade2}>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-4">{item.judul}</h3>
+                                {item.deskripsi.map(p => <p class="text-gray-600 leading-relaxed mb-4">{p}</p>)}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </section>
+        
+        <section id="kesenian" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Kesenian & Budaya</h2>
+                {data.kesenian.map((item, index) => {
+                    {/* We apply the same alternating logic here. */}
+                    const layoutClass = index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row';
+                    const fade1 = index % 2 !== 0 ? 'fade-left' : 'fade-right';
+                    const fade2 = index % 2 !== 0 ? 'fade-right' : 'fade-left';
+                    return (
+                        <div class={`flex flex-col ${layoutClass} items-center gap-12 mb-12`}>
+                            <div class="md:w-1/2" data-aos={fade1}>
+                                <img src={item.gambarUrl} alt={item.altText} class="rounded-lg shadow-xl w-full h-full object-cover" />
+                            </div>
+                            <div class="md:w-1/2" data-aos={fade2}>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-4">{item.judul}</h3>
+                                {item.deskripsi.map(p => <p class="text-gray-600 leading-relaxed mb-4">{p}</p>)}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </section>
+
+        <section id="kalender" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Kalender Acara Budaya</h2>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg" data-aos="zoom-in">
+                    <ul class="divide-y divide-gray-200">
+                        {data.kalender.map(item => (
+                            <li class="py-4 flex items-center justify-between">
+                                <div>
+                                    <p class="font-semibold text-gray-800">{item.acara}</p>
+                                    <p class="text-sm text-gray-500">{item.deskripsi}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">{item.tanggal}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

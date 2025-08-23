@@ -1,0 +1,33 @@
+{
+  "kontakPemerintah": [
+    {
+      "fotoUrl": "https://placehold.co/100x100/e2e8f0/333333?text=Foto",
+      "nama": "Budi Santoso",
+      "jabatan": "Kepala Dusun",
+      "telepon": "081234567890"
+    },
+    {
+      "fotoUrl": "https://placehold.co/100x100/e2e8f0/333333?text=Foto",
+      "nama": "Siti Aminah",
+      "jabatan": "Ketua RW 01",
+      "telepon": "081234567891"
+    },
+    {
+      "fotoUrl": "https://placehold.co/100x100/e2e8f0/333333?text=Foto",
+      "nama": "Agus Wijaya",
+      "jabatan": "Ketua RT 01",
+      "telepon": "081234567892"
+    }
+  ],
+  "formAspirasi": {
+    "judul": "Punya Ide atau Masukan?",
+    "deskripsi": "Kami sangat terbuka untuk menerima aspirasi, kritik, dan saran dari seluruh warga demi kemajuan Dusun Bedalo. Silakan sampaikan melalui formulir di samping.",
+    "formActionUrl": "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfWaCgBA-cNraUbTmOGjlmrZQ-99edYMdUSkbA-kQBtZm6QOw/formResponse",
+    "entry": {
+      "nama": "entry.2116275708",
+      "kontak": "entry.175133211",
+      "subjek": "entry.1266128475",
+      "pesan": "entry.1942425125"
+    }
+  }
+}
