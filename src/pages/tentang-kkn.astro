@@ -3,21 +3,49 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import data from '../data/tentang-kkn.json';
-// 1. Import the new MemberCard component
 import MemberCard from '../components/MemberCard.astro';
+
+// 1. Impor komponen Image dan gambar baru untuk bagian pengantar
+import { Image } from 'astro:assets';
+import kknImage from '../assets/images/kkn-team.webp'; 
+// (Ganti 'kkn-team.webp' dengan nama file gambar Anda)
 ---
 <Layout title={`${data.judulHalaman.judul} | Website Dusun Bedalo`}>
     <Header currentPage="Tentang KKN" />
     <main>
-        {/* ... other sections ... */}
-        <section class="py-20 overflow-hidden">
+        <section class="bg-orange-500 text-white py-12">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl font-bold" data-aos="fade-down">{data.judulHalaman.judul}</h1>
+                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">{data.judulHalaman.universitas}</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <Image src={kknImage} alt="Tim KKN UIN Sunan Kalijaga" class="rounded-xl shadow-lg w-full h-full object-cover"/>
+                    </div>
+                    <div data-aos="fade-left" data-aos-delay="100">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">{data.pengantar.judul}</h2>
+                        <p class="text-gray-600 leading-relaxed">{data.pengantar.deskripsi}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-100">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">{data.anggota.judul}</h2>
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">{data.anggota.judul}</h2>
+                    <p class="text-gray-600 mb-12" data-aos="fade-up" data-aos-delay="100">
+                        Kami adalah tim mahasiswa yang berdedikasi untuk memberikan kontribusi positif kepada masyarakat Dusun Bedalo melalui program kerja yang inovatif dan bermanfaat.
+                    </p>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
                     {data.anggota.tim.map((item, index) => (
                         <div data-aos="fade-up" data-aos-delay={100 + (index * 50)}>
-                            {/* 3. Use the new component and pass the member data */}
                             <MemberCard member={item} />
                         </div>
                     ))}
