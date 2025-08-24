@@ -33,7 +33,7 @@ import data from '../data/galeri.json';
                     {data.video.map((item, index) => (
                         <div class="rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay={100 + index * 100}>
                            <div class="aspect-w-16 aspect-h-9 bg-black">
-                               <iframe src={item.url} title={item.judul} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                               <iframe loading="lazy" src={item.url} title={item.judul} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
                            </div>
                             <div class="p-4"><h3 class="font-bold text-gray-800">{item.judul}</h3></div>
                        </div>
