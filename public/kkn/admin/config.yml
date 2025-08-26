@@ -1,17 +1,18 @@
+# Backend configuration for GitHub
 backend:
   name: github
   repo: inikknbedalo/bedalo
-  branch: main # Branch to update (optional; defaults to master)
+  branch: main
   base_url: https://bedalo.pages.dev
   auth_endpoint: /api/auth
 
-# Konfigurasi media yang dioptimalkan untuk Astro
-# Gambar akan disimpan di dalam 'src' agar bisa dioptimasi oleh Astro <Image>
+# Media files will be stored in the source directory to be processed by Astro
 media_folder: "src/assets/images"
-public_folder: "/assets/images" # Path relatif untuk pratinjau di CMS
+public_folder: "/assets/images"
 
-# Setiap file .json akan menjadi koleksinya sendiri untuk kemudahan pengelolaan.
+# Collections define the content structure for the CMS
 collections:
+  # 1. Halaman: Beranda
   - name: "beranda"
     label: "Halaman: Beranda"
     files:
@@ -19,13 +20,15 @@ collections:
         label: "Konten Halaman Beranda"
         name: "beranda"
         fields:
-          - { name: "hero", label: "Hero", widget: "object", fields: [
-              { label: "Teks Alternatif Gambar", name: "imageAlt", widget: "string" },
-              { label: "Judul", name: "judul", widget: "string" },
-              { label: "Subjudul", name: "subjudul", widget: "string" }
-            ]}
+          - name: "hero"
+            label: "Hero Section"
+            widget: "object"
+            fields:
+              - { label: "Teks Alternatif Gambar", name: "imageAlt", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Subjudul", name: "subjudul", widget: "string" }
           - name: "profilSingkat"
-            label: "Profil Singkat"
+            label: "Profil Singkat Kepala Dusun"
             widget: "object"
             fields:
               - { label: "Foto Kepala Dusun", name: "fotoUrl", widget: "image" }
@@ -34,8 +37,36 @@ collections:
               - name: "sambutan"
                 label: "Sambutan (per paragraf)"
                 widget: "list"
-                field: { label: "Paragraf", widget: "text", name: "paragraf" } # TAMBAHKAN INI
+                field: { label: "Paragraf", name: "paragraf", widget: "text" }
+          - name: "potensiUnggulan"
+            label: "Potensi Unggulan"
+            widget: "list"
+            summary: "{{fields.judul}}"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Link Halaman", name: "link", widget: "string" }
+          - name: "pariwisata"
+            label: "Seksi Pariwisata"
+            widget: "object"
+            fields:
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - name: "gambar"
+                label: "Gambar Pariwisata"
+                widget: "list"
+                summary: "{{fields.alt}}"
+                fields:
+                  - { label: "Gambar", name: "url", widget: "image" }
+                  - { label: "Teks Alternatif", name: "alt", widget: "string" }
+          - name: "galeri"
+            label: "Seksi Galeri"
+            widget: "list"
+            summary: "{{fields.alt}}"
+            fields:
+              - { label: "Gambar", name: "url", widget: "image" }
+              - { label: "Teks Alternatif", name: "alt", widget: "string" }
 
+  # 2. Halaman: Profil
   - name: "profil"
     label: "Halaman: Profil"
     files:
@@ -46,28 +77,81 @@ collections:
           - name: "sejarah"
             label: "Sejarah (per paragraf)"
             widget: "list"
-            field: { label: "Paragraf", widget: "text", name: "paragraf" } # TAMBAHKAN INI
-          - { name: "visiMisi", label: "Visi & Misi", widget: "object", fields: [
-              { label: "Visi", name: "visi", widget: "string" },
-              { label: "Misi", name: "misi", widget: "list" }
-            ]}
-          # ... sisa field profil ...
-          - { name: "strukturPemerintahan", label: "Struktur Pemerintahan", widget: "list", summary: "{{fields.nama}}", fields: [
-              { label: "Foto", name: "fotoUrl", widget: "image" }, { label: "Nama", name: "nama", widget: "string" }, { label: "Jabatan", name: "jabatan", widget: "string" }
-            ]}
-          - { name: "demografi", label: "Demografi", widget: "object", fields: [
-              { label: "Jumlah Penduduk", name: "jumlahPenduduk", widget: "string" },
-              { label: "Laki-laki", name: "lakiLaki", widget: "string" },
-              { label: "Perempuan", name: "perempuan", widget: "string" },
-              { label: "Mata Pencaharian", name: "mataPencaharian", widget: "list" }
-            ]}
+            field: { label: "Paragraf", name: "paragraf", widget: "text" }
+          - name: "visiMisi"
+            label: "Visi & Misi"
+            widget: "object"
+            fields:
+              - { label: "Visi", name: "visi", widget: "string" }
+              - name: "misi"
+                label: "Misi"
+                widget: "list"
+                field: { label: "Poin Misi", name: "misi_item", widget: "string" }
+          - name: "strukturPemerintahan"
+            label: "Struktur Pemerintahan"
+            widget: "list"
+            summary: "{{fields.nama}} - {{fields.jabatan}}"
+            fields:
+              - { label: "Foto", name: "fotoUrl", widget: "image" }
+              - { label: "Nama", name: "nama", widget: "string" }
+              - { label: "Jabatan", name: "jabatan", widget: "string" }
+          - name: "demografi"
+            label: "Demografi"
+            widget: "object"
+            fields:
+              - { label: "Jumlah Penduduk", name: "jumlahPenduduk", widget: "string" }
+              - { label: "Laki-laki", name: "lakiLaki", widget: "string" }
+              - { label: "Perempuan", name: "perempuan", widget: "string" }
+              - name: "mataPencaharian"
+                label: "Mata Pencaharian"
+                widget: "list"
+                field: { label: "Jenis Pekerjaan", name: "pekerjaan", widget: "string" }
           - { label: "URL Peta Google Maps (Embed)", name: "petaUrl", widget: "string" }
 
+  # 3. Halaman: Potensi
   - name: "potensi"
     label: "Halaman: Potensi"
     files:
-      - { file: "src/data/potensi.json", label: "Konten Halaman Potensi", name: "potensi", fields: [ ... ] } # Tidak ada perubahan di sini
+      - file: "src/data/potensi.json"
+        label: "Konten Halaman Potensi"
+        name: "potensi"
+        fields:
+          - name: "umkm"
+            label: "UMKM & Produk Lokal"
+            widget: "list"
+            summary: "{{fields.judul}}"
+            fields:
+              - { label: "Gambar Produk", name: "gambarUrl", widget: "image" }
+              - { label: "Teks Alternatif", name: "altText", widget: "string" }
+              - { label: "Nama Produk", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Harga", name: "harga", widget: "string" }
+              - { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+          - name: "pertanian"
+            label: "Pertanian"
+            widget: "object"
+            fields:
+              - { label: "Gambar Utama", name: "gambarUrl", widget: "image" }
+              - { label: "Teks Alternatif", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - name: "komoditas"
+                label: "Daftar Komoditas"
+                widget: "list"
+                summary: "{{fields.nama}}"
+                fields:
+                  - { label: "Nama Komoditas", name: "nama", widget: "string" }
+                  - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+          - name: "lainnya"
+            label: "Potensi Lainnya"
+            widget: "list"
+            summary: "{{fields.judul}}"
+            fields:
+              - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
 
+  # 4. Halaman: Pariwisata
   - name: "pariwisata"
     label: "Halaman: Pariwisata"
     files:
@@ -75,9 +159,16 @@ collections:
         label: "Konten Halaman Pariwisata"
         name: "pariwisata"
         fields:
-          - { name: "destinasi", label: "Destinasi Wisata", widget: "list", summary: "{{fields.judul}}", fields: [
-              { label: "Gambar", name: "gambarUrl", widget: "image" }, { label: "Alt Text", name: "altText", widget: "string" }, { label: "Judul", name: "judul", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "text" }, { label: "Link Peta", name: "petaLink", widget: "string" }
-            ]}
+          - name: "destinasi"
+            label: "Destinasi Wisata"
+            widget: "list"
+            summary: "{{fields.judul}}"
+            fields:
+              - { label: "Gambar", name: "gambarUrl", widget: "image" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Link Peta", name: "petaLink", widget: "string" }
           - name: "tradisi"
             label: "Tradisi"
             widget: "list"
@@ -87,9 +178,9 @@ collections:
               - { label: "Alt Text", name: "altText", widget: "string" }
               - { label: "Judul", name: "judul", widget: "string" }
               - name: "deskripsi"
-                label: "Deskripsi"
+                label: "Deskripsi (per paragraf)"
                 widget: "list"
-                field: { label: "Paragraf", widget: "text", name: "paragraf" } # TAMBAHKAN INI
+                field: { label: "Paragraf", name: "paragraf", widget: "text" }
           - name: "kesenian"
             label: "Kesenian"
             widget: "list"
@@ -99,13 +190,19 @@ collections:
               - { label: "Alt Text", name: "altText", widget: "string" }
               - { label: "Judul", name: "judul", widget: "string" }
               - name: "deskripsi"
-                label: "Deskripsi"
+                label: "Deskripsi (per paragraf)"
                 widget: "list"
-                field: { label: "Paragraf", widget: "text", name: "paragraf" } # TAMBAHKAN INI
-          - { name: "kalender", label: "Kalender Acara", widget: "list", summary: "{{fields.acara}}", fields: [
-              { label: "Acara", name: "acara", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "string" }, { label: "Tanggal", name: "tanggal", widget: "string" }
-            ]}
-            
+                field: { label: "Paragraf", name: "paragraf", widget: "text" }
+          - name: "kalender"
+            label: "Kalender Acara"
+            widget: "list"
+            summary: "{{fields.acara}}"
+            fields:
+              - { label: "Acara", name: "acara", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "string" }
+              - { label: "Tanggal", name: "tanggal", widget: "string" }
+
+  # 5. Halaman: Galeri
   - name: "galeri"
     label: "Halaman: Galeri"
     files:
@@ -113,14 +210,22 @@ collections:
         label: "Konten Halaman Galeri"
         name: "galeri"
         fields:
-          - { name: "foto", label: "Galeri Foto", widget: "list", summary: "{{fields.alt}}", fields: [
-              { label: "Gambar", name: "url", widget: "image" }, { label: "Keterangan (Alt Text)", name: "alt", widget: "string" }
-            ]}
-          - { name: "video", label: "Galeri Video", widget: "list", summary: "{{fields.judul}}", fields: [
-              { label: "URL Embed Video", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/embed/xxxxx" },
-              { label: "Judul Video", name: "judul", widget: "string" }
-            ]}
+          - name: "foto"
+            label: "Galeri Foto"
+            widget: "list"
+            summary: "{{fields.alt}}"
+            fields:
+              - { label: "Gambar", name: "url", widget: "image" }
+              - { label: "Keterangan (Alt Text)", name: "alt", widget: "string" }
+          - name: "video"
+            label: "Galeri Video"
+            widget: "list"
+            summary: "{{fields.judul}}"
+            fields:
+              - { label: "URL Embed Video", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/embed/xxxxx" }
+              - { label: "Judul Video", name: "judul", widget: "string" }
 
+  # 6. Halaman: Kontak
   - name: "kontak"
     label: "Halaman: Kontak"
     files:
@@ -128,16 +233,32 @@ collections:
         label: "Konten Halaman Kontak"
         name: "kontak"
         fields:
-          - { name: "kontakPemerintah", label: "Kontak Perangkat", widget: "list", summary: "{{fields.nama}}", fields: [
-              { label: "Foto", name: "fotoUrl", widget: "image" }, { label: "Nama", name: "nama", widget: "string" }, { label: "Jabatan", name: "jabatan", widget: "string" }, { label: "Telepon", name: "telepon", widget: "string" }
-            ]}
-          - { name: "formAspirasi", label: "Form Aspirasi", widget: "object", fields: [
-              { label: "Judul", name: "judul", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "text" }, { label: "URL Action Formulir", name: "formActionUrl", widget: "string" },
-              { name: "entry", label: "Entry Mapping", widget: "object", fields: [
-                  { label: "Nama Field 'Nama'", name: "nama", widget: "string" }, { label: "Nama Field 'Kontak'", name: "kontak", widget: "string" }, { label: "Nama Field 'Subjek'", name: "subjek", widget: "string" }, { label: "Nama Field 'Pesan'", name: "pesan", widget: "string" }
-                ]}
-            ]}
-  
+          - name: "kontakPemerintah"
+            label: "Kontak Perangkat Dusun"
+            widget: "list"
+            summary: "{{fields.nama}} - {{fields.jabatan}}"
+            fields:
+              - { label: "Foto", name: "fotoUrl", widget: "image" }
+              - { label: "Nama", name: "nama", widget: "string" }
+              - { label: "Jabatan", name: "jabatan", widget: "string" }
+              - { label: "Telepon", name: "telepon", widget: "string" }
+          - name: "formAspirasi"
+            label: "Form Aspirasi"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "URL Action Formulir", name: "formActionUrl", widget: "string" }
+              - name: "entry"
+                label: "Entry Mapping (Google Form)"
+                widget: "object"
+                fields:
+                  - { label: "Nama Field 'Nama'", name: "nama", widget: "string" }
+                  - { label: "Nama Field 'Kontak'", name: "kontak", widget: "string" }
+                  - { label: "Nama Field 'Subjek'", name: "subjek", widget: "string" }
+                  - { label: "Nama Field 'Pesan'", name: "pesan", widget: "string" }
+
+  # 7. Halaman: Tentang KKN
   - name: "kkn"
     label: "Halaman: Tentang KKN"
     files:
@@ -145,11 +266,29 @@ collections:
         label: "Konten Halaman KKN"
         name: "kkn"
         fields:
-          - { name: "judulHalaman", label: "Judul Halaman", widget: "object", fields: [{ label: "Judul", name: "judul", widget: "string" }, { label: "Universitas", name: "universitas", widget: "string" }] }
-          - { name: "pengantar", label: "Pengantar", widget: "object", fields: [{ label: "Judul", name: "judul", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "text" }] }
-          - { name: "anggota", label: "Anggota", widget: "object", fields: [
-              { label: "Judul Seksi", name: "judul", widget: "string" },
-              { name: "tim", label: "Daftar Anggota", widget: "list", summary: "{{fields.nama}}", fields: [
-                  { label: "Foto", name: "fotoUrl", widget: "image" }, { label: "Nama", name: "nama", widget: "string" }, { label: "Prodi", name: "prodi", widget: "string" }, { label: "Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
-                ]}
-            ]}
+          - name: "judulHalaman"
+            label: "Judul Halaman"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Universitas", name: "universitas", widget: "string" }
+          - name: "pengantar"
+            label: "Pengantar"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+          - name: "anggota"
+            label: "Anggota Tim KKN"
+            widget: "object"
+            fields:
+              - { label: "Judul Seksi", name: "judul", widget: "string" }
+              - name: "tim"
+                label: "Daftar Anggota"
+                widget: "list"
+                summary: "{{fields.nama}} - {{fields.prodi}}"
+                fields:
+                  - { label: "Foto", name: "fotoUrl", widget: "image" }
+                  - { label: "Nama", name: "nama", widget: "string" }
+                  - { label: "Prodi", name: "prodi", widget: "string" }
+                  - { label: "URL Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
