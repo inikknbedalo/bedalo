@@ -33,19 +33,19 @@
       "kontakLink": "https://wa.me/6283107581144"
     },
     {
+      "judul": "Gaplek",
+      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+5",
+      "deskripsi": "Singkong yang dijemur.",
+      "harga": "Rp 1.600 per kg.",
+      "kontakLink": "08123456789"
+    },
+    {
       "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+4",
       "altText": "Produk Kopi Bubuk",
       "judul": "Kopi Robusta Bedalo",
       "deskripsi": "Aroma khas dari biji kopi pilihan yang ditanam dan diolah langsung oleh petani lokal.",
       "harga": "Rp 35.000",
       "kontakLink": "https://wa.me/6283107581144"
-    },
-    {
-      "judul": "Gaplek",
-      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+5",
-      "deskripsi": "Singkong yang dijemur.",
-      "harga": "Rp 1.600 per kg.",
-      "kontakLink": "08123456789"
     }
   ],
   "pertanian": {
