@@ -39,6 +39,11 @@
       "fotoUrl": "foto.svg",
       "nama": "Pak RT 03",
       "jabatan": "Ketua RT 03"
+    },
+    {
+      "fotoUrl": "/assets/images/foto.svg",
+      "nama": "Ardi",
+      "jabatan": "Coder"
     }
   ],
   "demografi": {
