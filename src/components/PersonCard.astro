@@ -1,25 +1,32 @@
 ---
-// src/components/PersonCard.astro
+import { Image } from 'astro:assets';
 
-// 1. Definisikan properti (props) yang akan diterima oleh komponen ini.
-// Ini seperti parameter untuk fungsi. Komponen ini butuh nama, jabatan, dan URL foto.
-export interface Props {
-  nama: string;
-  jabatan: string;
-  fotoUrl: string;
+const { nama, jabatan, fotoUrl, allImages } = Astro.props;
+
+// This is the magic ✨. We find the full image object from the glob import
+// using the filename provided in the JSON data.
+const imagePath = Object.keys(allImages).find(path => path.endsWith(fotoUrl));
+
+if (!imagePath) {
+  console.error(`Image not found for ${fotoUrl}`);
 }
-
-// 2. Ambil nilai props yang dikirimkan dari halaman.
-const { nama, jabatan, fotoUrl } = Astro.props;
 ---
-
-<div class="text-center">
-    <img 
-        src={fotoUrl} 
-        alt={`Foto ${nama}`} 
-        class="w-40 h-40 rounded-full mx-auto object-cover shadow-lg mb-4"
-        loading="lazy"
-    >
-    <h4 class="text-lg font-bold text-gray-800">{nama}</h4>
+<div class="bg-white p-6 rounded-lg shadow-lg text-center transition-transform transform hover:-translate-y-2">
+    <div class="w-32 h-32 rounded-full mx-auto overflow-hidden shadow-md border-4 border-gray-200 mb-4">
+        {imagePath ? (
+            <Image 
+                src={allImages[imagePath]()} 
+                alt={`Foto ${nama}`}
+                width="128"
+                height="128"
+                class="w-full h-full object-cover"
+            />
+        ) : (
+            <div class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500">
+                No Img
+            </div>
+        )}
+    </div>
+    <h3 class="text-xl font-bold text-gray-800">{nama}</h3>
     <p class="text-gray-500">{jabatan}</p>
 </div>

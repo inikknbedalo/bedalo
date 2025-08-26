@@ -2,13 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import data from '../data/profil.json';
-import PersonCard from '../components/PersonCard.astro';
-
-// Impor komponen baru
 import PageBanner from '../components/PageBanner.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import StatCard from '../components/StatCard.astro';
+import PersonCard from '../components/PersonCard.astro';
+
+// 1. Import data and images
+import data from '../data/profil.json';
+const allPersonImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 ---
 <Layout 
     title="Profil | Website Dusun Bedalo"
@@ -26,7 +27,7 @@ import StatCard from '../components/StatCard.astro';
         <section id="sejarah" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Sejarah & Asal-Usul" />
-                <div class="max-w-4xl mx-auto text-gray-600 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                <div class="max-w-4xl mx-auto text-gray-600 leading-relaxed" data-aos="fade-up">
                     {data.sejarah.map(p => <p class="mb-4">{p}</p>)}
                 </div>
             </div>
@@ -41,7 +42,7 @@ import StatCard from '../components/StatCard.astro';
                         <p class="text-gray-600 italic text-center">{data.visiMisi.visi}</p>
                     </div>
                     <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-lg" data-aos="fade-left" data-aos-delay="100">
-                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Misi</h3>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Misi</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
                             {data.visiMisi.misi.map(item => <li>{item}</li>)}
                         </ul>
@@ -60,6 +61,7 @@ import StatCard from '../components/StatCard.astro';
                                 nama={item.nama}
                                 jabatan={item.jabatan}
                                 fotoUrl={item.fotoUrl}
+                                allImages={allPersonImages}
                             />
                         </div>
                     ))}
@@ -80,21 +82,20 @@ import StatCard from '../components/StatCard.astro';
                     <StatCard label="Perempuan" value={data.demografi.perempuan} delay={300}>
                         <i class="fas fa-female text-4xl text-pink-500" slot="icon"></i>
                     </StatCard>
-
                     <div class="bg-white p-6 rounded-lg shadow-lg text-center md:col-span-3" data-aos="fade-up" data-aos-delay="400">
                         <i class="fas fa-briefcase text-4xl text-green-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-800 mb-2">Mata Pencaharian Utama</h4>
                         <p class="text-gray-600">{data.demografi.mataPencaharian.join(', ')}</p>
                     </div>
                 </div>
-             </div>
+            </div>
         </section>
         
         <section id="peta" class="py-20 bg-white overflow-hidden">
              <div class="container mx-auto px-6">
                 <SectionTitle title="Peta Wilayah Dusun" />
-                <div class="w-full h-96 bg-gray-200 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
-                    <iframe src={data.petaUrl} width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Peta Dusun Bedalo"></iframe>
+                <div class="w-full h-96 bg-gray-200 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in">
+                    <iframe src={data.petaUrl} width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta Dusun Bedalo"></iframe>
                 </div>
              </div>
         </section>

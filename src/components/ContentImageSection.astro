@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+const { item, allImages, reverse = false } = Astro.props;
+
+const imagePath = Object.keys(allImages).find(path => path.endsWith(item.gambarUrl));
+
+const layoutClass = reverse ? 'md:flex-row-reverse' : 'md:flex-row';
+const fade1 = reverse ? 'fade-left' : 'fade-right';
+const fade2 = reverse ? 'fade-right' : 'fade-left';
+---
+<div class={`flex flex-col ${layoutClass} items-center gap-12`}>
+    <div class="md:w-1/2" data-aos={fade1}>
+        {imagePath ? (
+            <Image
+                src={allImages[imagePath]()}
+                alt={item.altText}
+                width="800"
+                height="600"
+                class="rounded-lg shadow-xl w-full h-full object-cover"
+            />
+        ) : <div class="w-full h-96 rounded-lg shadow-xl bg-gray-200"></div>}
+    </div>
+    <div class="md:w-1/2" data-aos={fade2}>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">{item.judul}</h3>
+        {item.deskripsi.map((p: string) => <p class="text-gray-600 leading-relaxed mb-4">{p}</p>)}
+    </div>
+</div>

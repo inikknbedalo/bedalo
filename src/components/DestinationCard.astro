@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+const { item, allImages } = Astro.props;
+
+const imagePath = Object.keys(allImages).find(path => path.endsWith(item.gambarUrl));
+---
+<div class="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+    {imagePath ? (
+        <Image 
+            src={allImages[imagePath]()} 
+            alt={item.altText} 
+            width="800"
+            height="500"
+            class="w-full h-64 object-cover" 
+        />
+    ) : <div class="w-full h-64 bg-gray-200"></div>}
+    <div class="p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">{item.judul}</h3>
+        <p class="text-gray-600 mb-4">{item.deskripsi}</p>
+        <a href={item.petaLink} class="font-semibold text-blue-600 hover:underline">Lihat di Peta &rarr;</a>
+    </div>
+</div>
