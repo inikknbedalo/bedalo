@@ -2,46 +2,89 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PageBanner from '../components/PageBanner.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import LiteYouTube from '../components/LiteYouTube.astro';
 import PhotoGallery from '../components/PhotoGallery.astro';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro:assets';
 import data from '../data/galeri.json';
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+const processedPhotos = await Promise.all(
+    data.foto.map(async (photo) => {
+        const imagePath = Object.keys(allImages).find(path => path.endsWith(photo.url));
+        if (!imagePath) return null;
+        const originalImage = allImages[imagePath];
+        const lightboxImage = await getImage({ src: originalImage(), width: 1200, format: 'webp' });
+        return {
+            alt: photo.alt,
+            originalSrc: originalImage,
+            lightboxSrc: lightboxImage.src,
+        };
+    })
+).then(results => results.filter(item => item !== null));
+
+const getYouTubeId = (url: string) => {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
+    return url.match(regex)?.[1] || null;
+};
 ---
 <Layout 
     title="Galeri | Website Dusun Bedalo"
-    description="Lihat momen dan kenangan dalam bingkai melalui galeri foto dan video kegiatan warga, pemandangan alam, dan upacara adat di Dusun Bedalo."
+    description="Lihat momen dan kenangan dalam bingkai melalui galeri foto dan video."
 >
     <Header currentPage="Galeri" />
-
     <main>
-        <section class="bg-teal-600 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">Galeri Dusun Bedalo</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Momen dan Kenangan dalam Bingkai</p>
-            </div>
-        </section>
-
+        <PageBanner 
+            title="Galeri Dusun Bedalo"
+            subtitle="Momen dan Kenangan dalam Bingkai"
+            bgColor="bg-teal-600"
+        />
         <section id="foto" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Galeri Foto</h2>
-                <PhotoGallery fotoItems={data.foto} />
+                <SectionTitle title="Galeri Foto" />
+                <PhotoGallery fotoItems={processedPhotos} />
             </div>
         </section>
         
         <section id="video" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Galeri Video</h2>
+                <SectionTitle title="Galeri Video" />
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {data.video.map((item, index) => (
-                        <div class="rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay={100 + index * 100}>
-                           <div class="aspect-w-16 aspect-h-9 bg-black">
-                               <iframe loading="lazy" src={item.url} title={item.judul} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-                           </div>
-                            <div class="p-4"><h3 class="font-bold text-gray-800">{item.judul}</h3></div>
-                       </div>
-                    ))}
+                    {data.video.map((item, index) => {
+                        const videoId = getYouTubeId(item.url);
+                        if (!videoId) return null;
+                        return (
+                            // --- MODIFICATION START ---
+                            // 1. The <a> tag is now the entire card.
+                            <a 
+                                href={item.url}
+                                class="glightbox group bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-shadow hover:shadow-xl"
+                                data-gallery="gallery-video"
+                                data-aos="fade-up" 
+                                data-aos-delay={100 + index * 100}
+                            >
+                                {/* 2. Added padding here for the "margin" around the video. */}
+                                <div class="p-4">
+                                    <div class="aspect-video w-full overflow-hidden rounded-lg">
+                                        <LiteYouTube id={videoId} title={item.judul} />
+                                    </div>
+                                </div>
+                                
+                                {/* 3. The title is now inside the clickable area. */}
+                                <div class="p-4 pt-0">
+                                    <h3 class="font-bold text-gray-800 transition-colors group-hover:text-blue-600">{item.judul}</h3>
+                                </div>
+                            </a>
+                            // --- MODIFICATION END ---
+                        )
+                    })}
                 </div>
             </div>
         </section>
     </main>
-
     <Footer />
 </Layout>
+

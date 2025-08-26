@@ -1,0 +1,46 @@
+---
+interface Props {
+	id: string;
+	title: string;
+}
+
+const { id, title } = Astro.props;
+---
+<div id={`youtube-${id}`} class="relative w-full h-full bg-black rounded-lg shadow-lg overflow-hidden group">
+    <img
+        src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+        alt={`Thumbnail for ${title}`}
+        loading="lazy"
+        class="w-full h-full object-cover transition-transform group-hover:scale-105"
+    />
+    <button
+        class="absolute inset-0 w-full h-full flex items-center justify-center"
+        aria-label={`Play video: ${title}`}
+    >
+        <svg class="w-16 h-16 text-white bg-black bg-opacity-50 rounded-full p-2" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+    </button>
+</div>
+
+<script>
+    function setupYouTubeEmbeds() {
+        const embeds = document.querySelectorAll('[id^="youtube-"]');
+        embeds.forEach(embed => {
+            const videoId = embed.id.split('-')[1];
+            const button = embed.querySelector('button');
+            
+            button?.addEventListener('click', () => {
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+                iframe.setAttribute('title', button.getAttribute('aria-label') || 'YouTube video player');
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('class', 'w-full h-full');
+                
+                embed.innerHTML = '';
+                embed.appendChild(iframe);
+            }, { once: true });
+        });
+    }
+    document.addEventListener('astro:page-load', setupYouTubeEmbeds);
+</script>
