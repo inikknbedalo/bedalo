@@ -1,56 +1,57 @@
 {
   "umkm": [
     {
-      "gambarUrl": "https://placehold.co/600x400/a0aec0/ffffff?text=Produk+1",
+      "gambarUrl": "ngedan.webp",
       "altText": "Produk Keripik Singkong",
       "judul": "Keripik Singkong",
       "deskripsi": "Renyah dan gurih, dibuat dari singkong pilihan dari kebun sendiri.",
       "harga": "Rp 15.000",
-      "kontakLink": "https://wa.me/6283107581144"
+      "kontakLink": "https://wa.me/6281234567890"
     },
     {
-      "gambarUrl": "https://placehold.co/600x400/f6ad55/ffffff?text=Produk+2",
+      "gambarUrl": "ngedan.webp",
       "altText": "Produk Gula Aren",
       "judul": "Gula Aren Asli",
       "deskripsi": "Manis alami tanpa bahan pengawet, diproses secara tradisional.",
       "harga": "Rp 25.000",
-      "kontakLink": "https://wa.me/6283107581144"
+      "kontakLink": "https://wa.me/6281234567890"
     },
     {
-      "gambarUrl": "https://placehold.co/600x400/f6ad55/ffffff?text=Produk+2",
-      "altText": "Produk Gula Aren",
-      "judul": "Layangan",
-      "deskripsi": "Manis alami tanpa bahan pengawet, diproses secara tradisional.",
-      "harga": "Rp 25.000",
-      "kontakLink": "https://wa.me/6283107581144"
+      "gambarUrl": "ngedan.webp",
+      "altText": "Layangan buatan tangan",
+      "judul": "Layangan Hias",
+      "deskripsi": "Layangan unik dengan berbagai bentuk dan warna, dibuat dengan presisi untuk terbang sempurna.",
+      "harga": "Rp 20.000",
+      "kontakLink": "https://wa.me/6281234567890"
     },
     {
-      "gambarUrl": "https://placehold.co/600x400/63b3ed/ffffff?text=Produk+3",
+      "gambarUrl": "ngedan.webp",
       "altText": "Produk Tas Anyaman",
       "judul": "Tas Anyaman Pandan",
       "deskripsi": "Kuat dan stylish, hasil kerajinan tangan ibu-ibu dusun.",
       "harga": "Rp 75.000",
-      "kontakLink": "https://wa.me/6283107581144"
+      "kontakLink": "https://wa.me/6281234567890"
     },
     {
+      "gambarUrl": "ngedan.webp",
+      "altText": "Gaplek atau singkong kering",
       "judul": "Gaplek",
-      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+5",
-      "deskripsi": "Singkong yang dijemur.",
-      "harga": "Rp 1.600 per kg.",
-      "kontakLink": "08123456789"
+      "deskripsi": "Bahan dasar makanan tradisional tiwul, dibuat dari singkong yang dijemur secara alami.",
+      "harga": "Rp 10.000 / kg",
+      "kontakLink": "https://wa.me/6281234567890"
     },
     {
-      "gambarUrl": "https://placehold.co/600x400/e53e3e/ffffff?text=Produk+4",
+      "gambarUrl": "ngedan.webp",
       "altText": "Produk Kopi Bubuk",
       "judul": "Kopi Robusta Bedalo",
       "deskripsi": "Aroma khas dari biji kopi pilihan yang ditanam dan diolah langsung oleh petani lokal.",
       "harga": "Rp 35.000",
-      "kontakLink": "https://wa.me/6283107581144"
+      "kontakLink": "https://wa.me/6281234567890"
     }
   ],
   "pertanian": {
-    "gambarUrl": "https://placehold.co/800x600/a0aec0/ffffff?text=Lahan+Pertanian",
-    "altText": "Lahan Pertanian",
+    "gambarUrl": "ngedan.webp",
+    "altText": "Lahan pertanian yang hijau dan subur di Dusun Bedalo",
     "judul": "Kesuburan Tanah Bedalo",
     "deskripsi": "Lahan pertanian di Dusun Bedalo sangat subur dan menjadi tumpuan hidup sebagian besar warga. Berbagai komoditas unggulan dihasilkan dari sini.",
     "komoditas": [
@@ -59,16 +60,16 @@
         "icon": "fas fa-seedling text-green-500"
       },
       {
+        "nama": "Singkong",
+        "icon": "fas fa-carrot text-yellow-600"
+      },
+      {
         "nama": "Sayur-mayur",
         "icon": "fas fa-leaf text-green-500"
       },
       {
         "nama": "Cabai",
         "icon": "fas fa-pepper-hot text-red-500"
-      },
-      {
-        "nama": "Buah-buahan",
-        "icon": "fas fa-lemon text-yellow-500"
       }
     ]
   },

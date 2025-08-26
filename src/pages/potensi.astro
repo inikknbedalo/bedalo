@@ -2,8 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import OriginalSlider from '../components/OriginalSlider.astro';
+import PageBanner from '../components/PageBanner.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import UmkmCard from '../components/UmkmCard.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Import data and all images for the page
 import data from '../data/potensi.json';
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+// Helper to find the agriculture image path
+const pertanianImagePath = Object.keys(allImages).find(path => path.endsWith(data.pertanian.gambarUrl));
 ---
 <Layout 
     title="Potensi | Website Dusun Bedalo"
@@ -12,36 +22,53 @@ import data from '../data/potensi.json';
     <Header currentPage="Potensi" />
 
     <main>
-        <section class="bg-green-600 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">Potensi Dusun Bedalo</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Sumber Daya dan Kreativitas Warga</p>
-            </div>
-        </section>
+        <PageBanner 
+            title="Potensi Dusun Bedalo"
+            subtitle="Sumber Daya dan Kreativitas Warga"
+            bgColor="bg-green-600"
+        />
 
         <section id="umkm" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-4" data-aos="fade-up">UMKM & Produk Unggulan</h2>
-                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Karya kreatif dan produk olahan dari tangan-tangan terampil warga Dusun Bedalo.</p>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <OriginalSlider umkmItems={data.umkm} />
+                <SectionTitle 
+                    title="UMKM & Produk Unggulan"
+                    subtitle="Karya kreatif dan produk olahan dari tangan-tangan terampil warga Dusun Bedalo."
+                />
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {data.umkm.map((item, index) => (
+                        <div data-aos="fade-up" data-aos-delay={100 + index * 50}>
+                           <UmkmCard item={item} allImages={allImages} />
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
 
         <section id="pertanian" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Pertanian & Perkebunan</h2>
+                <SectionTitle title="Pertanian & Perkebunan" />
                 <div class="flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2" data-aos="fade-right">
-                        <img src={data.pertanian.gambarUrl} alt={data.pertanian.altText} class="rounded-lg shadow-xl w-full h-full object-cover">
+                        {pertanianImagePath ? (
+                            <Image 
+                                src={allImages[pertanianImagePath]()} 
+                                alt={data.pertanian.altText} 
+                                width="800" 
+                                height="600" 
+                                class="rounded-lg shadow-xl w-full h-full object-cover"
+                            />
+                        ) : <div class="w-full h-96 bg-gray-200 rounded-lg shadow-xl"></div>}
                     </div>
                     <div class="md:w-1/2" data-aos="fade-left">
                         <h3 class="text-2xl font-bold text-gray-800 mb-4">{data.pertanian.judul}</h3>
-                        <p class="text-gray-600 leading-relaxed mb-4">{data.pertanian.deskripsi}</p>
+                        <p class="text-gray-600 leading-relaxed mb-6">{data.pertanian.deskripsi}</p>
+                        <h4 class="font-semibold text-gray-800 mb-3">Komoditas Utama:</h4>
                         <div class="grid grid-cols-2 gap-4 text-gray-700">
                             {data.pertanian.komoditas.map(k => (
-                                <div class="flex items-center gap-2"><i class={k.icon}></i> {k.nama}</div>
+                                <div class="flex items-center gap-3 bg-gray-100 p-3 rounded-md">
+                                    <i class={k.icon}></i> {k.nama}
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -51,18 +78,19 @@ import data from '../data/potensi.json';
 
         <section id="lainnya" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Potensi Lainnya</h2>
+                <SectionTitle title="Potensi Lainnya" />
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     {data.lainnya.map((item, index) => (
-                         <div class="text-center p-6 shadow-md rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay={100 + index * 100}>
+                        <div class="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow border border-gray-200" data-aos="fade-up" data-aos-delay={100 + index * 100}>
                             <i class={item.icon}></i>
                             <h4 class="text-xl font-bold text-gray-800 my-2">{item.judul}</h4>
-                            <p class="text-gray-600">{item.deskripsi}</p>
+                            <p class="text-gray-600 text-sm">{item.deskripsi}</p>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
     </main>
+
     <Footer />
 </Layout>

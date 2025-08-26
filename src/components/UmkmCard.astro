@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+const { item, allImages } = Astro.props;
+
+const imagePath = Object.keys(allImages).find(path => path.endsWith(item.gambarUrl));
+---
+<div class="bg-white h-full rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform transform hover:-translate-y-2">
+    {imagePath ? (
+        <Image 
+            src={allImages[imagePath]()} 
+            alt={item.altText} 
+            width="600" 
+            height="400" 
+            class="w-full h-48 object-cover" 
+        />
+    ) : <div class="w-full h-48 bg-gray-200"></div>}
+    
+    <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">{item.judul}</h3>
+        <p class="text-gray-600 mb-4 text-sm flex-grow">{item.deskripsi}</p>
+        <div class="flex justify-between items-center mt-auto">
+            <span class="text-lg font-bold text-green-600">{item.harga}</span>
+            <a href={item.kontakLink} target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                Hubungi
+            </a>
+        </div>
+    </div>
+</div>
