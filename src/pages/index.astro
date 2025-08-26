@@ -1,14 +1,19 @@
 ---
-// 1. Import components and layout
+// 1. Import layout and main components
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// 2. Import data directly from the JSON file
-import data from '../data/index.json';
+// 2. Import NEW section components
+import HeroSection from '../components/home/HeroSection.astro';
+import WelcomeSection from '../components/home/WelcomeSection.astro';
+import FeaturedPotentials from '../components/home/FeaturedPotentials.astro';
+import FeaturedTourism from '../components/home/FeaturedTourism.astro';
+import FeaturedGallery from '../components/home/FeaturedGallery.astro';
 
-import { Image } from 'astro:assets';
-import heroImage from '../assets/images/ngedan.webp';
+// 3. Import data and all images for the page
+import data from '../data/index.json';
+const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 ---
 <Layout 
     title="Beranda | Website Dusun Bedalo"
@@ -17,100 +22,15 @@ import heroImage from '../assets/images/ngedan.webp';
     <Header currentPage="Beranda" />
 
     <main>
-        <section id="hero-section" class="relative h-[60vh] md:h-[80vh]">
-            <Image 
-				src={heroImage} 
-				alt={data.hero.imageAlt}
-				width="1920"
-				height="1080"
-				class="absolute inset-0 w-full h-full object-cover"
-			/>
-            
-            <div class="absolute bg-black bg-opacity-50 z-10"></div>
-            <div class="relative z-20 flex flex-col justify-center items-center h-full text-white text-center px-4">
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4" data-aos="fade-down">
-                    {data.hero.judul}
-                </h1>
-                <p class="text-lg md:text-xl max-w-3xl" data-aos="fade-up" data-aos-delay="200">
-                    {data.hero.subjudul}
-                </p>
-                <a href="#profil" class="mt-8 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 transform hover:scale-105" data-aos="zoom-in" data-aos-delay="400">
-                    Jelajahi Sekarang
-                </a>
-            </div>
-        </section>
+        <HeroSection hero={data.hero} allImages={allImages} />
 
-        <section id="profil" class="py-20 bg-white overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-1/3 text-center" data-aos="fade-right">
-                        <img src={data.profilSingkat.fotoUrl} alt={`Foto ${data.profilSingkat.namaKepalaDusun}`} class="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto object-cover shadow-lg border-4 border-white">
-                        <h2 class="mt-4 text-xl font-bold text-gray-800">{data.profilSingkat.namaKepalaDusun}</h2>
-                        <p class="text-gray-500">{data.profilSingkat.jabatan}</p>
-                    </div>
-                    <div class="md:w-2/3" data-aos="fade-left" data-aos-delay="200">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Sambutan Hangat dari Kami</h2>
-                        <div class="text-gray-600 leading-relaxed" set:html={data.profilSingkat.sambutan.map(p => `<p class="mb-4">${p}</p>`).join('')} />
-                        <a href="/profil" class="mt-6 inline-block text-blue-600 font-semibold hover:underline">
-                            Lihat Profil Lengkap & Sejarah Dusun &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <WelcomeSection profile={data.profilSingkat} allImages={allImages} />
 
-        <section id="potensi" class="py-20 overflow-hidden">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2" data-aos="fade-up">Potensi Unggulan Dusun</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Dusun Bedalo dianugerahi berbagai potensi yang menjadi sumber kehidupan dan kebanggaan warga.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {data.potensiUnggulan.map((item, index) => (
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-up" data-aos-delay={200 + index * 100}>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">{item.judul}</h3>
-                            <p class="text-gray-600 mb-4">{item.deskripsi}</p>
-                            <a href={item.link} class="font-semibold text-blue-600 hover:underline">Lihat Selengkapnya &rarr;</a>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <FeaturedPotentials potentials={data.potensiUnggulan} />
 
-        <section id="pariwisata" class="py-20 bg-white overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-1/2" data-aos="fade-right">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Pariwisata & Kekayaan Budaya</h2>
-                        <p class="text-gray-600 leading-relaxed mb-6">{data.pariwisata.deskripsi}</p>
-                        <a href="/pariwisata" class="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                            Temukan Destinasi Wisata
-                        </a>
-                    </div>
-                    <div class="md:w-1/2 grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-delay="100">
-                        {data.pariwisata.gambar.map((item, index) => (
-                             <div class="overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-anchor="#pariwisata" data-aos-delay={300 + index * 100}>
-                                <img src={item.url} alt={item.alt} class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
+        <FeaturedTourism tourism={data.pariwisata} allImages={allImages} />
         
-        <section id="galeri" class="py-20 overflow-hidden">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-gray-800 mb-12" data-aos="fade-up">Galeri Momen Dusun Bedalo</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {data.galeri.map((item, index) => (
-                        <div class="overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay={100 + index * 100}>
-                            <img src={item.url} alt={item.alt} class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300" />
-                        </div>
-                    ))}
-                </div>
-                <a href="/galeri" class="mt-12 inline-block bg-white text-gray-800 px-8 py-3 rounded-md font-semibold border border-gray-300 hover:bg-gray-100 transition duration-300" data-aos="fade-up">
-                    Lihat Galeri Lengkap
-                </a>
-            </div>
-        </section>
+        <FeaturedGallery gallery={data.galeri} allImages={allImages} />
     </main>
 
     <Footer />

@@ -16,34 +16,29 @@
   },
   "strukturPemerintahan": [
     {
-      "fotoUrl": "foto.svg",
+      "fotoUrl": "cat.jpg",
       "nama": "Sumindar",
       "jabatan": "Kepala Dusun"
     },
     {
-      "fotoUrl": "foto.svg",
+      "fotoUrl": "cat.jpg",
       "nama": "Pak RW",
       "jabatan": "Ketua RW"
     },
     {
-      "fotoUrl": "foto.svg",
+      "fotoUrl": "cat.jpg",
       "nama": "Pak RT 01",
       "jabatan": "Ketua RT 01"
     },
     {
-      "fotoUrl": "foto.svg",
+      "fotoUrl": "cat.jpg",
       "nama": "Pak RT 02",
       "jabatan": "Ketua RT 02"
     },
     {
-      "fotoUrl": "foto.svg",
+      "fotoUrl": "cat.jpg",
       "nama": "Pak RT 03",
       "jabatan": "Ketua RT 03"
-    },
-    {
-      "fotoUrl": "/assets/images/foto.svg",
-      "nama": "Ardi",
-      "jabatan": "Coder"
     }
   ],
   "demografi": {
@@ -57,5 +52,5 @@
       "Wiraswasta"
     ]
   },
-  "petaUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.397220556535!2d110.60333061533224!3d-8.1623838841028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7bc5a45612c66f%3A0x6b2695326b5d2503!2sPantai%20Ngedan!5e0!3m2!1sen!2sid!4v1662966345678"
+  "petaUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.0932745914556!2d110.48636027500821!3d-8.091970191936598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7bafbba8806743%3A0xc6d4983457dd25c9!2sBalai%20Dusun%20Bedalo!5e0!3m2!1sen!2sid!4v1752035265194!5m2!1sen!2sid"
 }
