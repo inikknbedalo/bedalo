@@ -52,7 +52,7 @@ import data from '../data/profil.json';
         <section id="struktur" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Struktur Pemerintahan Dusun</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
                     {data.strukturPemerintahan.map((item, index) => (
                         <div class="text-center" data-aos="zoom-in" data-aos-delay={100 + index * 100}>
                             <img src={item.fotoUrl} alt={`Foto ${item.nama}`} class="w-40 h-40 rounded-full mx-auto object-cover shadow-lg mb-4">
