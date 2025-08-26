@@ -70,6 +70,12 @@
         "nama": "Meta Indiyasari",
         "prodi": "Akuntansi Syari'ah",
         "instagramUrl": "https://www.instagram.com/username7"
+      },
+      {
+        "fotoUrl": "/assets/images/cat.jpg",
+        "nama": "Ardi lagi",
+        "prodi": "Informatematika",
+        "instagramUrl": "ehe"
       }
     ]
   }
