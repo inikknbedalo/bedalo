@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Define the correct type for the glob import result
+type ImageGlob = Record<string, () => Promise<{ default: ImageMetadata }>>;
+
+interface Props {
+    item: {
+        fotoUrl: string;
+        nama: string;
+        jabatan: string;
+        telepon: string;
+    };
+    allImages: ImageGlob; // <-- FIX 1: Use the correct type
+}
+
+const { item, allImages } = Astro.props;
+
+const imagePath = Object.keys(allImages).find(path => path.endsWith(item.fotoUrl));
+const formattedPhone = item.telepon.replace(/(\d{4})(?=\d)/g, '$1-');
+---
+<div class="bg-white p-6 rounded-lg shadow-lg flex items-center gap-5 transition-shadow hover:shadow-xl">
+    <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-2 border-gray-200">
+        {imagePath ? (
+            <Image 
+                src={allImages[imagePath]()}  
+                alt={`Foto ${item.nama}`} 
+                width="80" 
+                height="80"
+                class="w-full h-full object-cover" 
+            />
+        ) : <div class="w-full h-full bg-gray-300"></div>}
+    </div>
+    <div>
+        <h4 class="text-lg font-bold text-gray-800">{item.nama}</h4>
+        <p class="text-gray-500 text-sm mb-2">{item.jabatan}</p>
+        <a href={`tel:${item.telepon}`} class="text-blue-600 hover:underline text-sm flex items-center gap-2">
+            <i class="fas fa-phone-alt fa-xs"></i>
+            <span>{formattedPhone}</span>
+        </a>
+    </div>
+</div>

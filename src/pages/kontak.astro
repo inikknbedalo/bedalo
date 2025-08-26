@@ -2,37 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PageBanner from '../components/PageBanner.astro';
+import SectionTitle from '../components/SectionTitle.astro';
 import ContactForm from '../components/ContactForm.astro';
+import ContactPersonCard from '../components/ContactPersonCard.astro'; // <-- Import new component
 import data from '../data/kontak.json';
+import type { ImageMetadata } from 'astro';
+
+// Use the correctly typed glob import for dynamic images
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 ---
 <Layout 
     title="Kontak & Aspirasi | Website Dusun Bedalo"
-    description="Hubungi perangkat Dusun Bedalo atau sampaikan ide dan aspirasi Anda melalui formulir kontak kami. Kami siap mendengar masukan dari Anda."
+    description="Hubungi perangkat Dusun Bedalo atau sampaikan ide dan aspirasi Anda melalui formulir kontak kami."
 >
     <Header currentPage="Kontak" />
 
     <main>
-        <section class="bg-blue-600 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">Hubungi Kami</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Informasi Kontak dan Saluran Aspirasi Warga</p>
-            </div>
-        </section>
+        <PageBanner 
+            title="Hubungi Kami"
+            subtitle="Informasi Kontak dan Saluran Aspirasi Warga"
+            bgColor="bg-blue-600"
+        />
 
         <section id="kontak-perangkat" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Kontak Perangkat Dusun</h2>
+                <SectionTitle title="Kontak Perangkat Dusun" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {data.kontakPemerintah.map((item, index) => (
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center gap-4" data-aos="fade-up" data-aos-delay={100 + index * 100}>
-                            <img src={item.fotoUrl} alt={`Foto ${item.nama}`} class="w-20 h-20 rounded-full object-cover" />
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800">{item.nama}</h4>
-                                <p class="text-gray-500 mb-2">{item.jabatan}</p>
-                                <a href={`tel:${item.telepon}`} class="text-blue-600 hover:underline text-sm flex items-center gap-1">
-                                    <i class="fas fa-phone-alt"></i> {item.telepon.replace(/(\d{4})(?=\d)/g, '$1-')}
-                                </a>
-                            </div>
+                        <div data-aos="fade-up" data-aos-delay={100 + index * 100}>
+                            {/* Use the new component */}
+                            <ContactPersonCard item={item} allImages={allImages} />
                         </div>
                     ))}
                 </div>
@@ -41,7 +41,11 @@ import data from '../data/kontak.json';
 
         <section id="aspirasi" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <ContactForm formData={data.formAspirasi} />
+                <SectionTitle title={data.formAspirasi.judul} subtitle={data.formAspirasi.deskripsi} />
+                {/* The ContactForm component can remain as is, but now it's paired with a SectionTitle */}
+                <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    <ContactForm formData={data.formAspirasi} />
+                </div>
             </div>
         </section>
     </main>
