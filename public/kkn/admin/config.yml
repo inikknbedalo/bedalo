@@ -22,6 +22,7 @@ collections:
       - file: "src/data/index.json"
         label: "🏠 Beranda"
         name: "beranda"
+        description: "Atur konten utama yang tampil di halaman depan website."
         fields:
           - name: "hero"
             label: "Hero Section"
@@ -79,6 +80,7 @@ collections:
       - file: "src/data/profil.json"
         label: "🏛️ Profil"
         name: "profil"
+        description: "Ubah sejarah, visi & misi, struktur pemerintahan, dan demografi dusun."
         fields:
           - name: "sejarah"
             label: "Sejarah (per paragraf)"
@@ -126,6 +128,7 @@ collections:
       - file: "src/data/potensi.json"
         label: "✨ Potensi"
         name: "potensi"
+        description: "Kelola daftar produk UMKM, potensi pertanian, dan sektor lainnya."
         fields:
           - name: "umkm"
             label: "UMKM & Produk Lokal"
@@ -170,6 +173,7 @@ collections:
       - file: "src/data/pariwisata.json"
         label: "🏖️ Pariwisata"
         name: "pariwisata"
+        description: "Atur konten destinasi wisata, tradisi budaya, dan kalender acara."
         fields:
           - name: "destinasi"
             label: "Destinasi Wisata"
@@ -223,6 +227,7 @@ collections:
       - file: "src/data/galeri.json"
         label: "🖼️ Galeri"
         name: "galeri"
+        description: "Tambah atau hapus koleksi foto dan video kegiatan dusun."
         fields:
           - name: "foto"
             label: "Galeri Foto"
@@ -246,6 +251,7 @@ collections:
       - file: "src/data/kontak.json"
         label: "📞 Kontak"
         name: "kontak"
+        description: "Edit informasi kontak perangkat dusun dan form aspirasi."
         fields:
           - name: "kontakPemerintah"
             label: "Kontak Perangkat Dusun"
@@ -279,6 +285,7 @@ collections:
       - file: "src/data/tentang-kkn.json"
         label: "🎓 Tentang KKN"
         name: "kkn"
+        description: "Perbarui informasi tentang tim KKN, termasuk daftar anggota."
         fields:
           - name: "judulHalaman"
             label: "Judul Halaman"
