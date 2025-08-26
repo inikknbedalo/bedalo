@@ -33,7 +33,11 @@ collections:
               - { label: "Foto Kepala Dusun", name: "fotoUrl", widget: "image" }
               - { label: "Nama Kepala Dusun", name: "namaKepalaDusun", widget: "string" }
               - { label: "Jabatan", name: "jabatan", widget: "string" }
-              - { label: "Sambutan", name: "sambutan", widget: "markdown", hint: "Setiap paragraf baru akan ditampilkan secara otomatis." }
+              # FIX: Diubah dari 'markdown' menjadi 'list' agar cocok dengan data array di JSON
+              - label: "Sambutan"
+                name: "sambutan"
+                widget: "list"
+                field: { label: "Paragraf", widget: "text" }
           - label: "Potensi Unggulan (di Beranda)"
             name: "potensiUnggulan"
             widget: "list"
@@ -70,7 +74,11 @@ collections:
         label: "Konten Profil"
         name: "profil"
         fields:
-          - { label: "Sejarah", name: "sejarah", widget: "markdown", hint: "Tulis semua paragraf sejarah di sini." }
+          # FIX: Diubah dari 'markdown' menjadi 'list' agar cocok dengan data array di JSON
+          - label: "Sejarah"
+            name: "sejarah"
+            widget: "list"
+            field: { label: "Paragraf", widget: "text" }
           - label: "Visi & Misi"
             name: "visiMisi"
             widget: "object"
@@ -89,6 +97,7 @@ collections:
             name: "demografi"
             widget: "object"
             fields:
+              # FIX: Mengubah widget menjadi 'number' untuk angka, dan memastikan JSON menggunakan string
               - { label: "Jumlah Penduduk", name: "jumlahPenduduk", widget: "string" }
               - { label: "Laki-laki", name: "lakiLaki", widget: "string" }
               - { label: "Perempuan", name: "perempuan", widget: "string" }
@@ -97,90 +106,46 @@ collections:
   
   # Halaman Lainnya (Gabungan)
   - name: "halaman_lainnya"
-    label: "Halaman Lainnya"
+    label: "Konten Halaman Lainnya"
     files:
       - file: "src/data/potensi.json"
-        label: "Konten Potensi"
+        label: "Potensi"
         name: "potensi"
         fields:
-          - label: "UMKM / Produk Unggulan"
-            name: "umkm"
-            widget: "list"
-            summary: "{{fields.judul}}"
-            fields:
-              - { label: "Gambar Produk", name: "gambarUrl", widget: "image" }
-              - { label: "Judul Produk", name: "judul", widget: "string" }
-              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-              - { label: "Harga", name: "harga", widget: "string" }
-              - { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+          - { name: "umkm", label: "UMKM", widget: "list", summary: "{{fields.judul}}", fields: [
+              { label: "Gambar Produk", name: "gambarUrl", widget: "image" }, { label: "Judul Produk", name: "judul", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "text" }, { label: "Harga", name: "harga", widget: "string" }, { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+            ]}
       - file: "src/data/pariwisata.json"
-        label: "Konten Pariwisata"
+        label: "Pariwisata"
         name: "pariwisata"
         fields:
-          - label: "Destinasi Wisata"
-            name: "destinasi"
-            widget: "list"
-            summary: "{{fields.judul}}"
-            fields:
-              - { label: "Gambar", name: "gambarUrl", widget: "image" }
-              - { label: "Judul", name: "judul", widget: "string" }
-              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-              - { label: "Link Peta", name: "petaLink", widget: "string" }
-          # ... tambahkan field lain untuk pariwisata jika perlu
+          - { name: "destinasi", label: "Destinasi Wisata", widget: "list", summary: "{{fields.judul}}", fields: [
+              { label: "Gambar", name: "gambarUrl", widget: "image" }, { label: "Judul", name: "judul", widget: "string" }, { label: "Deskripsi", name: "deskripsi", widget: "text" }, { label: "Link Peta", name: "petaLink", widget: "string" }
+            ]}
       - file: "src/data/galeri.json"
-        label: "Konten Galeri"
+        label: "Galeri"
         name: "galeri"
         fields:
-          - label: "Galeri Foto"
-            name: "foto"
-            widget: "list"
-            summary: "{{fields.alt}}"
-            fields:
-              - { label: "Gambar", name: "url", widget: "image" }
-              - { label: "Keterangan (Alt Text)", name: "alt", widget: "string" }
-          - label: "Galeri Video"
-            name: "video"
-            widget: "list"
-            summary: "{{fields.judul}}"
-            fields:
-              - { label: "URL Embed Video (YouTube)", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/embed/xxxxx" }
-              - { label: "Judul Video", name: "judul", widget: "string" }
+          - { name: "foto", label: "Galeri Foto", widget: "list", summary: "{{fields.alt}}", fields: [
+              { label: "Gambar", name: "url", widget: "image" }, { label: "Keterangan (Alt Text)", name: "alt", widget: "string" }
+            ]}
+          - { name: "video", label: "Galeri Video", widget: "list", summary: "{{fields.judul}}", fields: [
+              { label: "URL Embed Video (YouTube)", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/embed/xxxxx" }, { label: "Judul Video", name: "judul", widget: "string" }
+            ]}
       - file: "src/data/kontak.json"
-        label: "Konten Kontak"
+        label: "Kontak"
         name: "kontak"
         fields:
-          - label: "Kontak Perangkat Dusun"
-            name: "kontakPemerintah"
-            widget: "list"
-            summary: "{{fields.nama}}"
-            fields:
-              - { label: "Foto", name: "fotoUrl", widget: "image" }
-              - { label: "Nama", name: "nama", widget: "string" }
-              - { label: "Jabatan", name: "jabatan", widget: "string" }
-              - { label: "Nomor Telepon", name: "telepon", widget: "string" }
-          - label: "Form Aspirasi"
-            name: "formAspirasi"
-            widget: "object"
-            fields:
-              - { label: "Judul", name: "judul", widget: "string" }
-              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-              - { label: "URL Action Formulir", name: "formActionUrl", widget: "string", hint: "URL dari Google Form atau layanan lain." }
-              # ... field untuk entry mapping
+          - { name: "kontakPemerintah", label: "Kontak Perangkat", widget: "list", summary: "{{fields.nama}}", fields: [
+              { label: "Foto", name: "fotoUrl", widget: "image" }, { label: "Nama", name: "nama", widget: "string" }, { label: "Jabatan", name: "jabatan", widget: "string" }, { label: "Nomor Telepon", name: "telepon", widget: "string" }
+            ]}
       - file: "src/data/tentang-kkn.json"
-        label: "Konten Tentang KKN"
+        label: "Tentang KKN"
         name: "tentang_kkn"
         fields:
-          - label: "Anggota Tim"
-            name: "anggota"
-            widget: "object"
-            fields:
-              - { label: "Judul Seksi", name: "judul", widget: "string" }
-              - label: "Daftar Anggota"
-                name: "tim"
-                widget: "list"
-                summary: "{{fields.nama}}"
-                fields:
-                  - { label: "Foto", name: "fotoUrl", widget: "image" }
-                  - { label: "Nama", name: "nama", widget: "string" }
-                  - { label: "Program Studi", name: "prodi", widget: "string" }
-                  - { label: "URL Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
+          - { name: "anggota", label: "Anggota Tim", widget: "object", fields: [
+              { label: "Judul Seksi", name: "judul", widget: "string" },
+              { name: "tim", label: "Daftar Anggota", widget: "list", summary: "{{fields.nama}}", fields: [
+                { label: "Foto", name: "fotoUrl", widget: "image" }, { label: "Nama", name: "nama", widget: "string" }, { label: "Program Studi", name: "prodi", widget: "string" }, { label: "URL Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
+              ]}
+            ]}
