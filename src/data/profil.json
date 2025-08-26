@@ -22,18 +22,23 @@
     },
     {
       "fotoUrl": "https://placehold.co/300x300/e2e8f0/333333?text=Foto",
-      "nama": "Siti Aminah",
-      "jabatan": "Ketua RW 01"
+      "nama": "Pak RW",
+      "jabatan": "Ketua RW"
     },
     {
       "fotoUrl": "https://placehold.co/300x300/e2e8f0/333333?text=Foto",
-      "nama": "Agus Wijaya",
+      "nama": "Pak RT",
       "jabatan": "Ketua RT 01"
     },
     {
       "fotoUrl": "https://placehold.co/300x300/e2e8f0/333333?text=Foto",
-      "nama": "Rina Lestari",
-      "jabatan": "Ketua Karang Taruna"
+      "nama": "Pak RT",
+      "jabatan": "Ketua RT 02"
+    },
+    {
+      "nama": "Pak RT",
+      "jabatan": "Ketua RT 03",
+      "fotoUrl": "/assets/images/foto.svg"
     }
   ],
   "demografi": {
