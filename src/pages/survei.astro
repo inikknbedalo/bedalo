@@ -1,36 +1,50 @@
 ---
-// Impor CSS global Anda yang sudah ada
 import '../styles/global.css';
 ---
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survei Digitalisasi Bedalo</title>
-    
+
+    <link rel="icon" type="image/x-icon" href="/icon.svg">
+
     <style>
-        html { scroll-behavior: smooth; }
+        /* General Styling */
+        html { 
+            scroll-behavior: smooth; 
+        }
         body {
             font-family: 'Poppins', sans-serif;
-            padding-top: 64px;
+            padding-top: 64px; 
         }
-        .checklist-item input:checked + label span:first-child {
-            background-color: #34D399;
-            border-color: #34D399;
+
+        /* Checklist Custom Styling */
+        .checklist-item.item-checked label {
+            text-decoration: line-through;
+            color: #6B7280; /* gray-500 */
         }
-        .checklist-item input:checked + label span:first-child svg {
+        .checklist-item.item-checked label span:first-child {
+            background-color: #34D399; /* green-400 */
+            border-color: #34D399; /* green-400 */
+        }
+        .checklist-item.item-checked label span:first-child svg {
             display: block;
         }
-        .checklist-item input:checked + label {
-            text-decoration: line-through;
-            color: #6B7280;
+
+        /* Tab Custom Styling */
+        .tab-content { 
+            display: none; 
         }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active { 
+            display: block; 
+        }
         .tab-btn.active {
-            border-color: #2563EB;
-            color: #1E3A8A;
+            border-color: #2563EB; /* blue-600 */
+            color: #1E40AF; /* blue-800 */
+            font-weight: 600;
         }
     </style>
 </head>
@@ -39,7 +53,7 @@ import '../styles/global.css';
     <nav class="bg-white/90 backdrop-blur-sm shadow-md fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
+                <div class="flex-shrink-0">
                     <a href="/survei" class="text-xl font-bold text-blue-900">Survei Digitalisasi Bedalo</a>
                 </div>
                 <div class="hidden md:block">
@@ -52,7 +66,7 @@ import '../styles/global.css';
                 <div class="-mr-2 flex md:hidden">
                     <button id="mobile-menu-button" type="button" class="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-200 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
                         <span class="sr-only">Buka menu utama</span>
-                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-bars" id="mobile-menu-icon"></i>
                     </button>
                 </div>
             </div>
@@ -65,20 +79,20 @@ import '../styles/global.css';
             </div>
         </div>
     </nav>
-
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <section class="text-center mb-10">
+        <section class="text-center mb-12">
             <h1 class="text-4xl font-bold text-blue-900">Survei Digitalisasi Bedalo</h1>
+            <p class="mt-2 text-lg text-gray-600">Panduan, checklist, dan jadwal untuk tim survei.</p>
             <a href="https://docs.google.com/spreadsheets/d/1THGeYhivhE9zUZaW6KuiknF41-oQdDPM1rqI9rg8-Kg/edit?usp=sharing" target="_blank" class="mt-6 inline-block bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-105">
                 <i class="fas fa-file-excel mr-2"></i> Buka Database Hasil Survei
             </a>
         </section>
-        <section id="tugas" class="pt-8 -mt-8">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-700">Tugas Tim & Tautan Formulir</h2>
+        <section id="tugas" class="scroll-mt-16">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">Tugas Tim & Tautan Formulir</h2>
             <div class="space-y-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-bold text-blue-800 border-b pb-2 mb-4">Tim 1: Koordinator & Stakeholder</h3>
-                    <p class="text-gray-600 mb-4">Wawancara tokoh kunci (Dukuh, RW, RT) dan menjadi pusat informasi untuk tim lain. Bertanggung jawab atas development & finalisasi website.</p>
+                    <p class="text-gray-600 mb-4">Wawancara tokoh kunci (Dukuh, RW, RT), menjadi pusat informasi, dan bertanggung jawab atas development & finalisasi website.</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <a href="https://forms.gle/39xXy6qZMmXgXy556" target="_blank" class="bg-gray-600 text-white text-center py-3 px-4 rounded-md hover:bg-gray-700 transition-colors font-semibold">Form A: Stakeholder Kunci</a>
                         <a href="https://forms.gle/jkjhB5Kxoi93V8cb9" target="_blank" class="bg-gray-600 text-white text-center py-3 px-4 rounded-md hover:bg-gray-700 transition-colors font-semibold">Form A: Informasi Dusun</a>
@@ -104,8 +118,8 @@ import '../styles/global.css';
                 </div>
             </div>
         </section>
-        <section id="checklists" class="mt-12 pt-8 -mt-8">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-700">Checklist Dokumentasi Visual (Form H)</h2>
+        <section id="checklists" class="mt-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">Checklist Dokumentasi Visual (Form H)</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <div class="flex justify-between items-center mb-4">
@@ -121,17 +135,17 @@ import '../styles/global.css';
                         <button data-type="wisata" class="reset-btn text-sm text-gray-500 hover:text-red-500 transition-colors">Reset</button>
                     </div>
                     <div class="space-y-3" id="checklist-wisata"></div>
-                     <div class="mt-4"><div class="bg-gray-200 rounded-full h-2.5"><div id="progress-wisata" class="bg-green-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div></div></div>
+                    <div class="mt-4"><div class="bg-gray-200 rounded-full h-2.5"><div id="progress-wisata" class="bg-green-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div></div></div>
                 </div>
             </div>
         </section>
-        <section id="jadwal" class="mt-12 pt-8 -mt-8 mb-8">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-700">Jadwal & Rencana Survei</h2>
+        <section id="jadwal" class="mt-12 scroll-mt-16 mb-8">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">Jadwal & Rencana Survei</h2>
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="border-b border-gray-200">
                     <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                        <button data-tab="hari1" class="tab-btn active">Hari Pertama</button>
-                        <button data-tab="hari2" class="tab-btn">Hari Kedua</button>
+                        <button data-tab="hari1" class="tab-btn py-4 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 active">Hari Pertama</button>
+                        <button data-tab="hari2" class="tab-btn py-4 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700">Hari Kedua</button>
                     </nav>
                 </div>
                 <div id="hari1" class="tab-content active mt-6 space-y-4">
@@ -139,152 +153,218 @@ import '../styles/global.css';
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">10:00 – 12:00: Sesi Survei 1</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Menemui tokoh kunci.</li><li><span class="font-semibold">Tim Warung:</span> Mulai mendata UMKM yang mudah ditemukan.</li><li><span class="font-semibold">Tim Pantai:</span> Memetakan jalan utama & tes sinyal awal.</li></ul></div>
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">12:00 - 13:00: Istirahat & Sinkronisasi</p><p class="text-sm text-gray-600">Makan siang sambil berbagi temuan dan menyesuaikan rute. (Semua Tim)</p></div>
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">13:00 - 14:00: Sesi Survei 2</p><p class="text-sm text-gray-600">Melanjutkan survei ke lokasi-lokasi yang lebih terarah. (Semua Tim)</p></div>
-                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">19:00 - Selesai: Konsolidasi & Development</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Input data, validasi, dan development awal website.</li></ul></div>
+                    <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">19:00 - Selesai: Konsolidasi & Development</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Input data, validasi, dan development awal website.</li></ul></div>
                 </div>
                 <div id="hari2" class="tab-content mt-6 space-y-4">
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">09:45 - 10:00: Briefing & Analisis</p><p class="text-sm text-gray-600">Evaluasi data Hari 1, identifikasi data yang kurang/terlewat. (Semua Tim)</p></div>
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">10:00 - 12:00: Sesi Survei 3 (Misi Khusus)</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim Warung:</span> Mendatangi UMKM yang terlewat.</li><li><span class="font-semibold">Tim Pantai:</span> Fokus pada spot Instagram-able & menggali cerita unik lokasi.</li></ul></div>
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">12:00 - 13:00: Istirahat & Pra-evaluasi</p><p class="text-sm text-gray-600">Makan siang sambil cek kelengkapan form masing-masing. (Semua Tim)</p></div>
                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">13:00 - Selesai: Sesi Survei 4 (Misi Lanjutan)</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Follow up tokoh kunci.</li><li><span class="font-semibold">Tim Warung:</span> Validasi data & melengkapi foto.</li><li><span class="font-semibold">Tim Pantai:</span> Mencari rute alternatif & spot tersembunyi.</li></ul></div>
-                     <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">19:00 - Selesai: Finalisasi & Evaluasi</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Finalisasi website.</li><li><span class="font-semibold">Semua Tim:</span> Evaluasi & rencana lanjutan.</li></ul></div>
+                    <div class="p-4 bg-gray-50 rounded-lg"><p class="font-bold text-gray-700">19:00 - Selesai: Finalisasi & Evaluasi</p><ul class="list-disc list-inside text-sm text-gray-600 mt-1"><li><span class="font-semibold">Tim 1:</span> Finalisasi website.</li><li><span class="font-semibold">Semua Tim:</span> Evaluasi & rencana lanjutan.</li></ul></div>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const checklistData = {
-                umkm: [
-                    { id: 'umkm-1', text: 'Foto eksterior usaha' },
-                    { id: 'umkm-2', text: 'Foto interior/suasana' },
-                    { id: 'umkm-3', text: 'Foto produk utama (close-up)' },
-                    { id: 'umkm-4', text: 'Foto proses pembuatan (jika ada)' },
-                    { id: 'umkm-5', text: 'Foto pemilik dengan produk' },
-                    { id: 'umkm-6', text: 'Foto fasilitas pendukung' },
-                    { id: 'umkm-7', text: 'Foto patokan lokasi' },
-                    { id: 'umkm-8', text: 'Foto daftar menu' },
-                    { id: 'umkm-9', text: 'Foto 360° dari depan objek' }
-                ],
-                wisata: [
-                    { id: 'wisata-1', text: 'Wide shot lokasi' },
-                    { id: 'wisata-2', text: 'Detail unik/menarik' },
-                    { id: 'wisata-3', text: 'Best angle untuk Instagram' },
-                    { id: 'wisata-4', text: 'Golden hour shot (jika memungkinkan)' },
-                    { id: 'wisata-5', text: 'Aktivitas yang bisa dilakukan' },
-                    { id: 'wisata-6', text: 'Fasilitas pendukung' },
-                    { id: 'wisata-7', text: 'Foto Kuliner Khas' },
-                    { id: 'wisata-8', text: 'Foto Flora & Fauna' },
-                    { id: 'wisata-9', text: 'Foto Gerbang Masuk & Loket' },
-                    { id: 'wisata-10', text: 'Foto Area Parkir' },
-                    { id: 'wisata-11', text: 'Foto Peta atau Papan Informasi' },
-                    { id: 'wisata-12', text: 'Foto 360° dari depan objek' }
-                ]
-            };
+        // Define types for our data structures
+        type ChecklistItem = {
+            id: string;
+            text: string;
+        };
 
-            function createChecklistItemHTML(item) {
-                // Hapus onchange dari sini, kita akan menambahkannya secara terprogram
-                return `
-                    <div class="checklist-item flex items-center">
-                        <input type="checkbox" id="${item.id}" class="hidden">
-                        <label for="${item.id}" class="flex items-center cursor-pointer text-gray-700 w-full">
-                            <span class="w-5 h-5 mr-3 inline-flex items-center justify-center border-2 border-gray-300 rounded-sm transition-colors flex-shrink-0">
-                                <svg class="w-3 h-3 text-white hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </span>
-                            ${item.text}
-                        </label>
-                    </div>
-                `;
+        const checklistData = {
+            umkm: [
+                { id: 'umkm-1', text: 'Foto eksterior usaha' },
+                { id: 'umkm-2', text: 'Foto interior/suasana' },
+                { id: 'umkm-3', text: 'Foto produk utama (close-up)' },
+                { id: 'umkm-4', text: 'Foto proses pembuatan (jika ada)' },
+                { id: 'umkm-5', text: 'Foto pemilik dengan produk' },
+                { id: 'umkm-6', text: 'Foto fasilitas pendukung' },
+                { id: 'umkm-7', text: 'Foto patokan lokasi' },
+                { id: 'umkm-8', text: 'Foto daftar menu' },
+                { id: 'umkm-9', text: 'Foto 360° dari depan objek' }
+            ],
+            wisata: [
+                { id: 'wisata-1', text: 'Wide shot lokasi' },
+                { id: 'wisata-2', text: 'Detail unik/menarik' },
+                { id: 'wisata-3', text: 'Best angle untuk Instagram' },
+                { id: 'wisata-4', text: 'Golden hour shot (jika memungkinkan)' },
+                { id: 'wisata-5', text: 'Aktivitas yang bisa dilakukan' },
+                { id: 'wisata-6', text: 'Fasilitas pendukung' },
+                { id: 'wisata-7', text: 'Foto Kuliner Khas' },
+                { id: 'wisata-8', text: 'Foto Flora & Fauna' },
+                { id: 'wisata-9', text: 'Foto Gerbang Masuk & Loket' },
+                { id: 'wisata-10', text: 'Foto Area Parkir' },
+                { id: 'wisata-11', text: 'Foto Peta atau Papan Informasi' },
+                { id: 'wisata-12', text: 'Foto 360° dari depan objek' }
+            ]
+        } satisfies Record<string, ChecklistItem[]>;
+
+        type ChecklistType = keyof typeof checklistData;
+
+        /**
+         * UPDATED function to DIRECTLY apply styles to the elements.
+         * This overrides external stylesheets.
+         * @param checkbox The HTMLInputElement to update.
+         */
+        function updateCheckboxVisual(checkbox: HTMLInputElement) {
+            const label = document.querySelector(`label[for="${checkbox.id}"]`) as HTMLLabelElement | null;
+            if (!label) return;
+
+            const box = label.querySelector('span') as HTMLSpanElement | null;
+            const svg = label.querySelector('svg') as SVGSVGElement | null;
+
+            if (!box || !svg) return;
+
+            if (checkbox.checked) {
+                // Apply checked styles
+                label.style.textDecoration = 'line-through';
+                label.style.color = '#6B7280';
+                box.style.backgroundColor = '#34D399';
+                box.style.borderColor = '#34D399';
+                svg.style.display = 'block';
+            } else {
+                // Revert to original styles by removing the inline styles
+                label.style.textDecoration = '';
+                label.style.color = '';
+                box.style.backgroundColor = '';
+                box.style.borderColor = '';
+                svg.style.display = 'none';
             }
+        }
 
-            function updateProgress(type) {
-                const items = checklistData[type];
-                if (!items) return;
+        function createChecklistItemHTML(item: ChecklistItem): string {
+            return `
+                <div class="checklist-item flex items-center">
+                    <input type="checkbox" id="${item.id}" class="hidden">
+                    <label for="${item.id}" class="flex items-center cursor-pointer text-gray-700 w-full">
+                        <span class="w-5 h-5 mr-3 inline-flex items-center justify-center border-2 border-gray-300 rounded-sm transition-colors flex-shrink-0">
+                            <svg class="w-3 h-3 text-white hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        </span>
+                        ${item.text}
+                    </label>
+                </div>
+            `;
+        }
 
-                const checkedCount = items.filter(item => document.getElementById(item.id)?.checked).length;
-                const progress = (checkedCount / items.length) * 100;
-                
-                const progressBar = document.getElementById(`progress-${type}`);
-                if (progressBar) progressBar.style.width = `${progress}%`;
+        function updateProgress(type: ChecklistType) {
+            const items = checklistData[type];
+            const progressBar = document.getElementById(`progress-${type}`) as HTMLElement | null;
+            if (!items || !progressBar) return;
 
-                items.forEach(item => {
-                    const checkbox = document.getElementById(item.id);
-                    if (checkbox) {
-                        localStorage.setItem(item.id, checkbox.checked);
-                    }
-                });
-            }
+            const checkedCount = items.filter(item => {
+                const checkbox = document.getElementById(item.id) as HTMLInputElement | null;
+                if (checkbox) {
+                    localStorage.setItem(item.id, String(checkbox.checked));
+                    return checkbox.checked;
+                }
+                return false;
+            }).length;
 
-            function initializeChecklists() {
-                const umkmContainer = document.getElementById('checklist-umkm');
-                const wisataContainer = document.getElementById('checklist-wisata');
-                if (!umkmContainer || !wisataContainer) return;
-                
-                umkmContainer.innerHTML = checklistData.umkm.map(createChecklistItemHTML).join('');
-                wisataContainer.innerHTML = checklistData.wisata.map(createChecklistItemHTML).join('');
+            const progress = (checkedCount / items.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
 
-                Object.keys(checklistData).forEach(type => {
+        function initializeChecklists() {
+            Object.keys(checklistData).forEach(key => {
+                const type = key as ChecklistType;
+                const container = document.getElementById(`checklist-${type}`);
+                if (container) {
+                    container.innerHTML = checklistData[type].map(createChecklistItemHTML).join('');
+                    
                     checklistData[type].forEach(item => {
-                        const checkbox = document.getElementById(item.id);
+                        const checkbox = document.getElementById(item.id) as HTMLInputElement | null;
                         if (checkbox) {
                             const savedState = localStorage.getItem(item.id);
-                            if (savedState === 'true') {
-                                checkbox.checked = true;
-                            }
-                            checkbox.addEventListener('change', () => updateProgress(type));
+                            checkbox.checked = savedState === 'true';
+                            
+                            updateCheckboxVisual(checkbox); 
+                            
+                            checkbox.addEventListener('change', () => {
+                                updateCheckboxVisual(checkbox);
+                                updateProgress(type);
+                            });
                         }
                     });
                     updateProgress(type);
-                });
-            }
-
-            // --- Inisialisasi Event Listeners ---
-
-            // 1. Checklist
-            initializeChecklists();
-
-            // 2. Tombol Reset
+                }
+            });
+        }
+        
+        function initializeResetButtons() {
             document.querySelectorAll('.reset-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const type = e.currentTarget.dataset.type;
+                button.addEventListener('click', (e: Event) => {
+                    const target = e.currentTarget as HTMLButtonElement | null;
+                    if (!target) return;
+
+                    const type = target.dataset.type as ChecklistType | undefined;
                     if (type && confirm(`Yakin mau reset checklist ${type.toUpperCase()}?`)) {
                         checklistData[type].forEach(item => {
-                            const checkbox = document.getElementById(item.id);
-                            if(checkbox) checkbox.checked = false;
+                            const checkbox = document.getElementById(item.id) as HTMLInputElement | null;
+                            if (checkbox) {
+                                checkbox.checked = false;
+                                updateCheckboxVisual(checkbox);
+                            }
                             localStorage.removeItem(item.id);
                         });
                         updateProgress(type);
                     }
                 });
             });
+        }
 
-            // 3. Tab Jadwal
+        function initializeTabs() {
             const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
             tabButtons.forEach(button => {
-                button.classList.add('py-4', 'px-1', 'border-b-2', 'font-medium', 'text-sm', 'transition-colors', 'border-transparent', 'text-gray-500', 'hover:border-gray-300', 'hover:text-gray-700');
-                if(button.classList.contains('active')) {
-                    button.classList.add('border-blue-500', 'text-blue-600');
-                }
-                button.addEventListener('click', (e) => {
-                    const tabId = e.currentTarget.dataset.tab;
+                button.addEventListener('click', (e: Event) => {
+                    const target = e.currentTarget as HTMLButtonElement | null;
+                    if (!target) return;
+                    const tabId = target.dataset.tab;
                     if (!tabId) return;
 
-                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                    tabButtons.forEach(btn => btn.classList.remove('active', 'border-blue-500', 'text-blue-600'));
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
                     
+                    target.classList.add('active');
                     const newTabContent = document.getElementById(tabId);
-                    if(newTabContent) newTabContent.classList.add('active');
-                    e.currentTarget.classList.add('active', 'border-blue-500', 'text-blue-600');
+                    if (newTabContent) newTabContent.classList.add('active');
                 });
             });
+        }
 
-            // 4. Menu Mobile
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+        function initializeMobileMenu() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('mobile-menu-icon');
+            const navLinks = document.querySelectorAll('.nav-link-mobile');
 
-            mobileMenuButton?.addEventListener('click', () => mobileMenu?.classList.toggle('hidden'));
-            mobileNavLinks.forEach(link => link.addEventListener('click', () => mobileMenu?.classList.add('hidden')));
+            if (menuButton && menu && menuIcon) {
+                menuButton.addEventListener('click', () => {
+                    const isHidden = menu.classList.toggle('hidden');
+                    menuIcon.classList.toggle('fa-bars', isHidden);
+                    menuIcon.classList.toggle('fa-times', !isHidden);
+                });
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (menu && menuIcon) {
+                        menu.classList.add('hidden');
+                        menuIcon.classList.add('fa-bars');
+                        menuIcon.classList.remove('fa-times');
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeChecklists();
+            initializeResetButtons();
+            initializeTabs();
+            initializeMobileMenu();
         });
     </script>
 </body>
