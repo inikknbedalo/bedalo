@@ -1,0 +1,25 @@
+---
+// src/components/PersonCard.astro
+
+// 1. Definisikan properti (props) yang akan diterima oleh komponen ini.
+// Ini seperti parameter untuk fungsi. Komponen ini butuh nama, jabatan, dan URL foto.
+export interface Props {
+  nama: string;
+  jabatan: string;
+  fotoUrl: string;
+}
+
+// 2. Ambil nilai props yang dikirimkan dari halaman.
+const { nama, jabatan, fotoUrl } = Astro.props;
+---
+
+<div class="text-center">
+    <img 
+        src={fotoUrl} 
+        alt={`Foto ${nama}`} 
+        class="w-40 h-40 rounded-full mx-auto object-cover shadow-lg mb-4"
+        loading="lazy"
+    >
+    <h4 class="text-lg font-bold text-gray-800">{nama}</h4>
+    <p class="text-gray-500">{jabatan}</p>
+</div>
