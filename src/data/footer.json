@@ -1,0 +1,22 @@
+{
+  "address": "Desa Krambilsawit, Kec. Saptosari, Kab. Gunungkidul, Daerah Istimewa Yogyakarta.",
+  "email": "inikknbedalo@gmail.com",
+  "phone": "+62 831-0758-1144",
+  "mainLinks": [
+    { "href": "/kontak#kontak-perangkat", "text": "Kontak Perangkat" },
+    { "href": "/profil#peta", "text": "Peta Wilayah" },
+    { "href": "/galeri", "text": "Galeri" }
+  ],
+  "aboutLinks": [
+    { "href": "/tentang-kkn", "text": "Tentang KKN 117" },
+    { "href": "/peta-situs", "text": "Peta Situs" },
+    { "href": "/kebijakan-privasi", "text": "Kebijakan Privasi" }
+  ],
+  "socialLinks": [
+    { "href": "https://instagram.com/your-username", "label": "Instagram", "iconClass": "fa-brands fa-instagram" },
+    { "href": "https://youtube.com/your-channel", "label": "YouTube", "iconClass": "fa-brands fa-youtube" },
+    { "href": "https://tiktok.com/@your-username", "label": "TikTok", "iconClass": "fa-brands fa-tiktok" },
+    { "href": "https://facebook.com/your-profile", "label": "Facebook", "iconClass": "fa-brands fa-facebook" },
+    { "href": "https://x.com/your-handle", "label": "X (Twitter)", "iconClass": "fa-brands fa-twitter" }
+  ]
+}
