@@ -3,32 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// 1. Tambahkan properti 'icon' pada setiap halaman untuk tampilan visual
-const sitePages = [
-  {
-    category: 'Halaman Utama',
-    pages: [
-      { url: '/', title: 'Beranda', description: 'Halaman utama dan pengenalan singkat Dusun Bedalo.', icon: 'fas fa-home' },
-      { url: '/profil', title: 'Profil', description: 'Sejarah, visi & misi, struktur pemerintahan, dan data demografi.', icon: 'fas fa-user-circle' },
-      { url: '/potensi', title: 'Potensi', description: 'Informasi mengenai UMKM, pertanian, dan potensi unggulan lainnya.', icon: 'fas fa-lightbulb' },
-      { url: '/pariwisata', title: 'Pariwisata & Budaya', description: 'Destinasi wisata, tradisi, kesenian, dan kalender acara budaya.', icon: 'fas fa-map-signs' },
-      { url: '/galeri', title: 'Galeri', description: 'Kumpulan foto dan video momen-momen di Dusun Bedalo.', icon: 'fas fa-images' },
-      { url: '/kontak', title: 'Kontak', description: 'Informasi kontak perangkat dusun dan formulir aspirasi warga.', icon: 'fas fa-envelope' },
-    ]
-  },
-  {
-    category: 'Tentang Website',
-    pages: [
-    { url: '/tentang-kkn', title: 'Tentang KKN', description: 'Informasi mengenai tim KKN yang membangun website ini.', icon: 'fas fa-users' },
-    { url: '/peta-situs', title: 'Peta Situs', description: 'Halaman yang menampilkan semua halaman website.', icon: 'fas fa-sitemap' },
-    { url: '/kebijakan-privasi', title: 'Kebijakan Privasi', description: 'Menjelaskan bagaimana kami menangani dan melindungi data pribadi Anda.', icon: 'fas fa-shield-alt' },
-    ]
-  }
-];
+// Import the page data from our new JSON file
+import sitePages from '../data/peta-situs.json';
 ---
 <Layout 
     title="Peta Situs | Website Dusun Bedalo"
-    description="Navigasi dengan mudah seluruh halaman di website Dusun Bedalo. Temukan tautan langsung ke semua informasi penting melalui peta situs kami."
+    description="Navigasi dengan mudah seluruh halaman di website Dusun Bedalo."
 >
     <Header currentPage="Peta Situs" />
 
@@ -40,12 +20,11 @@ const sitePages = [
             </div>
         </section>
 
-        <section class="py-20 bg-gray-100">
+        <section class="py-20">
             <div class="container mx-auto px-6 max-w-5xl">
                 {sitePages.map(section => (
                     <div class="mb-12" data-aos="fade-up">
                         <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 pb-3 mb-8">{section.category}</h2>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {section.pages.map(page => (
                                 <a href={page.url} class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">

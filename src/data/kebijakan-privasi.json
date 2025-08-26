@@ -1,0 +1,57 @@
+{
+  "pageTitle": "Kebijakan Privasi",
+  "pageSubtitle": "Privasi dan keamanan data Anda adalah prioritas kami.",
+  "effectiveDate": "04 Agustus 2025",
+  "intro": "Terima kasih telah mengunjungi website Dusun Bedalo. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi yang mungkin Anda berikan saat menggunakan situs kami.",
+  "sections": [
+    {
+      "type": "default",
+      "icon": "fas fa-database text-xl",
+      "iconBg": "bg-blue-100 text-blue-600",
+      "title": "Informasi yang Kami Kumpulkan",
+      "content": "Kami hanya mengumpulkan informasi pribadi yang Anda berikan secara sukarela melalui <strong>Formulir Aspirasi</strong> di halaman Kontak. Informasi yang kami kumpulkan meliputi:",
+      "listItems": [
+        "Nama Lengkap",
+        "Nomor Telepon / Alamat Email",
+        "Subjek dan Isi Pesan Aspirasi"
+      ]
+    },
+    {
+      "type": "default",
+      "icon": "fas fa-tasks text-xl",
+      "iconBg": "bg-green-100 text-green-600",
+      "title": "Bagaimana Kami Menggunakan Informasi Anda",
+      "content": "Informasi Anda akan digunakan semata-mata untuk tujuan berikut:",
+      "listItems": [
+        "Menanggapi pertanyaan, masukan, atau keluhan Anda.",
+        "Menindaklanjuti usulan yang Anda sampaikan kepada perangkat dusun.",
+        "Menghubungi Anda kembali jika diperlukan informasi lebih lanjut."
+      ],
+      "footer": "Kami <strong>tidak akan</strong> membagikan, menjual, atau menyewakan informasi pribadi Anda kepada pihak ketiga."
+    },
+    {
+      "type": "grid",
+      "items": [
+        {
+          "icon": "fas fa-shield-alt text-xl",
+          "iconBg": "bg-red-100 text-red-600",
+          "title": "Keamanan Data",
+          "content": "Data yang dikirimkan melalui formulir diteruskan ke saluran internal perangkat dusun dan tidak disimpan di server website ini."
+        },
+        {
+          "icon": "fas fa-external-link-alt text-xl",
+          "iconBg": "bg-yellow-100 text-yellow-600",
+          "title": "Tautan ke Situs Lain",
+          "content": "Website kami mungkin berisi tautan ke situs lain. Kami tidak bertanggung jawab atas konten atau kebijakan privasi situs pihak ketiga."
+        }
+      ]
+    },
+    {
+      "type": "default",
+      "icon": "fas fa-info-circle text-xl",
+      "iconBg": "bg-purple-100 text-purple-600",
+      "title": "Perubahan & Kontak",
+      "content": "Kebijakan ini dapat diperbarui dari waktu ke waktu. Jika Anda memiliki pertanyaan, silakan hubungi kami melalui halaman <a href='/kontak' class='font-semibold text-blue-600 hover:underline'>Kontak</a>."
+    }
+  ]
+}
