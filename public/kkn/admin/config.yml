@@ -1,0 +1,240 @@
+backend:
+  name: github
+  repo: inikknbedalo/bedalo
+  branch: main # Branch to update (optional; defaults to master)
+  base_url: https://bedalo.pages.dev
+  auth_endpoint: /api/auth
+media_folder: "assets/images" # You might need to create this folder
+public_folder: "/assets/images"
+
+# These are your editable content types, based on your JSON files
+collections:
+  # Collection for the Home page (index.json)
+  - name: "beranda"
+    label: "Beranda"
+    files:
+      - file: "data/index.json"
+        label: "Halaman Beranda"
+        name: "beranda_data"
+        fields:
+          - { label: "Bagian Hero", name: "hero", widget: "object", fields: [
+              { label: "URL Background", name: "backgroundUrl", widget: "string" },
+              { label: "Judul", name: "judul", widget: "string" },
+              { label: "Subjudul", name: "subjudul", widget: "string" }
+            ]}
+          - { label: "Profil Singkat", name: "profilSingkat", widget: "object", fields: [
+              { label: "URL Foto Kepala Dusun", name: "fotoUrl", widget: "string" },
+              { label: "Nama Kepala Dusun", name: "namaKepalaDusun", widget: "string" },
+              { label: "Jabatan", name: "jabatan", widget: "string" },
+              { label: "Sambutan", name: "sambutan", widget: "list", field: { label: "Paragraf Sambutan", name: "paragraf", widget: "text" }}
+            ]}
+          - label: "Potensi Unggulan"
+            name: "potensiUnggulan"
+            widget: "list"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Link Halaman", name: "link", widget: "string" }
+          - { label: "Seksi Pariwisata", name: "pariwisata", widget: "object", fields: [
+              { label: "Deskripsi", name: "deskripsi", widget: "text" },
+              { label: "Gambar", name: "gambar", widget: "list", fields: [
+                  { label: "URL Gambar", name: "url", widget: "string" },
+                  { label: "Alt Text", name: "alt", widget: "string" }
+                ]}
+            ]}
+          - label: "Galeri Cuplikan"
+            name: "galeri"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "url", widget: "string" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+
+  # Collection for the Profile page (profil.json)
+  - name: "profil"
+    label: "Profil Dusun"
+    files:
+      - file: "data/profil.json"
+        label: "Data Profil"
+        name: "profil_data"
+        fields:
+          - { label: "Sejarah", name: "sejarah", widget: "list", field: { label: "Paragraf", name: "paragraf", widget: "text" }}
+          - { label: "Visi & Misi", name: "visiMisi", widget: "object", fields: [
+              { label: "Visi", name: "visi", widget: "string" },
+              { label: "Misi", name: "misi", widget: "list", field: { label: "Poin Misi", name: "poin", widget: "string" }}
+            ]}
+          - label: "Struktur Pemerintahan"
+            name: "strukturPemerintahan"
+            widget: "list"
+            fields:
+              - { label: "URL Foto", name: "fotoUrl", widget: "string" }
+              - { label: "Nama", name: "nama", widget: "string" }
+              - { label: "Jabatan", name: "jabatan", widget: "string" }
+          - { label: "Demografi", name: "demografi", widget: "object", fields: [
+              { label: "Jumlah Penduduk", name: "jumlahPenduduk", widget: "string" },
+              { label: "Laki-laki", name: "lakiLaki", widget: "string" },
+              { label: "Perempuan", name: "perempuan", widget: "string" },
+              { label: "Mata Pencaharian", name: "mataPencaharian", widget: "list", field: { label: "Pekerjaan", name: "pekerjaan", widget: "string" }}
+            ]}
+          - { label: "URL Peta Google Maps", name: "petaUrl", widget: "string" }
+
+  # Collection for the Potensi page (potensi.json)
+  - name: "potensi"
+    label: "Potensi Dusun"
+    files:
+      - file: "data/potensi.json"
+        label: "Data Potensi"
+        name: "potensi_data"
+        fields:
+          - label: "UMKM / Produk Unggulan"
+            name: "umkm"
+            widget: "list"
+            fields:
+              - { label: "Judul Produk", name: "judul", widget: "string" }
+              - { label: "URL Gambar", name: "gambarUrl", widget: "string" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Harga", name: "harga", widget: "string" }
+              - { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+          - label: "Pertanian"
+            name: "pertanian"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "URL Gambar", name: "gambarUrl", widget: "string" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Komoditas", name: "komoditas", widget: "list", fields: [
+                  { label: "Nama Komoditas", name: "nama", widget: "string" },
+                  { label: "Ikon (FontAwesome)", name: "icon", widget: "string" }
+                ]}
+          - label: "Potensi Lainnya"
+            name: "lainnya"
+            widget: "list"
+            fields:
+              - { label: "Ikon (FontAwesome)", name: "icon", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+
+  # Collection for the Tourism page (pariwisata.json)
+  - name: "pariwisata"
+    label: "Pariwisata & Budaya"
+    files:
+      - file: "data/pariwisata.json"
+        label: "Data Pariwisata"
+        name: "pariwisata_data"
+        fields:
+          - label: "Destinasi Wisata"
+            name: "destinasi"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "string" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Link Peta", name: "petaLink", widget: "string" }
+          - label: "Tradisi Budaya"
+            name: "tradisi"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "string" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "list", field: { label: "Paragraf", name: "paragraf", widget: "text" }}
+          - label: "Kesenian"
+            name: "kesenian"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "string" }
+              - { label: "Alt Text", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "list", field: { label: "Paragraf", name: "paragraf", widget: "text" }}
+          - label: "Kalender Acara"
+            name: "kalender"
+            widget: "list"
+            fields:
+              - { label: "Nama Acara", name: "acara", widget: "string" }
+              - { label: "Deskripsi Singkat", name: "deskripsi", widget: "string" }
+              - { label: "Tanggal Pelaksanaan", name: "tanggal", widget: "string" }
+  
+  # Collection for the Gallery page (galeri.json)
+  - name: "galeri"
+    label: "Galeri"
+    files:
+      - file: "data/galeri.json"
+        label: "Data Galeri"
+        name: "galeri_data"
+        fields:
+          - label: "Galeri Foto"
+            name: "foto"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "url", widget: "string" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+          - label: "Galeri Video"
+            name: "video"
+            widget: "list"
+            fields:
+              - { label: "Judul Video", name: "judul", widget: "string" }
+              - { label: "URL Embed Video (YouTube)", name: "url", widget: "string" }
+
+  # Collection for the Contact page (kontak.json)
+  - name: "kontak"
+    label: "Kontak"
+    files:
+      - file: "data/kontak.json"
+        label: "Data Kontak"
+        name: "kontak_data"
+        fields:
+          - label: "Kontak Pemerintah"
+            name: "kontakPemerintah"
+            widget: "list"
+            fields:
+              - { label: "URL Foto", name: "fotoUrl", widget: "string" }
+              - { label: "Nama", name: "nama", widget: "string" }
+              - { label: "Jabatan", name: "jabatan", widget: "string" }
+              - { label: "Nomor Telepon", name: "telepon", widget: "string" }
+          - label: "Form Aspirasi"
+            name: "formAspirasi"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Form Action URL", name: "formActionUrl", widget: "string" }
+              - label: "Entry Mapping"
+                name: "entry"
+                widget: "object"
+                fields:
+                  - { label: "Nama Field 'Nama'", name: "nama", widget: "string" }
+                  - { label: "Nama Field 'Kontak'", name: "kontak", widget: "string" }
+                  - { label: "Nama Field 'Subjek'", name: "subjek", widget: "string" }
+                  - { label: "Nama Field 'Pesan'", name: "pesan", widget: "string" }
+
+  # Collection for the About KKN page (tentang-kkn.json)
+  - name: "tentang_kkn"
+    label: "Tentang KKN"
+    files:
+      - file: "data/tentang-kkn.json"
+        label: "Data KKN"
+        name: "kkn_data"
+        fields:
+          - { label: "Judul Halaman", name: "judulHalaman", widget: "object", fields: [
+              { label: "Judul", name: "judul", widget: "string" },
+              { label: "Universitas", name: "universitas", widget: "string" }
+            ]}
+          - { label: "Pengantar", name: "pengantar", widget: "object", fields: [
+              { label: "Judul Seksi", name: "judul", widget: "string" },
+              { label: "Deskripsi", name: "deskripsi", widget: "text" }
+            ]}
+          - label: "Anggota Tim"
+            name: "anggota"
+            widget: "object"
+            fields:
+              - { label: "Judul Seksi", name: "judul", widget: "string" }
+              - label: "Daftar Anggota"
+                name: "tim"
+                widget: "list"
+                fields:
+                  - { label: "Nama", name: "nama", widget: "string" }
+                  - { label: "URL Foto", name: "fotoUrl", widget: "string" }
+                  - { label: "Program Studi", name: "prodi", widget: "string" }
+                  - { label: "URL Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
