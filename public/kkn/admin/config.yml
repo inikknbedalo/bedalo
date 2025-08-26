@@ -345,7 +345,7 @@ collections:
                   - name: "listItems"
                     label: "Poin-poin Daftar (opsional)"
                     widget: "list"
-                    field: { label: "Poin", widget: "string" }
+                    field: { label: "Poin", name: "poin", widget: "string" } # FIXED
                     required: false
                   - { label: "Teks Footer Seksi (opsional)", name: "footer", widget: "markdown", required: false }
               - name: "grid"
