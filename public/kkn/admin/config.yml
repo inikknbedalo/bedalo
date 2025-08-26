@@ -14,12 +14,13 @@ public_folder: "/assets/images"
 collections:
   - name: "halaman"
     label: "Manajemen Halaman"
+    description: "✍️ Kelola konten untuk semua halaman statis di website ini."
     files:
       # ===================================================================
       # 1. Halaman: Beranda
       # ===================================================================
       - file: "src/data/index.json"
-        label: "Beranda"
+        label: "🏠 Beranda"
         name: "beranda"
         fields:
           - name: "hero"
@@ -76,7 +77,7 @@ collections:
       # 2. Halaman: Profil
       # ===================================================================
       - file: "src/data/profil.json"
-        label: "Profil"
+        label: "🏛️ Profil"
         name: "profil"
         fields:
           - name: "sejarah"
@@ -123,7 +124,7 @@ collections:
       # 3. Halaman: Potensi
       # ===================================================================
       - file: "src/data/potensi.json"
-        label: "Potensi"
+        label: "✨ Potensi"
         name: "potensi"
         fields:
           - name: "umkm"
@@ -167,7 +168,7 @@ collections:
       # 4. Halaman: Pariwisata
       # ===================================================================
       - file: "src/data/pariwisata.json"
-        label: "Pariwisata"
+        label: "🏖️ Pariwisata"
         name: "pariwisata"
         fields:
           - name: "destinasi"
@@ -220,7 +221,7 @@ collections:
       # 5. Halaman: Galeri
       # ===================================================================
       - file: "src/data/galeri.json"
-        label: "Galeri"
+        label: "🖼️ Galeri"
         name: "galeri"
         fields:
           - name: "foto"
@@ -243,7 +244,7 @@ collections:
       # 6. Halaman: Kontak
       # ===================================================================
       - file: "src/data/kontak.json"
-        label: "Kontak"
+        label: "📞 Kontak"
         name: "kontak"
         fields:
           - name: "kontakPemerintah"
@@ -276,7 +277,7 @@ collections:
       # 7. Halaman: Tentang KKN
       # ===================================================================
       - file: "src/data/tentang-kkn.json"
-        label: "Tentang KKN"
+        label: "🎓 Tentang KKN"
         name: "kkn"
         fields:
           - name: "judulHalaman"
