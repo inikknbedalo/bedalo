@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  value: string | number;
+  delay?: number;
+}
+const { label, value, delay = 100 } = Astro.props;
+---
+<div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay={delay}>
+    <div class="mb-3">
+        <slot name="icon" /> </div>
+    <p class="text-3xl font-bold text-gray-800">{value}</p>
+    <p class="text-gray-500">{label}</p>
+</div>

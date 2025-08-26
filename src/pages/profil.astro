@@ -4,46 +4,46 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import data from '../data/profil.json';
 import PersonCard from '../components/PersonCard.astro';
+
+// Impor komponen baru
+import PageBanner from '../components/PageBanner.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import StatCard from '../components/StatCard.astro';
 ---
 <Layout 
     title="Profil | Website Dusun Bedalo"
-    description="Kenali lebih dekat Dusun Bedalo melalui sejarah, visi & misi, struktur pemerintahan dusun, serta data demografi terbaru kami."
+    description="Kenali lebih dekat Dusun Bedalo melalui sejarah, visi & misi, struktur pemerintahan, serta data demografi terbaru kami."
 >
     <Header currentPage="Profil" />
 
     <main>
-        <section class="bg-blue-600 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">Profil Dusun Bedalo</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Mengenal Lebih Dekat Dusun Kami</p>
-            </div>
-        </section>
+        <PageBanner 
+            title="Profil Dusun Bedalo"
+            subtitle="Mengenal Lebih Dekat Dusun Kami"
+            bgColor="bg-blue-600"
+        />
 
         <section id="sejarah" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Sejarah & Asal-Usul</h2>
+                <SectionTitle title="Sejarah & Asal-Usul" />
                 <div class="max-w-4xl mx-auto text-gray-600 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    {data.sejarah.map(p => (
-                        <p class="mb-4">{p}</p>
-                    ))}
+                    {data.sejarah.map(p => <p class="mb-4">{p}</p>)}
                 </div>
             </div>
         </section>
 
         <section id="visimisi" class="py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Visi & Misi</h2>
+             <div class="container mx-auto px-6">
+                <SectionTitle title="Visi & Misi" />
                 <div class="flex flex-col md:flex-row gap-10 max-w-5xl mx-auto">
                     <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-lg" data-aos="fade-right">
                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Visi</h3>
                         <p class="text-gray-600 italic text-center">{data.visiMisi.visi}</p>
                     </div>
                     <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-lg" data-aos="fade-left" data-aos-delay="100">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Misi</h3>
+                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Misi</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            {data.visiMisi.misi.map(item => (
-                                <li>{item}</li>
-                            ))}
+                            {data.visiMisi.misi.map(item => <li>{item}</li>)}
                         </ul>
                     </div>
                 </div>
@@ -52,9 +52,8 @@ import PersonCard from '../components/PersonCard.astro';
 
         <section id="struktur" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Struktur Pemerintahan Dusun</h2>
+                <SectionTitle title="Struktur Pemerintahan Dusun" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-                    {/* 2. Gunakan komponen di dalam perulangan (map) */}
                     {data.strukturPemerintahan.map((item, index) => (
                         <div data-aos="zoom-in" data-aos-delay={100 + index * 100}>
                             <PersonCard 
@@ -70,45 +69,32 @@ import PersonCard from '../components/PersonCard.astro';
 
         <section id="demografi" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Data Demografi</h2>
+                <SectionTitle title="Data Demografi" />
                 <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fas fa-users text-4xl text-blue-500 mb-3"></i>
-                        <p class="text-3xl font-bold text-gray-800">{data.demografi.jumlahPenduduk}</p>
-                        <p class="text-gray-500">Jumlah Penduduk</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fas fa-male text-4xl text-blue-500 mb-3"></i>
-                        <p class="text-3xl font-bold text-gray-800">{data.demografi.lakiLaki}</p>
-                        <p class="text-gray-500">Laki-laki</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="300">
-                        <i class="fas fa-female text-4xl text-pink-500 mb-3"></i>
-                        <p class="text-3xl font-bold text-gray-800">{data.demografi.perempuan}</p>
-                        <p class="text-gray-500">Perempuan</p>
-                    </div>
+                    <StatCard label="Jumlah Penduduk" value={data.demografi.jumlahPenduduk} delay={100}>
+                        <i class="fas fa-users text-4xl text-blue-500" slot="icon"></i>
+                    </StatCard>
+                    <StatCard label="Laki-laki" value={data.demografi.lakiLaki} delay={200}>
+                        <i class="fas fa-male text-4xl text-blue-500" slot="icon"></i>
+                    </StatCard>
+                    <StatCard label="Perempuan" value={data.demografi.perempuan} delay={300}>
+                        <i class="fas fa-female text-4xl text-pink-500" slot="icon"></i>
+                    </StatCard>
+
                     <div class="bg-white p-6 rounded-lg shadow-lg text-center md:col-span-3" data-aos="fade-up" data-aos-delay="400">
                         <i class="fas fa-briefcase text-4xl text-green-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-800 mb-2">Mata Pencaharian Utama</h4>
                         <p class="text-gray-600">{data.demografi.mataPencaharian.join(', ')}</p>
                     </div>
                 </div>
-            </div>
+             </div>
         </section>
         
         <section id="peta" class="py-20 bg-white overflow-hidden">
              <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Peta Wilayah Dusun</h2>
+                <SectionTitle title="Peta Wilayah Dusun" />
                 <div class="w-full h-96 bg-gray-200 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
-                    <iframe 
-                        src={data.petaUrl}
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy"
-                        title="Peta Dusun Bedalo">
-                    </iframe>
+                    <iframe src={data.petaUrl} width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Peta Dusun Bedalo"></iframe>
                 </div>
              </div>
         </section>

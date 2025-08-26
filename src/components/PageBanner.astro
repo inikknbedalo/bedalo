@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  bgColor?: string; // Warna bisa diubah-ubah
+}
+
+const { title, subtitle, bgColor = 'bg-blue-600' } = Astro.props;
+---
+<section class:list={[bgColor, "text-white py-12"]}>
+    <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl font-bold" data-aos="fade-down">{title}</h1>
+        <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">{subtitle}</p>
+    </div>
+</section>
