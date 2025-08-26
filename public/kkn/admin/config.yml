@@ -10,14 +10,16 @@ backend:
 media_folder: "src/assets/images"
 public_folder: "/assets/images"
 
-# Collections define the content structure for the CMS
+# A single collection to manage all static pages
 collections:
-  # 1. Halaman: Beranda
-  - name: "beranda"
-    label: "Halaman: Beranda"
+  - name: "halaman"
+    label: "Manajemen Halaman"
     files:
+      # ===================================================================
+      # 1. Halaman: Beranda
+      # ===================================================================
       - file: "src/data/index.json"
-        label: "Konten Halaman Beranda"
+        label: "Beranda"
         name: "beranda"
         fields:
           - name: "hero"
@@ -27,6 +29,7 @@ collections:
               - { label: "Teks Alternatif Gambar", name: "imageAlt", widget: "string" }
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Subjudul", name: "subjudul", widget: "string" }
+
           - name: "profilSingkat"
             label: "Profil Singkat Kepala Dusun"
             widget: "object"
@@ -38,6 +41,7 @@ collections:
                 label: "Sambutan (per paragraf)"
                 widget: "list"
                 field: { label: "Paragraf", name: "paragraf", widget: "text" }
+
           - name: "potensiUnggulan"
             label: "Potensi Unggulan"
             widget: "list"
@@ -46,6 +50,7 @@ collections:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
               - { label: "Link Halaman", name: "link", widget: "string" }
+
           - name: "pariwisata"
             label: "Seksi Pariwisata"
             widget: "object"
@@ -58,6 +63,7 @@ collections:
                 fields:
                   - { label: "Gambar", name: "url", widget: "image" }
                   - { label: "Teks Alternatif", name: "alt", widget: "string" }
+
           - name: "galeri"
             label: "Seksi Galeri"
             widget: "list"
@@ -66,18 +72,18 @@ collections:
               - { label: "Gambar", name: "url", widget: "image" }
               - { label: "Teks Alternatif", name: "alt", widget: "string" }
 
-  # 2. Halaman: Profil
-  - name: "profil"
-    label: "Halaman: Profil"
-    files:
+      # ===================================================================
+      # 2. Halaman: Profil
+      # ===================================================================
       - file: "src/data/profil.json"
-        label: "Konten Halaman Profil"
+        label: "Profil"
         name: "profil"
         fields:
           - name: "sejarah"
             label: "Sejarah (per paragraf)"
             widget: "list"
             field: { label: "Paragraf", name: "paragraf", widget: "text" }
+
           - name: "visiMisi"
             label: "Visi & Misi"
             widget: "object"
@@ -87,6 +93,7 @@ collections:
                 label: "Misi"
                 widget: "list"
                 field: { label: "Poin Misi", name: "misi_item", widget: "string" }
+
           - name: "strukturPemerintahan"
             label: "Struktur Pemerintahan"
             widget: "list"
@@ -95,6 +102,7 @@ collections:
               - { label: "Foto", name: "fotoUrl", widget: "image" }
               - { label: "Nama", name: "nama", widget: "string" }
               - { label: "Jabatan", name: "jabatan", widget: "string" }
+
           - name: "demografi"
             label: "Demografi"
             widget: "object"
@@ -106,14 +114,16 @@ collections:
                 label: "Mata Pencaharian"
                 widget: "list"
                 field: { label: "Jenis Pekerjaan", name: "pekerjaan", widget: "string" }
-          - { label: "URL Peta Google Maps (Embed)", name: "petaUrl", widget: "string" }
 
-  # 3. Halaman: Potensi
-  - name: "potensi"
-    label: "Halaman: Potensi"
-    files:
+          - name: "petaUrl"
+            label: "URL Peta Google Maps (Embed)"
+            widget: "string"
+
+      # ===================================================================
+      # 3. Halaman: Potensi
+      # ===================================================================
       - file: "src/data/potensi.json"
-        label: "Konten Halaman Potensi"
+        label: "Potensi"
         name: "potensi"
         fields:
           - name: "umkm"
@@ -127,6 +137,7 @@ collections:
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
               - { label: "Harga", name: "harga", widget: "string" }
               - { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+
           - name: "pertanian"
             label: "Pertanian"
             widget: "object"
@@ -142,6 +153,7 @@ collections:
                 fields:
                   - { label: "Nama Komoditas", name: "nama", widget: "string" }
                   - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+
           - name: "lainnya"
             label: "Potensi Lainnya"
             widget: "list"
@@ -150,13 +162,12 @@ collections:
               - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-
-  # 4. Halaman: Pariwisata
-  - name: "pariwisata"
-    label: "Halaman: Pariwisata"
-    files:
+      
+      # ===================================================================
+      # 4. Halaman: Pariwisata
+      # ===================================================================
       - file: "src/data/pariwisata.json"
-        label: "Konten Halaman Pariwisata"
+        label: "Pariwisata"
         name: "pariwisata"
         fields:
           - name: "destinasi"
@@ -169,6 +180,7 @@ collections:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
               - { label: "Link Peta", name: "petaLink", widget: "string" }
+
           - name: "tradisi"
             label: "Tradisi"
             widget: "list"
@@ -181,6 +193,7 @@ collections:
                 label: "Deskripsi (per paragraf)"
                 widget: "list"
                 field: { label: "Paragraf", name: "paragraf", widget: "text" }
+
           - name: "kesenian"
             label: "Kesenian"
             widget: "list"
@@ -193,6 +206,7 @@ collections:
                 label: "Deskripsi (per paragraf)"
                 widget: "list"
                 field: { label: "Paragraf", name: "paragraf", widget: "text" }
+
           - name: "kalender"
             label: "Kalender Acara"
             widget: "list"
@@ -202,12 +216,11 @@ collections:
               - { label: "Deskripsi", name: "deskripsi", widget: "string" }
               - { label: "Tanggal", name: "tanggal", widget: "string" }
 
-  # 5. Halaman: Galeri
-  - name: "galeri"
-    label: "Halaman: Galeri"
-    files:
+      # ===================================================================
+      # 5. Halaman: Galeri
+      # ===================================================================
       - file: "src/data/galeri.json"
-        label: "Konten Halaman Galeri"
+        label: "Galeri"
         name: "galeri"
         fields:
           - name: "foto"
@@ -217,6 +230,7 @@ collections:
             fields:
               - { label: "Gambar", name: "url", widget: "image" }
               - { label: "Keterangan (Alt Text)", name: "alt", widget: "string" }
+          
           - name: "video"
             label: "Galeri Video"
             widget: "list"
@@ -225,12 +239,11 @@ collections:
               - { label: "URL Embed Video", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/embed/xxxxx" }
               - { label: "Judul Video", name: "judul", widget: "string" }
 
-  # 6. Halaman: Kontak
-  - name: "kontak"
-    label: "Halaman: Kontak"
-    files:
+      # ===================================================================
+      # 6. Halaman: Kontak
+      # ===================================================================
       - file: "src/data/kontak.json"
-        label: "Konten Halaman Kontak"
+        label: "Kontak"
         name: "kontak"
         fields:
           - name: "kontakPemerintah"
@@ -242,6 +255,7 @@ collections:
               - { label: "Nama", name: "nama", widget: "string" }
               - { label: "Jabatan", name: "jabatan", widget: "string" }
               - { label: "Telepon", name: "telepon", widget: "string" }
+
           - name: "formAspirasi"
             label: "Form Aspirasi"
             widget: "object"
@@ -258,12 +272,11 @@ collections:
                   - { label: "Nama Field 'Subjek'", name: "subjek", widget: "string" }
                   - { label: "Nama Field 'Pesan'", name: "pesan", widget: "string" }
 
-  # 7. Halaman: Tentang KKN
-  - name: "kkn"
-    label: "Halaman: Tentang KKN"
-    files:
+      # ===================================================================
+      # 7. Halaman: Tentang KKN
+      # ===================================================================
       - file: "src/data/tentang-kkn.json"
-        label: "Konten Halaman KKN"
+        label: "Tentang KKN"
         name: "kkn"
         fields:
           - name: "judulHalaman"
@@ -272,12 +285,14 @@ collections:
             fields:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Universitas", name: "universitas", widget: "string" }
+          
           - name: "pengantar"
             label: "Pengantar"
             widget: "object"
             fields:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+
           - name: "anggota"
             label: "Anggota Tim KKN"
             widget: "object"
