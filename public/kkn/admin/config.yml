@@ -28,6 +28,7 @@ collections:
             label: "Hero Section"
             widget: "object"
             fields:
+              - { label: "Gambar Hero", name: "image", widget: "image" }
               - { label: "Teks Alternatif Gambar", name: "imageAlt", widget: "string" }
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Subjudul", name: "subjudul", widget: "string" }
@@ -300,6 +301,7 @@ collections:
             fields:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Gambar Tim KKN", name: "gambarUrl", widget: "image" }
 
           - name: "anggota"
             label: "Anggota Tim KKN"
@@ -315,3 +317,81 @@ collections:
                   - { label: "Nama", name: "nama", widget: "string" }
                   - { label: "Prodi", name: "prodi", widget: "string" }
                   - { label: "URL Instagram (opsional)", name: "instagramUrl", widget: "string", required: false }
+                  
+      # ===================================================================
+      # 8. Halaman: Kebijakan Privasi
+      # ===================================================================
+      - file: "src/data/kebijakan-privasi.json"
+        label: "🔒 Kebijakan Privasi"
+        name: "kebijakan_privasi"
+        description: "Kelola konten halaman kebijakan privasi."
+        fields:
+          - { label: "Judul Halaman", name: "pageTitle", widget: "string" }
+          - { label: "Subjudul Halaman", name: "pageSubtitle", widget: "string" }
+          - { label: "Tanggal Efektif", name: "effectiveDate", widget: "string" }
+          - { label: "Paragraf Pembuka", name: "intro", widget: "text" }
+          - name: "sections"
+            label: "Seksi Konten"
+            widget: "list"
+            types:
+              - name: "default"
+                label: "Seksi Standar"
+                widget: "object"
+                fields:
+                  - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+                  - { label: "Warna Latar Ikon (Tailwind Class)", name: "iconBg", widget: "string" }
+                  - { label: "Judul Seksi", name: "title", widget: "string" }
+                  - { label: "Konten Utama", name: "content", widget: "markdown" }
+                  - name: "listItems"
+                    label: "Poin-poin Daftar (opsional)"
+                    widget: "list"
+                    field: { label: "Poin", widget: "string" }
+                    required: false
+                  - { label: "Teks Footer Seksi (opsional)", name: "footer", widget: "markdown", required: false }
+              - name: "grid"
+                label: "Seksi Grid"
+                widget: "object"
+                fields:
+                  - name: "items"
+                    label: "Item Grid"
+                    widget: "list"
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+                      - { label: "Warna Latar Ikon (Tailwind Class)", name: "iconBg", widget: "string" }
+                      - { label: "Judul Item", name: "title", widget: "string" }
+                      - { label: "Konten Item", name: "content", widget: "text" }
+
+      # ===================================================================
+      # 9. Global: Footer
+      # ===================================================================
+      - file: "src/data/footer.json"
+        label: "🦶 Footer"
+        name: "footer"
+        description: "Kelola informasi kontak, alamat, dan tautan di bagian footer."
+        fields:
+          - { label: "Alamat", name: "address", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Telepon", name: "phone", widget: "string" }
+          - name: "mainLinks"
+            label: "Tautan Utama"
+            widget: "list"
+            summary: "{{fields.text}}"
+            fields:
+              - { label: "Teks Tautan", name: "text", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+          - name: "aboutLinks"
+            label: "Tautan Tentang"
+            widget: "list"
+            summary: "{{fields.text}}"
+            fields:
+              - { label: "Teks Tautan", name: "text", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+          - name: "socialLinks"
+            label: "Tautan Media Sosial"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "URL", name: "href", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Kelas Ikon (Font Awesome)", name: "iconClass", widget: "string" }
