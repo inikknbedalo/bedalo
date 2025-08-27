@@ -82,15 +82,15 @@ Semua konten teks dan referensi gambar untuk setiap halaman disimpan dalam file 
 
 ***
 
-### 🤝 Kontribusi
+## 🤝 Kontribusi
 
 Kontribusi, isu, dan permintaan fitur sangat kami hargai! Jangan ragu untuk memeriksa halaman isu jika Anda ingin membantu.
 
-### 📄 Lisensi
+## 📄 Lisensi
 
 Proyek ini dilisensikan di bawah Lisensi MIT.
 
-### 🙏 Ucapan Terima Kasih
+## 🙏 Ucapan Terima Kasih
 
 * Segenap perangkat dan warga Dusun Bedalo.
 * Universitas Islam Negeri Sunan Kalijaga Yogyakarta.
