@@ -1,43 +1,39 @@
-# Astro Starter Kit: Minimal
+# Website Profil Dusun Bedalo
 
-```sh
-npm create astro@latest -- --template minimal
-```
+![Astro](https://img.shields.io/badge/Astro-4.9.2-FF5D01?logo=astro)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.3-38B2AC?logo=tailwind-css)
+![Decap CMS](https://img.shields.io/badge/Decap_CMS-2.10.19-563D7C?logo=decap-cms)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Ini adalah repositori untuk website profil resmi **Dusun Bedalo**, dibangun menggunakan Astro. Proyek ini dibuat sebagai bagian dari program Kuliah Kerja Nyata (KKN) oleh mahasiswa UIN Sunan Kalijaga Yogyakarta.
 
-## 🚀 Project Structure
+Tujuannya adalah untuk mendigitalisasi informasi dusun dan menyajikannya dalam format yang modern, cepat, dan mudah diakses. Website ini sepenuhnya terintegrasi dengan **Decap CMS** untuk manajemen konten yang mudah oleh perangkat dusun.
 
-Inside of your Astro project, you'll see the following folders and files:
+***
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🚀 Fitur Utama
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+* **Static Site Generation (SSG)** dengan Astro untuk performa maksimal dan keamanan tinggi.
+* **Styling Modern** dengan Tailwind CSS.
+* **Manajemen Konten Mudah** melalui Decap CMS (sebelumnya Netlify CMS), memungkinkan pengeditan konten tanpa perlu menyentuh kode.
+* **Optimasi Gambar Otomatis** menggunakan `astro:assets` untuk menyajikan gambar yang responsif dan cepat dimuat.
+* **Galeri Foto & Video Interaktif** dengan GLightbox.
+* **Optimasi Video YouTube** dengan teknik *Lite YouTube Embed* untuk loading halaman yang sangat cepat.
+* **Animasi Scroll** yang halus dengan AOS (Animate On Scroll).
+* **Arsitektur Berbasis Komponen** yang modular dan mudah dikelola.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+***
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🛠️ Teknologi yang Digunakan
 
-## 🧞 Commands
+* **Framework**: [Astro](https://astro.build/)
+* **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+* **CMS**: [Decap CMS](https://decapcms.org/)
+* **Lightbox**: [GLightbox](https://biati-digital.github.io/glightbox/)
+* **Animasi**: [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/)
+* **Icons**: [Font Awesome](https://fontawesome.com/)
 
-All commands are run from the root of the project, from a terminal:
+***
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 📁 Struktur Proyek
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Struktur folder utama pada proyek ini adalah sebagai berikut:

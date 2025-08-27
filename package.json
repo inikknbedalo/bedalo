@@ -1,7 +1,10 @@
 {
-  "name": "bedalo",
+  "name": "website-dusun-bedalo",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website profil untuk Dusun Bedalo, dibangun dengan Astro dan Tailwind CSS sebagai bagian dari program KKN UIN Sunan Kalijaga.",
+  "author": "KKN 117 UIN SUKA Kelompok 129",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
