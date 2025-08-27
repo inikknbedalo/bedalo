@@ -363,7 +363,28 @@ collections:
                       - { label: "Konten Item", name: "content", widget: "text" }
 
       # ===================================================================
-      # 9. Global: Footer
+      # 9. Halaman: Peta Situs
+      # ===================================================================
+      - file: "src/data/peta-situs.json"
+        label: "🗺️ Peta Situs"
+        name: "peta_situs"
+        description: "Kelola daftar halaman yang ditampilkan di peta situs."
+        widget: "list"
+        summary: "{{fields.category}}"
+        fields:
+          - { label: "Nama Kategori", name: "category", widget: "string" }
+          - name: "pages"
+            label: "Daftar Halaman"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "URL (contoh: /profil)", name: "url", widget: "string" }
+              - { label: "Judul Halaman", name: "title", widget: "string" }
+              - { label: "Deskripsi", name: "description", widget: "text" }
+              - { label: "Ikon (Font Awesome Class)", name: "icon", widget: "string" }
+
+      # ===================================================================
+      # 10. Global: Footer
       # ===================================================================
       - file: "src/data/footer.json"
         label: "🦶 Footer"

@@ -79,3 +79,21 @@ Semua konten teks dan referensi gambar untuk setiap halaman disimpan dalam file 
 * `src/data/profil.json` - Konten Halaman Profil
 * `src/data/pariwisata.json` - Konten Halaman Pariwisata
 * ...dan seterusnya.
+
+---
+
+### 🤝 Kontribusi
+
+Kontribusi, isu, dan permintaan fitur sangat kami hargai! Jangan ragu untuk memeriksa halaman isu jika Anda ingin membantu.
+
+### 📄 Lisensi
+
+Proyek ini dilisensikan di bawah Lisensi MIT.
+
+### 🙏 Ucapan Terima Kasih
+
+* Segenap perangkat dan warga Dusun Bedalo.
+* Universitas Islam Negeri Sunan Kalijaga Yogyakarta.
+* Teman-teman yang terlibat selama KKN di Dusun Bedalo.
+
+<p align="right">(<a href="#website-profil-dusun-bedalo">kembali ke atas</a>)</p>
