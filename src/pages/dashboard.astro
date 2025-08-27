@@ -1,0 +1,442 @@
+---
+// src/pages/dashboard.astro
+
+// 1. Use your existing Layout for a consistent look and feel.
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout 
+    title="Aspirasi Dashboard | Website Dusun Bedalo"
+    description="Dashboard untuk menampilkan data aspirasi yang dikirimkan oleh warga Dusun Bedalo."
+>
+
+    {/* The main container that holds the sidebar and content */}
+    <div class="flex min-h-screen font-inter bg-gray-100 text-gray-800">
+
+        {/* Loading Modal Overlay */}
+        <div id="loading-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-[1000] flex items-center justify-center transition-opacity duration-300 hidden">
+            <div class="flex flex-col items-center p-8 bg-white rounded-xl shadow-2xl">
+                <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-500 rounded-full animate-spin"></div>
+                <p class="mt-4 text-lg font-semibold text-gray-700">Loading Data...</p>
+            </div>
+        </div>
+
+        {/* Sidebar Overlay for mobile */}
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none md:hidden"></div>
+
+        {/* Sidebar */}
+        <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 bg-white shadow-lg p-6 flex-col z-50 md:sticky md:flex md:transform-none hidden md:block">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-2xl font-extrabold text-indigo-600 tracking-tight">Aspirasi Bedalo</h1>
+                <button id="sidebar-close-btn" class="text-gray-400 hover:text-gray-600 md:hidden">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <div class="mb-6 space-y-4">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="search-input" placeholder="Search aspirations..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
+                </div>
+                <button id="refresh-button" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg shadow-md hover:bg-pink-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 text-sm">
+                    <i class="fas fa-sync-alt"></i>
+                    <span class="font-medium">Refresh Data</span>
+                </button>
+            </div>
+
+            <div class="mb-8">
+                <span class="text-sm font-semibold text-gray-500 mb-2 block">Group by:</span>
+                <div class="flex flex-wrap gap-2">
+                    <button class="group-by-btn text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 bg-indigo-500 text-white hover:bg-indigo-600" data-group-by="none">None</button>
+                    <button class="group-by-btn text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300" data-group-by="date">Date</button>
+                    <button class="group-by-btn text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300" data-group-by="week">Week</button>
+                    <button class="group-by-btn text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300" data-group-by="month">Month</button>
+                    <button class="group-by-btn text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300" data-group-by="year">Year</button>
+                </div>
+            </div>
+        </aside>
+
+        {/* Main Content */}
+        <div class="flex-1 flex flex-col p-6 md:p-10">
+            <header class="flex items-center justify-between mb-6 md:hidden py-4 px-6 bg-white shadow-md rounded-xl fixed top-24 left-4 right-4 z-40">
+                <h1 class="text-xl font-extrabold text-indigo-600">Aspirasi Bedalo</h1>
+                <button id="mobile-menu-btn" class="text-gray-600 hover:text-indigo-600 p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </header>
+
+            <div class="pb-6 border-b border-gray-200 mt-20 md:mt-0">
+                <h2 class="text-3xl font-bold text-gray-900 leading-tight">Dashboard</h2>
+                <p id="total-count" class="text-gray-500 mt-1 text-sm"></p>
+            </div>
+
+            <main class="flex-1 overflow-y-auto pt-8">
+                <div id="aspirasi-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Skeletons will be injected here by JS */}
+                </div>
+            </main>
+        </div>
+    </div>
+
+    {/* Notification Popup */}
+    <div id="notification-popup" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-[1001] transition-opacity duration-300 opacity-0 pointer-events-none">
+        Text copied to clipboard!
+    </div>
+    
+    <Footer />
+</Layout>
+
+<style>
+    /* Scoped styles for the dashboard page */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+    .font-inter {
+        font-family: 'Inter', sans-serif;
+    }
+
+    .loading-skeleton {
+        animation: pulse 1.5s infinite ease-in-out;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border-left: 5px solid transparent;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-left-color: #6366f1; /* indigo-500 */
+    }
+
+    .sidebar {
+        width: 280px;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    @media (max-width: 767px) {
+        .sidebar {
+            transform: translateX(-100%);
+            z-index: 50;
+        }
+        .sidebar.active {
+            transform: translateX(0);
+        }
+    }
+
+    .overlay {
+        z-index: 40;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+</style>
+
+<script>
+    // All the JavaScript logic from dashboard.html goes here.
+    // It's client-side, so it runs in the browser.
+
+    // Define the script URL for fetching data from Google Sheets
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwSKLz61pECBMKyYqr72knvY9p65vt945pkmRPl9HPIyRjYRom3IgmInBrS8lMGfSst/exec';
+    
+    // Get references to all the necessary DOM elements
+    const aspirasiContainer = document.getElementById('aspirasi-container');
+    const refreshButton = document.getElementById('refresh-button');
+    const searchInput = document.getElementById('search-input');
+    const groupByButtons = document.querySelectorAll('.group-by-btn');
+    const loadingModal = document.getElementById('loading-modal');
+    const totalCountElement = document.getElementById('total-count');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    
+    // Initialize global variables to store data and state
+    let fetchedData = [];
+    let currentGroupBy = 'none';
+
+    // --- Core Functions ---
+
+    /**
+     * Shows or hides the loading modal.
+     * @param {boolean} show - If true, displays the modal; otherwise, hides it.
+     */
+    function showLoading(show) {
+        loadingModal.classList.toggle('hidden', !show);
+        refreshButton.disabled = show;
+    }
+
+    /**
+     * Renders skeleton loader cards to indicate that data is being loaded.
+     * @param {number} count - The number of skeleton cards to display.
+     */
+    function showSkeleton(count = 4) {
+        let skeletonHtml = '';
+        for (let i = 0; i < count; i++) {
+            skeletonHtml += `
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 loading-skeleton h-60">
+                    <div class="h-4 bg-gray-200 rounded w-2/5 mb-2"></div>
+                    <div class="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+                    <div class="mt-auto pt-4 border-t border-gray-100 flex-grow">
+                        <div class="h-4 bg-gray-200 rounded w-1/2 mb-1"></div>
+                        <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+                    </div>
+                </div>
+            `;
+        }
+        aspirasiContainer.innerHTML = skeletonHtml;
+    }
+
+    /**
+     * Formats a timestamp into a human-readable string (Indonesian locale).
+     * @param {string} timestamp - The ISO timestamp string.
+     * @returns {string} The formatted date string.
+     */
+    function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString('id-ID', {
+            year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+    }
+
+    /**
+     * Calculates the ISO week number for a given date.
+     * @param {Date} d - The date object.
+     * @returns {number} The week number.
+     */
+    function getWeekNumber(d) {
+        d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+        d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        return weekNo;
+    }
+
+    /**
+     * Groups an array of data objects by a specified time unit.
+     * @param {Array<Object>} data - The array of aspiration data.
+     * @param {string} groupBy - The unit to group by ('none', 'date', 'week', 'month', 'year').
+     * @returns {Object} An object with keys as group names and values as arrays of items.
+     */
+    function groupData(data, groupBy) {
+        if (groupBy === 'none') {
+            return { 'All Aspirations': data };
+        }
+
+        const grouped = {};
+        data.forEach(item => {
+            const date = new Date(item.Timestamp);
+            let key = '';
+
+            if (groupBy === 'date') {
+                key = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+            } else if (groupBy === 'week') {
+                const weekNumber = getWeekNumber(date);
+                key = `Week ${weekNumber}, ${date.getFullYear()}`;
+            } else if (groupBy === 'month') {
+                key = date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+            } else if (groupBy === 'year') {
+                key = date.getFullYear().toString();
+            }
+
+            if (!grouped[key]) {
+                grouped[key] = [];
+            }
+            grouped[key].push(item);
+        });
+
+        return grouped;
+    }
+    
+    /**
+     * Copies the provided text to the clipboard and shows a notification.
+     * @param {string} text - The text to copy.
+     */
+    async function copyToClipboard(text) {
+        const popup = document.getElementById('notification-popup');
+        try {
+            await navigator.clipboard.writeText(text);
+            popup.textContent = 'Contact information copied!';
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            popup.textContent = 'Failed to copy text.';
+        } finally {
+            popup.classList.remove('opacity-0', 'pointer-events-none');
+            popup.classList.add('opacity-100');
+            setTimeout(() => {
+                popup.classList.remove('opacity-100');
+                popup.classList.add('opacity-0', 'pointer-events-none');
+            }, 2000);
+        }
+    }
+    
+    // Make the copy function globally accessible from the inline onclick attribute
+    window.copyToClipboard = copyToClipboard;
+
+    /**
+     * Renders the grouped data into the main container.
+     * @param {Object} groupedData - The data grouped by the selected criterion.
+     */
+    function renderData(groupedData) {
+        aspirasiContainer.innerHTML = '';
+        
+        if (Object.keys(groupedData).length === 0 || fetchedData.length === 0) {
+            aspirasiContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-gray-500 text-lg">No data found.</p></div>`;
+            return;
+        }
+
+        // Sort group keys logically (e.g., by date descending)
+        const groupKeys = Object.keys(groupedData).sort((a, b) => {
+            if (currentGroupBy === 'none') return 0;
+            if (currentGroupBy === 'date') return new Date(b.split('/').reverse().join('-')) - new Date(a.split('/').reverse().join('-'));
+            if (currentGroupBy === 'year') return b - a;
+            return b.localeCompare(a, undefined, { numeric: true });
+        });
+
+        groupKeys.forEach(key => {
+            const items = groupedData[key];
+            items.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
+            
+            let groupHtml = `
+                <div class="col-span-full mb-6">
+                    <div class="flex items-center space-x-3 text-gray-700 mb-4">
+                        <i class="fas fa-folder text-lg text-pink-500"></i>
+                        <h3 class="text-xl font-bold">${key} (${items.length})</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            `;
+            
+            items.forEach(item => {
+                const namaLengkap = item['Nama Lengkap'] || 'N/A';
+                const noTelepon = item['No. Telepon / Email'] || 'N/A';
+                const subjek = item['Subjek'] || 'N/A';
+                const pesanAspirasi = item['Pesan Aspirasi'] || 'No message provided.';
+                const timestamp = item['Timestamp'] ? formatDate(item['Timestamp']) : 'N/A';
+                
+                groupHtml += `
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col card">
+                        <div class="flex items-center justify-between text-xs text-gray-400 mb-3">
+                            <span>${timestamp}</span>
+                            <i class="fas fa-comment-alt text-indigo-400"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2 leading-tight">${subjek}</h4>
+                        <p class="text-sm text-gray-600 mb-4 flex-grow whitespace-pre-wrap break-words">${pesanAspirasi}</p>
+                        
+                        <div class="w-full h-px bg-gray-200 my-4"></div>
+
+                        <div class="mt-auto flex flex-col gap-2">
+                            <div class="flex items-center text-sm text-gray-600 font-semibold">
+                                <i class="fas fa-user text-indigo-500 mr-2"></i>
+                                By: ${namaLengkap}
+                            </div>
+                            <button class="flex items-center text-sm text-gray-500 hover:text-indigo-600 transition-colors" onclick="copyToClipboard('${noTelepon}')">
+                                <i class="fas fa-phone-alt text-indigo-500 mr-2"></i>
+                                Contact: ${noTelepon}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            groupHtml += `</div></div>`;
+            aspirasiContainer.innerHTML += groupHtml;
+        });
+    }
+
+    /**
+     * Filters data based on the search term, groups it, and renders it.
+     */
+    function filterAndRenderData() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredData = fetchedData.filter(item => {
+            return Object.values(item).some(value => 
+                String(value).toLowerCase().includes(searchTerm)
+            );
+        });
+        totalCountElement.textContent = `Showing ${filteredData.length} of ${fetchedData.length} aspirations`;
+        const groupedData = groupData(filteredData, currentGroupBy);
+        renderData(groupedData);
+    }
+
+    /**
+     * Fetches data from the Google Script URL and initiates the rendering process.
+     */
+    async function fetchAndRenderData() {
+        showSkeleton();
+        showLoading(true);
+
+        try {
+            const response = await fetch(scriptUrl);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            fetchedData = await response.json();
+            filterAndRenderData();
+        } catch (error) {
+            console.error('Error fetching aspirasi data:', error);
+            aspirasiContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-red-500 text-lg">Failed to load data. Please try again later.</p></div>`;
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    // --- Event Listeners ---
+
+    // Refresh button fetches new data
+    refreshButton.addEventListener('click', () => {
+        fetchAndRenderData();
+        if (window.innerWidth < 768) {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+    });
+
+    // Search input filters data on every keystroke
+    searchInput.addEventListener('input', filterAndRenderData);
+
+    // Grouping buttons re-group and re-render the data
+    groupByButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const newGroupBy = e.target.dataset.groupBy;
+            if (currentGroupBy === newGroupBy) return;
+            
+            groupByButtons.forEach(btn => {
+                btn.classList.toggle('bg-indigo-500', btn === e.target);
+                btn.classList.toggle('text-white', btn === e.target);
+                btn.classList.toggle('bg-gray-200', btn !== e.target);
+                btn.classList.toggle('text-gray-600', btn !== e.target);
+            });
+            
+            currentGroupBy = newGroupBy;
+            filterAndRenderData();
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+    });
+
+    // --- Mobile Sidebar Logic ---
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.remove('hidden');
+        sidebar.classList.add('active');
+        sidebarOverlay.classList.remove('opacity-0', 'pointer-events-none');
+    });
+
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => sidebar.classList.add('hidden'), 300); // Hide after transition
+    }
+
+    sidebarOverlay.addEventListener('click', closeSidebar);
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+
+    // Initial data fetch when the page loads
+    fetchAndRenderData();
+</script>
