@@ -40,7 +40,7 @@ const { formData } = Astro.props;
     </div>
 </div>
 
-<div id="status-modal" class="hidden fixed inset-0 bg-opacity-50 flex items-center justify-center z-[1001] p-4">
+<div id="status-modal" class="hidden fixed inset-0 bg-opacity-50 items-center justify-center z-[1001] p-4">
     <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm w-full">
         <div id="modal-content"></div>
     </div>
@@ -48,35 +48,49 @@ const { formData } = Astro.props;
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('aspirasi-form');
-        const statusModal = document.getElementById('status-modal');
-        const modalContent = document.getElementById('modal-content');
+        // Cast the elements to their specific types to avoid TypeScript errors
+        const form = document.getElementById('aspirasi-form') as HTMLFormElement | null;
+        const statusModal = document.getElementById('status-modal') as HTMLElement | null;
+        const modalContent = document.getElementById('modal-content') as HTMLElement | null;
 
+        // Add a check to ensure all elements are found before proceeding
         if (!form || !statusModal || !modalContent) return;
 
+        // The "hidden" class should be toggled to show/hide the modal.
+        // The original code used a class that applied the same properties as "flex".
+        // Let's use a class that actually hides the element to fix the "flex" warning.
+        // We will remove the "flex" class when hiding the modal to ensure it's fully hidden.
         function hideModal() {
             statusModal.classList.add('hidden');
+            statusModal.classList.remove('flex'); // Add this line to remove the "flex" class
         }
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (!form.action || form.action.includes('YOUR_GOOGLE_FORM')) {
+
+            // The 'form' variable is now guaranteed to be an HTMLFormElement inside this block,
+            // so we can safely access its 'action' property.
+            if (form.action.includes('YOUR_GOOGLE_FORM') || form.action === '') {
                 alert("Form action URL has not been configured. Please update kontak.json.");
                 return;
             }
+
             modalContent.innerHTML = `
                 <div class="flex justify-center items-center mb-4">
                     <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
                 <p class="text-lg text-gray-700">Mengirim pesan...</p>`;
-            statusModal.classList.remove('hidden');
             
+            // We now add 'flex' here to show the modal
+            statusModal.classList.add('flex');
+            statusModal.classList.remove('hidden');
+
             const formData = new FormData(form);
 
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
-                mode: 'no-cors' // Important for Google Forms submission
+                mode: 'no-cors'
             })
             .then(() => {
                 modalContent.innerHTML = `
@@ -84,7 +98,9 @@ const { formData } = Astro.props;
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">Terima Kasih!</h3>
                     <p class="text-gray-600 mb-6">Aspirasi Anda telah berhasil terkirim.</p>
                     <button id="close-modal-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full">Tutup</button>`;
-                document.getElementById('close-modal-btn').addEventListener('click', hideModal);
+                document.getElementById('close-modal-btn')?.addEventListener('click', hideModal); // Use optional chaining for safety
+                
+                // The 'form' variable is now of type HTMLFormElement, so it has a 'reset' method
                 form.reset();
             })
             .catch(error => {
@@ -93,7 +109,7 @@ const { formData } = Astro.props;
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">Gagal Mengirim</h3>
                     <p class="text-gray-600 mb-6">Maaf, terjadi kesalahan. Silakan coba lagi nanti.</p>
                     <button id="close-modal-btn" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-full">Tutup</button>`;
-                document.getElementById('close-modal-btn').addEventListener('click', hideModal);
+                document.getElementById('close-modal-btn')?.addEventListener('click', hideModal); // Use optional chaining for safety
                 console.error('Error:', error);
             });
         });
