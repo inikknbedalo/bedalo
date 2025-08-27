@@ -80,7 +80,7 @@ Semua konten teks dan referensi gambar untuk setiap halaman disimpan dalam file 
 * `src/data/pariwisata.json` - Konten Halaman Pariwisata
 * ...dan seterusnya.
 
----
+***
 
 ### 🤝 Kontribusi
 
