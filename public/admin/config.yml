@@ -142,6 +142,7 @@ collections:
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
               - { label: "Harga", name: "harga", widget: "string" }
               - { label: "Link Kontak (WA)", name: "kontakLink", widget: "string" }
+              - { label: "Link Peta (Google Maps)", name: "petaLink", widget: "string" }
 
           - name: "pertanian"
             label: "Pertanian"

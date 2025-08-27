@@ -7,12 +7,9 @@ import SectionTitle from '../components/SectionTitle.astro';
 import UmkmCard from '../components/UmkmCard.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-
-// Import data and all images for the page
 import data from '../data/potensi.json';
-const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 
-// Helper to find the agriculture image path
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 const pertanianImagePath = Object.keys(allImages).find(path => path.endsWith(data.pertanian.gambarUrl));
 ---
 <Layout 
@@ -45,7 +42,7 @@ const pertanianImagePath = Object.keys(allImages).find(path => path.endsWith(dat
             </div>
         </section>
 
-        <section id="pertanian" class="py-20 overflow-hidden">
+        <section id="pertanian" class="py-20">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Pertanian & Perkebunan" />
                 <div class="flex flex-col md:flex-row items-center gap-12">
