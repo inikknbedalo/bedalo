@@ -41,7 +41,6 @@ const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/asset
 
         <section id="aspirasi" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <SectionTitle title={data.formAspirasi.judul} subtitle={data.formAspirasi.deskripsi} />
                 {/* The ContactForm component can remain as is, but now it's paired with a SectionTitle */}
                 <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                     <ContactForm formData={data.formAspirasi} />
