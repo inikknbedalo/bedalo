@@ -4,34 +4,52 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageBanner from '../components/PageBanner.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import DestinationCard from '../components/DestinationCard.astro';
+import Card from '../components/Card.astro'; // <-- Import the new Card component
 import ContentImageSection from '../components/ContentImageSection.astro';
-
-// 1. Import data and all relevant images
+import { getCollection, type CollectionEntry } from 'astro:content';
 import data from '../data/pariwisata.json';
 const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+const destinasiEntries = await getCollection('pariwisata');
+
+interface ContentImageItem {
+    gambarUrl: string;
+    altText: string;
+    judul: string;
+    deskripsi: string[];
+}
+interface KalenderItem {
+    acara: string;
+    deskripsi: string;
+    tanggal: string;
+}
 ---
-<Layout 
+<Layout
     title="Pariwisata & Budaya | Website Dusun Bedalo"
     description="Jelajahi pesona pariwisata dan budaya Dusun Bedalo."
 >
     <Header currentPage="Pariwisata" />
-
     <main>
-        <PageBanner 
+        <PageBanner
             title="Pariwisata & Budaya"
             subtitle="Pesona Alam dan Kekayaan Tradisi Dusun Bedalo"
             bgColor="bg-purple-600"
         />
-
         <section id="destinasi" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <SectionTitle title="Destinasi Wisata" subtitle="Jelajahi sudut-sudut indah di Dusun Bedalo yang menawarkan ketenangan dan pemandangan memukau." />
-                
+                 <SectionTitle title="Destinasi Wisata" subtitle="Jelajahi sudut-sudut indah di Dusun Bedalo yang menawarkan ketenangan dan pemandangan memukau." />
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {data.destinasi.map((item, index) => (
+                    {destinasiEntries.map((entry: CollectionEntry<'pariwisata'>, index: number) => (
                         <div data-aos="fade-up" data-aos-delay={100 + index * 100}>
-                            <DestinationCard item={item} allImages={allImages} />
+                             <Card
+                                title={entry.data.judul}
+                                description={entry.data.deskripsi}
+                                imageUrl={entry.data.coverImage}
+                                altText={entry.data.altText}
+                                linkUrl={`/pariwisata/${entry.slug}`}
+                                linkText="Lihat Detail"
+                                allImages={allImages}
+                             />
                         </div>
                     ))}
                 </div>
@@ -41,25 +59,25 @@ const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,
         <section id="tradisi" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6 space-y-16">
                 <SectionTitle title="Adat Istiadat & Tradisi" />
-                {data.tradisi.map((item, index) => (
-                    <ContentImageSection 
-                        item={item} 
-                        allImages={allImages} 
-                        reverse={index % 2 !== 0} 
+                {data.tradisi.map((item: ContentImageItem, index: number) => (
+                    <ContentImageSection
+                        item={item}
+                        allImages={allImages}
+                        reverse={index % 2 !== 0}
                     />
-                ))}
+                 ))}
             </div>
         </section>
-        
+
         <section id="kesenian" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6 space-y-16">
                 <SectionTitle title="Kesenian & Budaya" />
-                {data.kesenian.map((item, index) => (
-                    <ContentImageSection 
-                        item={item} 
-                        allImages={allImages} 
+                {data.kesenian.map((item: ContentImageItem, index: number) => (
+                   <ContentImageSection
+                        item={item}
+                        allImages={allImages}
                         reverse={index % 2 !== 0}
-                    />
+                     />
                 ))}
             </div>
         </section>
@@ -67,19 +85,19 @@ const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,
         <section id="kalender" class="py-20">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Kalender Acara Budaya" />
-                <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg" data-aos="zoom-in">
+                 <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg" data-aos="zoom-in">
                     <ul class="divide-y divide-gray-200">
-                        {data.kalender.map(item => (
+                        {data.kalender.map((item: KalenderItem) => (
                             <li class="py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                 <div>
                                     <p class="font-semibold text-gray-800 text-lg">{item.acara}</p>
-                                    <p class="text-sm text-gray-500">{item.deskripsi}</p>
+                                     <p class="text-sm text-gray-500">{item.deskripsi}</p>
                                 </div>
                                 <div class="text-left sm:text-right flex-shrink-0">
-                                    <p class="font-semibold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">{item.tanggal}</p>
+                                     <p class="font-semibold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">{item.tanggal}</p>
                                 </div>
                             </li>
-                        ))}
+                         ))}
                     </ul>
                 </div>
             </div>

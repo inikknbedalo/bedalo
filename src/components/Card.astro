@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+    title: string;
+    description: string;
+    imageUrl: string;
+    altText: string;
+    linkUrl: string;
+    linkText: string;
+    price?: string; // Optional price for UMKM cards
+    allImages: Record<string, () => Promise<{ default: ImageMetadata }>>;
+}
+
+const {
+    title,
+    description,
+    imageUrl,
+    altText,
+    linkUrl,
+    linkText,
+    price,
+    allImages
+} = Astro.props;
+
+const imagePath = Object.keys(allImages).find(path => path.endsWith(imageUrl));
+---
+<div class="bg-white h-full rounded-lg shadow-lg overflow-hidden flex flex-col transition-shadow hover:shadow-xl">
+    {imagePath ? (
+        <a href={linkUrl} class="block">
+            <Image
+                src={allImages[imagePath]()}
+                alt={altText}
+                width="600"
+                height="400"
+                class="w-full h-48 object-cover"
+            />
+        </a>
+    ) : <div class="w-full h-48 bg-gray-200"></div>}
+
+    <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">
+            <a href={linkUrl} class="hover:text-blue-600 transition-colors">{title}</a>
+        </h3>
+        <p class="text-gray-600 mb-4 text-sm flex-grow line-clamp-3">{description}</p>
+
+        <div class="pt-4 mt-auto border-t">
+            {price && (
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-sm text-gray-500">Harga:</p>
+                    <span class="text-lg font-bold text-green-600">{price}</span>
+                </div>
+            )}
+            <a href={linkUrl} class="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
+                {linkText}
+            </a>
+        </div>
+    </div>
+</div>
