@@ -6,6 +6,8 @@ backend:
   base_url: https://bedalo.pages.dev
   auth_endpoint: /api/auth
 
+local_backend: true
+
 # Media files will be stored in the source directory to be processed by Astro
 media_folder: "src/assets/images"
 public_folder: "/assets/images"
