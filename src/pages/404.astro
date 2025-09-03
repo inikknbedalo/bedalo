@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="404: Halaman Tidak Ditemukan" description="Halaman yang Anda cari tidak dapat ditemukan.">
+  <Header currentPage="" />
+  <main class="flex items-center justify-center py-20">
+    <div class="text-center">
+      <h1 class="text-9xl font-bold text-blue-600">404</h1>
+      <h2 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Halaman Tidak Ditemukan</h2>
+      <p class="mt-6 text-base leading-7 text-gray-600">Maaf, kami tidak dapat menemukan halaman yang Anda cari.</p>
+      <div class="mt-10">
+        {/* --- FIX IS HERE: Removed the redundant 'focus-visible:outline' class --- */}
+        <a href="/" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          &larr; Kembali ke Beranda
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

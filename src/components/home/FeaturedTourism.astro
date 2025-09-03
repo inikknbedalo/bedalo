@@ -1,8 +1,13 @@
 ---
 import { Image } from 'astro:assets';
-const { tourism, allImages } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
 
-// A small helper to find image paths
+interface Props {
+    tourism: CollectionEntry<'pariwisata'>[];
+    allImages: any;
+}
+
+const { tourism, allImages } = Astro.props;
 const findImagePath = (filename: string) => Object.keys(allImages).find(path => path.endsWith(filename));
 ---
 <section id="pariwisata" class="py-20 bg-white overflow-hidden">
@@ -10,17 +15,17 @@ const findImagePath = (filename: string) => Object.keys(allImages).find(path => 
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2" data-aos="fade-right">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Pariwisata & Kekayaan Budaya</h2>
-                <p class="text-gray-600 leading-relaxed mb-6">{tourism.deskripsi}</p>
+                <p class="text-gray-600 leading-relaxed mb-6">Dari pemandangan alam yang memukau hingga tradisi yang lestari, Dusun Bedalo menawarkan pengalaman yang tak terlupakan.</p>
                 <a href="/pariwisata" class="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
                     Temukan Destinasi Wisata
                 </a>
             </div>
             <div class="md:w-1/2 grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-delay="100">
-                {tourism.gambar.map((item: any, index: number) => {
-                    const imagePath = findImagePath(item.url);
+                {tourism.map((item, index) => {
+                     const imagePath = findImagePath(item.data.coverImage);
                     return (
                         <div class="overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-anchor="#pariwisata" data-aos-delay={300 + index * 100}>
-                            {imagePath && <Image src={allImages[imagePath]()} alt={item.alt} class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300" width="400" height="400" />}
+                             {imagePath && <Image src={allImages[imagePath]()} alt={item.data.altText} class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300" width="400" height="400" />}
                         </div>
                     );
                 })}

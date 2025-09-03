@@ -4,11 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageBanner from '../components/PageBanner.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import Card from '../components/Card.astro'; // <-- Import the new Card component
+import Card from '../components/Card.astro';
 import ContentImageSection from '../components/ContentImageSection.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import data from '../data/pariwisata.json';
-const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+import type { ImageMetadata } from 'astro'; // <-- Add this import
+
+// --- FIX IS HERE: Add the type hint to the glob import ---
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 
 const destinasiEntries = await getCollection('pariwisata');
 
@@ -55,6 +58,8 @@ interface KalenderItem {
                 </div>
             </div>
         </section>
+
+        {/* The rest of the file remains unchanged... */}
 
         <section id="tradisi" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6 space-y-16">
@@ -103,6 +108,5 @@ interface KalenderItem {
             </div>
         </section>
     </main>
-
     <Footer />
 </Layout>

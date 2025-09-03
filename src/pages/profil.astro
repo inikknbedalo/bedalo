@@ -6,10 +6,26 @@ import PageBanner from '../components/PageBanner.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import StatCard from '../components/StatCard.astro';
 import PersonCard from '../components/PersonCard.astro';
+import { getEntry, getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 
-// 1. Import data and images
-import data from '../data/profil.json';
-const allPersonImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+const allPersonImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+// Fetch all migrated data
+const profilData = await getEntry('profil', 'data');
+const strukturPemerintahan = (await getCollection('struktur')).sort((a, b) => a.data.order - b.data.order);
+
+if (!profilData) {
+    throw new Error("Could not find the profile data entry.");
+}
+
+// Demografi data can live here now
+const demografi = {
+    jumlahPenduduk: "1,234",
+    lakiLaki: "610",
+    perempuan: "624",
+    mataPencaharian: ["Petani", "Pedagang", "Buruh", "Wiraswasta"]
+};
 ---
 <Layout 
     title="Profil | Website Dusun Bedalo"
@@ -18,88 +34,94 @@ const allPersonImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jp
     <Header currentPage="Profil" />
 
     <main>
-        <PageBanner 
-            title="Profil Dusun Bedalo"
-            subtitle="Mengenal Lebih Dekat Dusun Kami"
-            bgColor="bg-blue-600"
-        />
-
+        {/* Sejarah and Visi/Misi sections remain the same, using profilData */}
+        <PageBanner title="Profil Dusun Bedalo" subtitle="Mengenal Lebih Dekat Dusun Kami" bgColor="bg-blue-600" />
         <section id="sejarah" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Sejarah & Asal-Usul" />
                 <div class="max-w-4xl mx-auto text-gray-600 leading-relaxed" data-aos="fade-up">
-                    {data.sejarah.map(p => <p class="mb-4">{p}</p>)}
+                    {profilData.data.sejarah.map(p => <p class="mb-4">{p}</p>)}
                 </div>
             </div>
         </section>
-
         <section id="visimisi" class="py-20 overflow-hidden">
-             <div class="container mx-auto px-6">
+            <div class="container mx-auto px-6">
                 <SectionTitle title="Visi & Misi" />
                 <div class="flex flex-col md:flex-row gap-10 max-w-5xl mx-auto">
                     <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-lg" data-aos="fade-right">
                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Visi</h3>
-                        <p class="text-gray-600 italic text-center">{data.visiMisi.visi}</p>
+                        <p class="text-gray-600 italic text-center">{profilData.data.visi}</p>
                     </div>
                     <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-lg" data-aos="fade-left" data-aos-delay="100">
                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Misi</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            {data.visiMisi.misi.map(item => <li>{item}</li>)}
+                            {profilData.data.misi.map(item => <li>{item}</li>)}
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
+        {/* --- UPDATED STRUKTUR SECTION --- */}
         <section id="struktur" class="py-20 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
-                <SectionTitle title="Struktur Pemerintahan Dusun" />
+                 <SectionTitle title="Struktur Pemerintahan Dusun" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-                    {data.strukturPemerintahan.map((item, index) => (
+                    {strukturPemerintahan.map((item, index) => (
                         <div data-aos="zoom-in" data-aos-delay={100 + index * 100}>
-                            <PersonCard 
-                                nama={item.nama}
-                                jabatan={item.jabatan}
-                                fotoUrl={item.fotoUrl}
+                             <PersonCard 
+                                nama={item.data.nama}
+                                jabatan={item.data.jabatan}
+                                fotoUrl={item.data.fotoUrl}
                                 allImages={allPersonImages}
                             />
                         </div>
-                    ))}
+                     ))}
                 </div>
             </div>
         </section>
-
+        
+        {/* --- UPDATED DEMOGRAFI SECTION --- */}
         <section id="demografi" class="py-20 overflow-hidden">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Data Demografi" />
                 <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <StatCard label="Jumlah Penduduk" value={data.demografi.jumlahPenduduk} delay={100}>
+                    <StatCard label="Jumlah Penduduk" value={demografi.jumlahPenduduk} delay={100}>
                         <i class="fas fa-users text-4xl text-blue-500" slot="icon"></i>
                     </StatCard>
-                    <StatCard label="Laki-laki" value={data.demografi.lakiLaki} delay={200}>
+                     <StatCard label="Laki-laki" value={demografi.lakiLaki} delay={200}>
                         <i class="fas fa-male text-4xl text-blue-500" slot="icon"></i>
                     </StatCard>
-                    <StatCard label="Perempuan" value={data.demografi.perempuan} delay={300}>
-                        <i class="fas fa-female text-4xl text-pink-500" slot="icon"></i>
+                    <StatCard label="Perempuan" value={demografi.perempuan} delay={300}>
+                         <i class="fas fa-female text-4xl text-pink-500" slot="icon"></i>
                     </StatCard>
                     <div class="bg-white p-6 rounded-lg shadow-lg text-center md:col-span-3" data-aos="fade-up" data-aos-delay="400">
                         <i class="fas fa-briefcase text-4xl text-green-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-800 mb-2">Mata Pencaharian Utama</h4>
-                        <p class="text-gray-600">{data.demografi.mataPencaharian.join(', ')}</p>
+                         <h4 class="text-xl font-bold text-gray-800 mb-2">Mata Pencaharian Utama</h4>
+                        <p class="text-gray-600">{demografi.mataPencaharian.join(', ')}</p>
                     </div>
                 </div>
             </div>
         </section>
         
+        {/* Peta section remains the same */}
         <section id="peta" class="py-20 bg-white overflow-hidden">
              <div class="container mx-auto px-6">
                 <SectionTitle title="Peta Wilayah Dusun" />
                 <div class="w-full h-96 bg-gray-200 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in">
-                    <iframe src={data.petaUrl} width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta Dusun Bedalo"></iframe>
+                    <iframe 
+                        src={profilData.data.petaUrl} 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        title="Peta Dusun Bedalo">
+                    </iframe>
                 </div>
              </div>
         </section>
     </main>
-
     <Footer />
 </Layout>

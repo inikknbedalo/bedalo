@@ -1,4 +1,8 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+    potentials: CollectionEntry<'potensi'>[];
+}
 const { potentials } = Astro.props;
 ---
 <section id="potensi" class="py-20 overflow-hidden">
@@ -6,12 +10,12 @@ const { potentials } = Astro.props;
         <h2 class="text-3xl font-bold text-gray-800 mb-2" data-aos="fade-up">Potensi Unggulan Dusun</h2>
         <p class="text-gray-600 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Dusun Bedalo dianugerahi berbagai potensi yang menjadi sumber kehidupan dan kebanggaan warga.</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {potentials.map((item: any, index: number) => (
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-up" data-aos-delay={200 + index * 100}>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">{item.judul}</h3>
-                    <p class="text-gray-600 mb-4">{item.deskripsi}</p>
-                    <a href={item.link} class="font-semibold text-blue-600 hover:underline">Lihat Selengkapnya &rarr;</a>
-                </div>
+            {potentials.map((item, index) => (
+              <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-up" data-aos-delay={200 + index * 100}>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{item.data.judul}</h3>
+                    <p class="text-gray-600 mb-4">{item.data.deskripsi}</p>
+                    <a href={`/potensi/${item.slug}`} class="font-semibold text-blue-600 hover:underline">Lihat Selengkapnya &rarr;</a>
+               </div>
             ))}
         </div>
     </div>

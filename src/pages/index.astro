@@ -1,19 +1,44 @@
 ---
-// 1. Import layout and main components
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-// 2. Import NEW section components
 import HeroSection from '../components/home/HeroSection.astro';
 import WelcomeSection from '../components/home/WelcomeSection.astro';
 import FeaturedPotentials from '../components/home/FeaturedPotentials.astro';
 import FeaturedTourism from '../components/home/FeaturedTourism.astro';
 import FeaturedGallery from '../components/home/FeaturedGallery.astro';
 
-// 3. Import data and all images for the page
-import data from '../data/index.json';
-const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import homepageData from '../data/index.json';
+import galleryData from '../data/galeri.json'; // <-- Import main gallery data
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+// Fetch content for other sections
+const featuredPotensi = (await getCollection('potensi')).sort((a, b) => a.data.judul.localeCompare(b.data.judul)).slice(0, 3);
+const featuredPariwisata = (await getCollection('pariwisata')).slice(0, 4);
+
+// --- NEW: Process featured gallery photos ---
+const featuredPhotos = galleryData.foto.slice(0, 4); // Take the first 4 photos
+
+const processedFeaturedPhotos = await Promise.all(
+    featuredPhotos.map(async (photo) => {
+        const imagePath = Object.keys(allImages).find(path => path.endsWith(photo.url));
+        if (!imagePath) return null;
+
+        const originalImage = allImages[imagePath];
+        const lightboxImage = await getImage({ src: originalImage(), width: 1200, format: 'webp' });
+
+        return {
+            alt: photo.alt,
+            originalSrc: originalImage,
+            lightboxSrc: lightboxImage.src,
+        };
+    })
+).then(results => results.filter(item => item !== null));
 ---
 <Layout 
     title="Beranda | Website Dusun Bedalo"
@@ -22,15 +47,16 @@ const allImages = await import.meta.glob('/src/assets/images/**/*.{jpeg,jpg,png,
     <Header currentPage="Beranda" />
 
     <main>
-        <HeroSection hero={data.hero} allImages={allImages} />
+        <HeroSection hero={homepageData.hero} allImages={allImages} />
 
-        <WelcomeSection profile={data.profilSingkat} allImages={allImages} />
+        <WelcomeSection profile={homepageData.profilSingkat} allImages={allImages} />
 
-        <FeaturedPotentials potentials={data.potensiUnggulan} />
+        <FeaturedPotentials potentials={featuredPotensi} />
 
-        <FeaturedTourism tourism={data.pariwisata} allImages={allImages} />
+        <FeaturedTourism tourism={featuredPariwisata} allImages={allImages} />
         
-        <FeaturedGallery gallery={data.galeri} allImages={allImages} />
+        {/* Pass the processed photos to the component */}
+        <FeaturedGallery photos={processedFeaturedPhotos} />
     </main>
 
     <Footer />

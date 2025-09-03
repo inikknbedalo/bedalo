@@ -14,7 +14,8 @@ import Footer from '../components/Footer.astro';
     <div class="flex min-h-screen font-inter bg-gray-100 text-gray-800">
 
         {/* Loading Modal Overlay */}
-        <div id="loading-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-[1000] flex items-center justify-center transition-opacity duration-300 hidden">
+        {/* CHANGE #1: Removed the 'flex' class from here. JS will handle it now. */}
+        <div id="loading-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-[1000] items-center justify-center transition-opacity duration-300 hidden">
             <div class="flex flex-col items-center p-8 bg-white rounded-xl shadow-2xl">
                 <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-500 rounded-full animate-spin"></div>
                 <p class="mt-4 text-lg font-semibold text-gray-700">Loading Data...</p>
@@ -25,7 +26,8 @@ import Footer from '../components/Footer.astro';
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none md:hidden"></div>
 
         {/* Sidebar */}
-        <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 bg-white shadow-lg p-6 flex-col z-50 md:sticky md:flex md:transform-none hidden md:block">
+        {/* CHANGE #2: Removed the conflicting 'md:block' class. */}
+        <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 bg-white shadow-lg p-6 flex-col z-50 md:sticky md:flex md:transform-none hidden">
             <div class="flex items-center justify-between mb-8">
                 <h1 class="text-2xl font-extrabold text-indigo-600 tracking-tight">Aspirasi Bedalo</h1>
                 <button id="sidebar-close-btn" class="text-gray-400 hover:text-gray-600 md:hidden">
@@ -143,7 +145,6 @@ import Footer from '../components/Footer.astro';
 
     // Define the script URL for fetching data from Google Sheets
     const scriptUrl = 'https://script.google.com/macros/s/AKfycbwSKLz61pECBMKyYqr72knvY9p65vt945pkmRPl9HPIyRjYRom3IgmInBrS8lMGfSst/exec';
-    
     // Get references to all the necessary DOM elements
     const aspirasiContainer = document.getElementById('aspirasi-container');
     const refreshButton = document.getElementById('refresh-button');
@@ -155,11 +156,9 @@ import Footer from '../components/Footer.astro';
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
-    
     // Initialize global variables to store data and state
     let fetchedData = [];
     let currentGroupBy = 'none';
-
     // --- Core Functions ---
 
     /**
@@ -167,7 +166,9 @@ import Footer from '../components/Footer.astro';
      * @param {boolean} show - If true, displays the modal; otherwise, hides it.
      */
     function showLoading(show) {
+        // CHANGE #1: Added a toggle for the 'flex' class.
         loadingModal.classList.toggle('hidden', !show);
+        loadingModal.classList.toggle('flex', show);
         refreshButton.disabled = show;
     }
 
@@ -251,7 +252,6 @@ import Footer from '../components/Footer.astro';
             }
             grouped[key].push(item);
         });
-
         return grouped;
     }
     
@@ -279,14 +279,12 @@ import Footer from '../components/Footer.astro';
     
     // Make the copy function globally accessible from the inline onclick attribute
     window.copyToClipboard = copyToClipboard;
-
     /**
      * Renders the grouped data into the main container.
      * @param {Object} groupedData - The data grouped by the selected criterion.
      */
     function renderData(groupedData) {
         aspirasiContainer.innerHTML = '';
-        
         if (Object.keys(groupedData).length === 0 || fetchedData.length === 0) {
             aspirasiContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-gray-500 text-lg">No data found.</p></div>`;
             return;
@@ -299,7 +297,6 @@ import Footer from '../components/Footer.astro';
             if (currentGroupBy === 'year') return b - a;
             return b.localeCompare(a, undefined, { numeric: true });
         });
-
         groupKeys.forEach(key => {
             const items = groupedData[key];
             items.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
@@ -371,7 +368,6 @@ import Footer from '../components/Footer.astro';
     async function fetchAndRenderData() {
         showSkeleton();
         showLoading(true);
-
         try {
             const response = await fetch(scriptUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -395,10 +391,8 @@ import Footer from '../components/Footer.astro';
             sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
         }
     });
-
     // Search input filters data on every keystroke
     searchInput.addEventListener('input', filterAndRenderData);
-
     // Grouping buttons re-group and re-render the data
     groupByButtons.forEach(button => {
         button.addEventListener('click', (e) => {
@@ -420,14 +414,12 @@ import Footer from '../components/Footer.astro';
             }
         });
     });
-
     // --- Mobile Sidebar Logic ---
     mobileMenuBtn.addEventListener('click', () => {
         sidebar.classList.remove('hidden');
         sidebar.classList.add('active');
         sidebarOverlay.classList.remove('opacity-0', 'pointer-events-none');
     });
-
     function closeSidebar() {
         sidebar.classList.remove('active');
         sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
@@ -436,7 +428,6 @@ import Footer from '../components/Footer.astro';
 
     sidebarOverlay.addEventListener('click', closeSidebar);
     sidebarCloseBtn.addEventListener('click', closeSidebar);
-
     // Initial data fetch when the page loads
     fetchAndRenderData();
 </script>

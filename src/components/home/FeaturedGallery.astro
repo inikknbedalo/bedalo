@@ -1,24 +1,49 @@
 ---
 import { Image } from 'astro:assets';
-const { gallery, allImages } = Astro.props;
 
-const findImagePath = (filename: string) => Object.keys(allImages).find(path => path.endsWith(filename));
+// The component now expects the processed photo data
+interface Props {
+  photos: any[];
+}
+const { photos } = Astro.props;
 ---
 <section id="galeri" class="py-20 overflow-hidden">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-3xl font-bold text-gray-800 mb-12" data-aos="fade-up">Galeri Momen Dusun Bedalo</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {gallery.map((item: any, index: number) => {
-                const imagePath = findImagePath(item.url);
-                return (
-                    <div class="overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay={100 + index * 100}>
-                        {imagePath && <Image src={allImages[imagePath]()} alt={item.alt} class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300" width="600" height="400" />}
-                    </div>
-                );
-            })}
+            {photos.map((photo, index) => (
+                <a 
+                  href={photo.lightboxSrc} 
+                  class="glightbox group block w-full overflow-hidden rounded-lg shadow-md aspect-video" 
+                  data-gallery="featured-gallery"
+                  data-aos="zoom-in" 
+                  data-aos-delay={100 + index * 100}
+                >
+                  <Image 
+                    src={photo.originalSrc()} 
+                    alt={photo.alt}
+                    width="400"
+                    height="225" 
+                    densities={[1.5, 2]}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                </a>
+            ))}
         </div>
         <a href="/galeri" class="mt-12 inline-block bg-white text-gray-800 px-8 py-3 rounded-md font-semibold border border-gray-300 hover:bg-gray-100 transition duration-300" data-aos="fade-up">
             Lihat Galeri Lengkap
         </a>
     </div>
 </section>
+
+<script>
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.min.css';
+
+  // Initialize GLightbox for this specific gallery
+  const lightbox = GLightbox({
+    selector: '[data-gallery="featured-gallery"]',
+    touchNavigation: true,
+    loop: true,
+  });
+</script>
