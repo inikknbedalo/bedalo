@@ -1,12 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 const { hero, allImages } = Astro.props;
-
-// Find the image module from the glob using the filename in the JSON
 const imagePath = Object.keys(allImages).find(path => path.endsWith(hero.image));
 ---
 <section id="hero-section" class="relative h-[60vh] md:h-[80vh] bg-gray-800">
-    {imagePath ? (
+    {imagePath ?
+    (
         <Image 
             src={allImages[imagePath]()} 
             alt={hero.imageAlt}
@@ -14,10 +13,13 @@ const imagePath = Object.keys(allImages).find(path => path.endsWith(hero.image))
             sizes="(max-width: 768px) 100vw, 100vw"
             quality="high"
             class="absolute inset-0 w-full h-full object-cover"
+            
+            loading="eager"
+            fetchpriority="high"
         />
     ) : <div class="absolute inset-0 bg-gray-600"></div>}
     
-    <div class="absolute bg-black bg-opacity-50 z-10"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
 
     <div class="container mx-auto px-6 relative z-20 flex flex-col justify-center items-center h-full text-white text-center">
         <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4" data-aos="fade-down">
