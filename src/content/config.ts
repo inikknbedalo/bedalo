@@ -1,6 +1,6 @@
 import { z, defineCollection } from 'astro:content';
 
-// Schema for each UMKM item
+// Skema UMKM (tidak berubah)
 const umkmSchema = z.object({
     altText: z.string(),
     judul: z.string(),
@@ -11,7 +11,7 @@ const umkmSchema = z.object({
     gambarUrl: z.string(),
 });
 
-// Schema for each tourism destination
+// Skema Pariwisata (tidak berubah)
 const pariwisataSchema = z.object({
     altText: z.string(),
     judul: z.string(),
@@ -24,28 +24,49 @@ const pariwisataSchema = z.object({
     })).optional(),
 });
 
-// --- NEW SCHEMAS START HERE ---
-
-// Schema for the main profile page content
+// --- PERUBAHAN DI SINI ---
+// Skema untuk konten halaman profil
 const profilSchema = z.object({
-    title: z.string(), // e.g., "Profil Dusun Bedalo"
-    sejarah: z.array(z.string()),
+    title: z.string(),
     visi: z.string(),
     misi: z.array(z.string()),
     petaUrl: z.string().url(),
+    // Data Demografi sekarang menjadi bagian dari profil
+    demografi: z.object({
+        jumlahPenduduk: z.string(),
+        lakiLaki: z.string(),
+        perempuan: z.string(),
+        mataPencaharian: z.array(z.string()),
+    }),
+    // Data Pertanian juga dipindahkan ke sini
+    pertanian: z.object({
+        gambarUrl: z.string(),
+        altText: z.string(),
+        judul: z.string(),
+        deskripsi: z.string(),
+        komoditas: z.array(z.object({
+            nama: z.string(),
+            icon: z.string(),
+        })),
+    }),
+    // Data "Potensi Lainnya" juga ada di sini
+    lainnya: z.array(z.object({
+        icon: z.string(),
+        judul: z.string(),
+        deskripsi: z.string(),
+    })),
 });
 
-// Schema for KKN team members
+// Skema Anggota KKN (tidak berubah)
 const kknSchema = z.object({
     nama: z.string(),
     prodi: z.string(),
     fotoUrl: z.string(),
     instagramUrl: z.string().url().optional(),
-    // Add an order field to control display sequence
     order: z.number(),
 });
 
-// Schema for each government member
+// Skema Struktur Pemerintahan (tidak berubah)
 const strukturSchema = z.object({
     nama: z.string(),
     jabatan: z.string(),
@@ -54,36 +75,21 @@ const strukturSchema = z.object({
 });
 
 
+// Definisikan semua koleksi
+const potensiCollection = defineCollection({ type: 'content', schema: umkmSchema });
+const pariwisataCollection = defineCollection({ type: 'content', schema: pariwisataSchema });
+const kknCollection = defineCollection({ type: 'content', schema: kknSchema });
+const strukturCollection = defineCollection({ type: 'content', schema: strukturSchema });
 
-// Define the collections
-const potensiCollection = defineCollection({
-    type: 'content',
-    schema: umkmSchema,
-});
-
-const pariwisataCollection = defineCollection({
-    type: 'content',
-    schema: pariwisataSchema,
-});
-
-// --- NEW COLLECTIONS START HERE ---
-
+// --- PERUBAHAN DI SINI ---
+// Ubah tipe koleksi 'profil' menjadi 'content'
 const profilCollection = defineCollection({
-    type: 'data', // Use 'data' for single JSON/YAML files
+    type: 'content',
     schema: profilSchema,
 });
 
-const kknCollection = defineCollection({
-    type: 'content', // Use 'content' for a folder of Markdown files
-    schema: kknSchema,
-});
 
-const strukturCollection = defineCollection({
-    type: 'content',
-    schema: strukturSchema,
-});
-
-// Export all collections
+// Ekspor semua koleksi
 export const collections = {
   'potensi': potensiCollection,
   'pariwisata': pariwisataCollection,
