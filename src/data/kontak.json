@@ -1,0 +1,33 @@
+{
+  "kontakPemerintah": [
+    {
+      "fotoUrl": "cat.jpg",
+      "nama": "Sumindar",
+      "jabatan": "Kepala Dusun",
+      "telepon": "081234567890"
+    },
+    {
+      "fotoUrl": "cat.jpg",
+      "nama": "Pak RW",
+      "jabatan": "Ketua RW",
+      "telepon": "081234567891"
+    },
+    {
+      "fotoUrl": "cat.jpg",
+      "nama": "Pak RT",
+      "jabatan": "Ketua RT 01",
+      "telepon": "081234567892"
+    }
+  ],
+  "formAspirasi": {
+    "judul": "Punya Ide atau Masukan?",
+    "deskripsi": "Kami sangat terbuka untuk menerima aspirasi, kritik, dan saran dari seluruh warga demi kemajuan Dusun Bedalo. Silakan sampaikan melalui formulir berikut.",
+    "formActionUrl": "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfWaCgBA-cNraUbTmOGjlmrZQ-99edYMdUSkbA-kQBtZm6QOw/formResponse",
+    "entry": {
+      "nama": "entry.2116275708",
+      "kontak": "entry.175133211",
+      "subjek": "entry.1266128475",
+      "pesan": "entry.1942425125"
+    }
+  }
+}
