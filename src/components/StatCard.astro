@@ -5,10 +5,80 @@ interface Props {
   delay?: number;
 }
 const { label, value, delay = 100 } = Astro.props;
+const numericValue = String(value).replace(/,/g, '');
 ---
 <div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay={delay}>
     <div class="mb-3">
-        <slot name="icon" /> </div>
-    <p class="text-3xl font-bold text-gray-800">{value}</p>
+        <slot name="icon" />
+    </div>
+    <p 
+      class="count-up-number text-3xl font-bold text-gray-800" 
+      data-value={numericValue}
+    >
+      {/* Fallback to the real value if JS fails */}
+      {value}
+    </p>
     <p class="text-gray-500">{label}</p>
 </div>
+
+<script>
+  import { CountUp } from 'countup.js';
+
+  /**
+   * Starts the count-up animation for a single element.
+   */
+  function startCountUpAnimation(el: HTMLElement) {
+    const endVal = parseInt(el.dataset.value || '0', 10);
+    if (isNaN(endVal)) return;
+
+    const countUp = new CountUp(el, endVal, {
+      startVal: 0,
+      duration: 2.5,
+      useGrouping: true,
+      separator: ',',
+    });
+
+    if (!countUp.error) {
+      countUp.start();
+    } else {
+      console.error(countUp.error);
+    }
+  }
+
+  /**
+   * The IntersectionObserver watches for elements to enter the viewport.
+   */
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        startCountUpAnimation(el);
+        observer.unobserve(el); // Stop observing once animated
+      }
+    }
+  }, {
+    threshold: 0.1, // Trigger when 10% of the element is visible
+  });
+
+  /**
+   * Finds all number elements on the page and tells the observer to watch them.
+   */
+  function setupObservers() {
+    const numberElements = document.querySelectorAll('.count-up-number');
+    for (const el of numberElements) {
+      // Set initial text to 0 to ensure the animation is visible
+      el.textContent = '0';
+      observer.observe(el);
+    }
+  }
+
+  // --- THE FIX IS HERE ---
+
+  // 1. Run the setup function immediately when the script first loads.
+  //    This handles the initial page view.
+  setupObservers();
+
+  // 2. ALSO, add the event listener for client-side navigation.
+  //    This makes it future-proof if you add Astro View Transitions later.
+  document.addEventListener('astro:page-load', setupObservers);
+</script>

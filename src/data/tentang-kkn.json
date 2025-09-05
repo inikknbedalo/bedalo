@@ -1,0 +1,82 @@
+{
+  "judulHalaman": {
+    "judul": "Tentang KKN Reguler Periode 117",
+    "universitas": "Universitas Islam Negeri Sunan Kalijaga Yogyakarta"
+  },
+  "pengantar": {
+    "judul": "Tim Pengembang Website",
+    "deskripsi": "Website ini merupakan salah satu program kerja utama dari tim Kuliah Kerja Nyata (KKN) Reguler Periode 117 Kelompok 129 dari Universitas Islam Negeri Sunan Kalijaga Yogyakarta. Kami berupaya mendigitalisasi informasi dan potensi Dusun Bedalo agar dapat diakses oleh masyarakat luas.",
+    "gambarUrl": "kkn-team.webp"
+  },
+  "anggota": {
+    "judul": "Anggota Kelompok 129 - Bedalo",
+    "tim": [
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Dika Izki Fadillah",
+        "prodi": "Komunikasi dan Penyiaran Islam",
+        "instagramUrl": "https://www.instagram.com/username1"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Embun Lahfah El Khalieqy",
+        "prodi": "Ilmu Hukum",
+        "instagramUrl": "https://www.instagram.com/username2"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Ardiandi Deya Shidiq",
+        "prodi": "Ilmu Hukum",
+        "instagramUrl": "https://www.instagram.com/username3"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Atha Aulia Nur Syafitri",
+        "prodi": "Pendidikan Agama Islam",
+        "instagramUrl": "https://www.instagram.com/username3"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Hartini Berma Ningsi",
+        "prodi": "Manajemen Pendidikan Islam",
+        "instagramUrl": "https://www.instagram.com/username4"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Titi Prihartati",
+        "prodi": "Matematika",
+        "instagramUrl": "https://www.instagram.com/username5"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Asyadu Rahman",
+        "prodi": "Psikologi",
+        "instagramUrl": "https://www.instagram.com/username6"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Muhammad Aditya",
+        "prodi": "Perbankan Syari'ah",
+        "instagramUrl": "https://www.instagram.com/username7"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Alisya Putri Rahmadhiani",
+        "prodi": "Perbankan Syari'ah",
+        "instagramUrl": "https://www.instagram.com/username7"
+      },
+      {
+        "fotoUrl": "cat.jpg",
+        "nama": "Meta Indiyasari",
+        "prodi": "Akuntansi Syari'ah",
+        "instagramUrl": "https://www.instagram.com/username7"
+      },
+      {
+        "fotoUrl": "/assets/images/cat.jpg",
+        "nama": "Ardi lagi",
+        "prodi": "Informatematika",
+        "instagramUrl": "ehe"
+      }
+    ]
+  }
+}
