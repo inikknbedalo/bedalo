@@ -17,7 +17,6 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props as { entry: CollectionEntry<'potensi'> };
 const { data } = entry;
-
 const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 const imagePath = Object.keys(allImages).find(path => path.endsWith(data.gambarUrl));
 ---
@@ -32,6 +31,15 @@ const imagePath = Object.keys(allImages).find(path => path.endsWith(data.gambarU
 
         <section class="py-20 bg-white">
             <div class="container mx-auto px-6 max-w-4xl">
+                
+                {/* --- BACK BUTTON ADDED HERE --- */}
+                <div class="mb-8">
+                    <a href="/potensi" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline transition-colors font-semibold">
+                        <i class="fas fa-arrow-left"></i>
+                        Kembali ke Daftar Potensi
+                    </a>
+                </div>
+       
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div data-aos="fade-right">
                         {imagePath && (
