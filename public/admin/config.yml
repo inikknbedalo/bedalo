@@ -1,4 +1,4 @@
-# Backend dan Media (tidak berubah)
+# Backend and Media
 backend:
   name: github
   repo: inikknbedalo/bedalo
@@ -11,7 +11,7 @@ local_backend: true
 media_folder: "src/assets/images"
 public_folder: "/assets/images"
 
-# --- STRUKTUR KOLEKSI YANG DISEDERHANAKAN DAN VALID ---
+# Collections Structure
 collections:
   # ===================================================================
   # Koleksi untuk Halaman & Pengaturan Global
