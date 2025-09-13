@@ -8,7 +8,7 @@ export interface Props {
 const { fotoItems, itemsPerPage = 20 } = Astro.props;
 ---
 
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
   {fotoItems.map((photo, index) => (
     <a 
       href={photo.lightboxSrc} 

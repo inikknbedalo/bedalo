@@ -27,7 +27,7 @@ const processedPhotos = await Promise.all(
 ).then(results => results.filter(item => item !== null));
 
 // Pagination variables
-const itemsPerPage = 20;
+const itemsPerPage = 12;
 const totalPages = Math.ceil(processedPhotos.length / itemsPerPage);
 
 // For server-side rendering, we'll show the first page by default
