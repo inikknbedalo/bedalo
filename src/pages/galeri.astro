@@ -30,9 +30,11 @@ const processedPhotos = await Promise.all(
 const itemsPerPage = 12;
 const totalPages = Math.ceil(processedPhotos.length / itemsPerPage);
 
-// For server-side rendering, we'll show the first page by default
-const currentPage = 1;
-const startIndex = (currentPage - 1) * itemsPerPage;
+// Get the current page from URL parameters, default to 1 if not specified
+const currentPage = Astro.url.searchParams.get('page') ? parseInt(Astro.url.searchParams.get('page') as string) : 1;
+// Ensure currentPage is within valid range
+const validPage = Math.max(1, Math.min(currentPage, totalPages));
+const startIndex = (validPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const photosToShow = processedPhotos.slice(startIndex, endIndex);
 
@@ -66,7 +68,7 @@ const getYouTubeId = (url: string) => {
                                 <a
                                     href={`?page=${page}`}
                                     class={`px-4 py-2 text-sm font-medium ${
-                                        page === currentPage
+                                        page === validPage
                                             ? 'bg-blue-600 text-white'
                                             : 'bg-white text-gray-700 hover:bg-gray-50'
                                     } border border-gray-300 first:rounded-l-md last:rounded-r-md`}
