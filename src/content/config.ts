@@ -11,7 +11,7 @@ const umkmSchema = z.object({
     gambarUrl: z.string(),
 });
 
-// Skema Pariwisata (tidak berubah)
+// Skema Pariwisata dengan UMKM
 const pariwisataSchema = z.object({
     altText: z.string(),
     judul: z.string(),
@@ -21,6 +21,21 @@ const pariwisataSchema = z.object({
     gallery: z.array(z.object({
         url: z.string(),
         alt: z.string(),
+    })).optional(),
+    // Bagian UMKM untuk tempat wisata dengan detail lengkap
+    umkm: z.array(z.object({
+        nama: z.string(),
+        jenis: z.enum(["warung", "penginapan", "souvenir", "jasa"]),
+        deskripsi: z.string(),
+        harga: z.string().optional(),
+        kontak: z.string().optional(),
+        kontakLink: z.string().url().optional(),
+        petaLink: z.string().url().optional(),
+        gambarUrl: z.string().optional(),
+        gallery: z.array(z.object({
+            url: z.string(),
+            alt: z.string(),
+        })).optional(),
     })).optional(),
 });
 

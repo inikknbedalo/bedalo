@@ -1,0 +1,151 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import PageBanner from '../../../../components/PageBanner.astro';
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export async function getStaticPaths() {
+  const pariwisataEntries = await getCollection('pariwisata');
+  
+  const paths = [];
+  for (const entry of pariwisataEntries) {
+    if (entry.data.umkm) {
+      for (const umkm of entry.data.umkm) {
+        paths.push({
+          params: { 
+            slug: entry.slug,
+            umkmSlug: encodeURIComponent(umkm.nama.toLowerCase().replace(/\s+/g, '-'))
+          },
+          props: { 
+            pariwisataEntry: entry,
+            umkmData: umkm
+          },
+        });
+      }
+    }
+  }
+  
+  return paths;
+}
+
+const { pariwisataEntry, umkmData } = Astro.props as { 
+  pariwisataEntry: CollectionEntry<'pariwisata'>,
+  umkmData: any
+};
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+// Process gallery images if available
+const processedPhotos = umkmData.gallery ?
+await Promise.all(
+    umkmData.gallery.map(async (photo: { url: string, alt: string }) => {
+        const imagePath = Object.keys(allImages).find(path => path.endsWith(photo.url));
+        if (!imagePath) return null;
+        const originalImage = allImages[imagePath];
+        const lightboxImage = await getImage({ src: originalImage(), width: 1200, format: 'webp' });
+        return {
+            alt: photo.alt,
+            originalSrc: originalImage,
+            lightboxSrc: lightboxImage.src,
+        };
+    })
+).then(results => results.filter(item => item !== null)) : [];
+
+// Get main image path
+const imagePath = umkmData.gambarUrl ? 
+  Object.keys(allImages).find(path => path.endsWith(umkmData.gambarUrl)) : null;
+---
+
+<Layout title={`${umkmData.nama} - ${pariwisataEntry.data.judul}`} description={umkmData.deskripsi}>
+    <Header currentPage="Pariwisata" />
+    <main>
+        <PageBanner
+            title={umkmData.nama}
+            subtitle={`UMKM di ${pariwisataEntry.data.judul}`}
+            bgColor="bg-purple-600"
+        />
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                
+                <!-- Back buttons -->
+                <div class="mb-8 flex flex-wrap gap-4">
+                    <a href="/pariwisata" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline transition-colors font-semibold">
+                        <i class="fas fa-arrow-left"></i>
+                        Kembali ke Daftar Pariwisata
+                    </a>
+                    <a href={`/pariwisata/${pariwisataEntry.slug}`} class="inline-flex items-center gap-2 text-green-600 hover:text-green-800 hover:underline transition-colors font-semibold">
+                        <i class="fas fa-arrow-left"></i>
+                        Kembali ke {pariwisataEntry.data.judul}
+                    </a>
+                </div>
+       
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        {imagePath && (
+                            <Image
+                                src={allImages[imagePath]()}
+                                alt={umkmData.altText || umkmData.nama}
+                                width="800"
+                                height="600"
+                                class="rounded-xl shadow-lg w-full h-full object-cover"
+                            />
+                        )}
+                    </div>
+                    <div data-aos="fade-left">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">{umkmData.nama}</h2>
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-gray-600 rounded-full mb-3">
+                            {umkmData.jenis.charAt(0).toUpperCase() + umkmData.jenis.slice(1)}
+                        </span>
+                        <p class="text-gray-600 leading-relaxed mb-6">{umkmData.deskripsi}</p>
+                        
+                        {umkmData.harga && (
+                            <div class="mb-6">
+                                <span class="text-sm text-gray-500">Harga:</span>
+                                <p class="text-2xl font-bold text-green-600">{umkmData.harga}</p>
+                            </div>
+                        )}
+                        
+                        <div class="flex flex-wrap gap-4">
+                            {umkmData.kontakLink && (
+                                <a href={umkmData.kontakLink} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 text-white bg-green-500 px-6 py-3 rounded-md hover:bg-green-600 transition-colors font-semibold">
+                                    <i class="fab fa-whatsapp"></i> Hubungi
+                                </a>
+                            )}
+                            {umkmData.petaLink && (
+                                <a href={umkmData.petaLink} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 text-white bg-gray-600 px-6 py-3 rounded-md hover:bg-gray-700 transition-colors font-semibold">
+                                    <i class="fas fa-map-marker-alt"></i> Lihat Lokasi
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {processedPhotos.length > 0 && (
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6 max-w-6xl">
+                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-12">Galeri Foto</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {processedPhotos.map((photo: any, index: number) => (
+                            <div class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay={index * 100}>
+                                <Image
+                                    src={photo.originalSrc()}
+                                    alt={photo.alt}
+                                    width="600"
+                                    height="400"
+                                    class="w-full h-64 object-cover"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        )}
+    </main>
+    <Footer />
+</Layout>
