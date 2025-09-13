@@ -56,28 +56,6 @@ const getYouTubeId = (url: string) => {
             <div class="container mx-auto px-6">
                 <SectionTitle title="Galeri Foto" />
                 
-                <!-- Filter and Sort Controls -->
-                <div class="flex flex-wrap gap-4 mb-6">
-                    <div class="flex-1 min-w-[200px]">
-                        <label for="category-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter Kategori</label>
-                        <select id="category-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            <option value="all">Semua Kategori</option>
-                            <option value="activities">Kegiatan Warga</option>
-                            <option value="landscapes">Pemandangan</option>
-                            <option value="events">Acara</option>
-                            <option value="products">Produk UMKM</option>
-                        </select>
-                    </div>
-                    <div class="flex-1 min-w-[200px]">
-                        <label for="sort-order" class="block text-sm font-medium text-gray-700 mb-1">Urutkan</label>
-                        <select id="sort-order" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            <option value="newest">Terbaru</option>
-                            <option value="oldest">Terlama</option>
-                            <option value="alphabetical">A-Z</option>
-                        </select>
-                    </div>
-                </div>
-                
                 <PhotoGallery fotoItems={photosToShow} itemsPerPage={itemsPerPage} />
                 
                 <!-- Pagination Controls -->
