@@ -31,10 +31,10 @@ const itemsPerPage = 12;
 const totalPages = Math.ceil(processedPhotos.length / itemsPerPage);
 
 // Get the current page from URL parameters, default to 1 if not specified
-const currentPage = Astro.url.searchParams.get('page') ? parseInt(Astro.url.searchParams.get('page') as string) : 1;
-// Ensure currentPage is within valid range
-const validPage = Math.max(1, Math.min(currentPage, totalPages));
-const startIndex = (validPage - 1) * itemsPerPage;
+const url = Astro.url;
+const pageParam = url.searchParams.get('page');
+const currentPage = pageParam ? Math.max(1, Math.min(parseInt(pageParam), totalPages)) : 1;
+const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const photosToShow = processedPhotos.slice(startIndex, endIndex);
 
@@ -64,18 +64,42 @@ const getYouTubeId = (url: string) => {
                 {totalPages > 1 && (
                     <div class="flex justify-center mt-8">
                         <nav class="inline-flex rounded-md shadow">
+                            {/* Previous button */}
+                            <a
+                                href={`?page=${currentPage > 1 ? currentPage - 1 : 1}`}
+                                class={`px-4 py-2 text-sm font-medium ${
+                                    currentPage === 1
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                                } border border-gray-300 first:rounded-l-md`}
+                            >
+                                Previous
+                            </a>
+                            
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                                 <a
                                     href={`?page=${page}`}
                                     class={`px-4 py-2 text-sm font-medium ${
-                                        page === validPage
+                                        page === currentPage
                                             ? 'bg-blue-600 text-white'
                                             : 'bg-white text-gray-700 hover:bg-gray-50'
-                                    } border border-gray-300 first:rounded-l-md last:rounded-r-md`}
+                                    } border border-gray-300`}
                                 >
                                     {page}
                                 </a>
                             ))}
+                            
+                            {/* Next button */}
+                            <a
+                                href={`?page=${currentPage < totalPages ? currentPage + 1 : totalPages}`}
+                                class={`px-4 py-2 text-sm font-medium ${
+                                    currentPage === totalPages
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                                } border border-gray-300 last:rounded-r-md`}
+                            >
+                                Next
+                            </a>
                         </nav>
                     </div>
                 )}
