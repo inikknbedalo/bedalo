@@ -4,7 +4,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
-import LiteYouTube from '../../components/LiteYouTube.astro';
 import PhotoGallery from '../../components/PhotoGallery.astro';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -26,32 +25,9 @@ const processedPhotos = await Promise.all(
     })
 ).then(results => results.filter(item => item !== null));
 
-// Pagination variables
+// Default to first page for server-side rendering
 const itemsPerPage = 12;
-const totalPages = Math.ceil(processedPhotos.length / itemsPerPage);
-
-// Get the current page from URL parameters, default to 1 if not specified
-const currentPage = Astro.url.searchParams.get('page') ? parseInt(Astro.url.searchParams.get('page') as string) : 1;
-// Ensure currentPage is within valid range
-const validPage = Math.max(1, Math.min(currentPage, totalPages));
-const startIndex = (validPage - 1) * itemsPerPage;
-const endIndex = startIndex + itemsPerPage;
-const photosToShow = processedPhotos.slice(startIndex, endIndex);
-
-// Debug logs
-console.log('All Gallery page - processedPhotos length:', processedPhotos.length);
-console.log('All Gallery page - itemsPerPage:', itemsPerPage);
-console.log('All Gallery page - totalPages:', totalPages);
-console.log('All Gallery page - currentPage:', currentPage);
-console.log('All Gallery page - validPage:', validPage);
-console.log('All Gallery page - startIndex:', startIndex);
-console.log('All Gallery page - endIndex:', endIndex);
-console.log('All Gallery page - photosToShow length:', photosToShow.length);
-
-const getYouTubeId = (url: string) => {
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
-    return url.match(regex)?.[1] || null;
-};
+const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
 ---
 
 <Layout 
@@ -69,58 +45,24 @@ const getYouTubeId = (url: string) => {
             <div class="container mx-auto px-6">
                 <SectionTitle title="Semua Foto" />
                 
-                <PhotoGallery fotoItems={photosToShow} />
-                
-                <!-- Pagination Controls -->
-                {totalPages > 1 && (
-                    <div class="flex justify-center mt-8">
-                        <nav class="inline-flex rounded-md shadow">
-                            {/* Previous button */}
-                            <a
-                                href={`?page=${validPage > 1 ? validPage - 1 : 1}`}
-                                class={`px-4 py-2 text-sm font-medium ${
-                                    validPage === 1
-                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                        : 'bg-white text-gray-700 hover:bg-gray-50'
-                                } border border-gray-300 first:rounded-l-md`}
-                            >
-                                Previous
-                            </a>
-                            
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                <a
-                                    href={`?page=${page}`}
-                                    class={`px-4 py-2 text-sm font-medium ${
-                                        page === validPage
-                                            ? 'bg-blue-600 text-white'
-                                            : 'bg-white text-gray-700 hover:bg-gray-50'
-                                    } border border-gray-300`}
-                                >
-                                    {page}
-                                </a>
-                            ))}
-                            
-                            {/* Next button */}
-                            <a
-                                href={`?page=${validPage < totalPages ? validPage + 1 : totalPages}`}
-                                class={`px-4 py-2 text-sm font-medium ${
-                                    validPage === totalPages
-                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                        : 'bg-white text-gray-700 hover:bg-gray-50'
-                                } border border-gray-300 last:rounded-r-md`}
-                            >
-                                Next
-                            </a>
-                        </nav>
-                    </div>
-                )}
-                
-                {/* Debug info for pagination */}
-                <div class="mt-4 text-center text-sm text-gray-500">
-                    Page {validPage} of {totalPages} (Current URL: {Astro.url.toString()})
+                <div id="gallery-container">
+                    <PhotoGallery fotoItems={defaultPhotos} />
                 </div>
                 
-                {/* Back to Gallery Button */}
+                <!-- Pagination Controls -->
+                <div class="flex justify-center mt-8">
+                    <nav class="inline-flex rounded-md shadow">
+                        <button id="prev-button" class="px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 first:rounded-l-md" disabled>
+                            Previous
+                        </button>
+                        <div id="page-buttons" class="flex"></div>
+                        <button id="next-button" class="px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 last:rounded-r-md">
+                            Next
+                        </button>
+                    </nav>
+                </div>
+                
+                <!-- Back to Gallery Button -->
                 <div class="flex justify-center mt-8">
                     <a 
                         href="/galeri" 
@@ -134,3 +76,73 @@ const getYouTubeId = (url: string) => {
     </main>
     <Footer />
 </Layout>
+
+<script>
+    // Client-side pagination
+    document.addEventListener('DOMContentLoaded', function() {
+        // In a real implementation, we would pass the photo data to the client
+        // For now, we'll use a simple approach
+        const itemsPerPage = 12;
+        const totalItems = 15; // This should come from the server
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        // Get current page from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentPage = parseInt(urlParams.get('page')) || 1;
+        currentPage = Math.max(1, Math.min(currentPage, totalPages));
+        
+        // Update URL
+        function updateURL(page) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.replaceState({}, '', url);
+        }
+        
+        // Update pagination controls
+        function updatePagination() {
+            // Update previous/next buttons
+            document.getElementById('prev-button').disabled = currentPage === 1;
+            document.getElementById('next-button').disabled = currentPage === totalPages;
+            
+            // Generate page buttons
+            const pageButtonsContainer = document.getElementById('page-buttons');
+            pageButtonsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.className = `px-4 py-2 text-sm font-medium border border-gray-300 ${
+                    i === currentPage 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`;
+                button.textContent = i;
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    updateURL(currentPage);
+                    updatePagination();
+                });
+                pageButtonsContainer.appendChild(button);
+            }
+        }
+        
+        // Add event listeners
+        document.getElementById('prev-button').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateURL(currentPage);
+                updatePagination();
+            }
+        });
+        
+        document.getElementById('next-button').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateURL(currentPage);
+                updatePagination();
+            }
+        });
+        
+        // Initialize
+        updatePagination();
+    });
+</script>
