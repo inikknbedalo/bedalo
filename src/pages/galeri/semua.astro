@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import LiteYouTube from '../../components/LiteYouTube.astro';
+import PhotoGallery from '../../components/PhotoGallery.astro';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import data from '../../data/galeri.json';
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+const processedPhotos = await Promise.all(
+    data.foto.map(async (photo) => {
+        const imagePath = Object.keys(allImages).find(path => path.endsWith(photo.url));
+        if (!imagePath) return null;
+        const originalImage = allImages[imagePath];
+        const lightboxImage = await getImage({ src: originalImage(), width: 1200, format: 'webp' });
+        return {
+            alt: photo.alt,
+            originalSrc: originalImage,
+            lightboxSrc: lightboxImage.src,
+        };
+    })
+).then(results => results.filter(item => item !== null));
+
+// Pagination variables
+const itemsPerPage = 12;
+const totalPages = Math.ceil(processedPhotos.length / itemsPerPage);
+
+// Get the current page from URL parameters, default to 1 if not specified
+const currentPage = Astro.url.searchParams.get('page') ? parseInt(Astro.url.searchParams.get('page') as string) : 1;
+// Ensure currentPage is within valid range
+const validPage = Math.max(1, Math.min(currentPage, totalPages));
+const startIndex = (validPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+const photosToShow = processedPhotos.slice(startIndex, endIndex);
+
+const getYouTubeId = (url: string) => {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
+    return url.match(regex)?.[1] || null;
+};
+---
+
+<Layout 
+    title="Semua Foto Galeri | Website Dusun Bedalo"
+    description="Lihat semua foto dalam galeri Dusun Bedalo."
+>
+    <Header currentPage="Galeri" />
+    <main>
+        <PageBanner 
+            title="Semua Foto Galeri"
+            subtitle="Kumpulan Kenangan Dusun Bedalo"
+            bgColor="bg-teal-600"
+        />
+        <section class="py-20 overflow-hidden bg-white">
+            <div class="container mx-auto px-6">
+                <SectionTitle title="Semua Foto" />
+                
+                <PhotoGallery fotoItems={photosToShow} />
+                
+                <!-- Pagination Controls -->
+                {totalPages > 1 && (
+                    <div class="flex justify-center mt-8">
+                        <nav class="inline-flex rounded-md shadow">
+                            {/* Previous button */}
+                            <a
+                                href={`?page=${validPage > 1 ? validPage - 1 : 1}`}
+                                class={`px-4 py-2 text-sm font-medium ${
+                                    validPage === 1
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                                } border border-gray-300 first:rounded-l-md`}
+                            >
+                                Previous
+                            </a>
+                            
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                <a
+                                    href={`?page=${page}`}
+                                    class={`px-4 py-2 text-sm font-medium ${
+                                        page === validPage
+                                            ? 'bg-blue-600 text-white'
+                                            : 'bg-white text-gray-700 hover:bg-gray-50'
+                                    } border border-gray-300`}
+                                >
+                                    {page}
+                                </a>
+                            ))}
+                            
+                            {/* Next button */}
+                            <a
+                                href={`?page=${validPage < totalPages ? validPage + 1 : totalPages}`}
+                                class={`px-4 py-2 text-sm font-medium ${
+                                    validPage === totalPages
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                                } border border-gray-300 last:rounded-r-md`}
+                            >
+                                Next
+                            </a>
+                        </nav>
+                    </div>
+                )}
+                
+                {/* Back to Gallery Button */}
+                <div class="flex justify-center mt-8">
+                    <a 
+                        href="/galeri" 
+                        class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+                    >
+                        Kembali ke Galeri
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
