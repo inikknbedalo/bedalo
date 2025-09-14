@@ -30,11 +30,18 @@ const processedPhotos = await Promise.all(
 const initialPhotos = processedPhotos.slice(0, 12);
 const hasMorePhotos = processedPhotos.length > 12;
 
+// YouTube ID extractor function
 const getYouTubeId = (url: string) => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
     return url.match(regex)?.[1] || null;
 };
+
+// Debug logs
+console.log('Gallery page - processedPhotos length:', processedPhotos.length);
+console.log('Gallery page - initialPhotos length:', initialPhotos.length);
+console.log('Gallery page - hasMorePhotos:', hasMorePhotos);
 ---
+
 <Layout 
     title="Galeri | Website Dusun Bedalo"
     description="Lihat momen dan kenangan dalam bingkai melalui galeri foto dan video."

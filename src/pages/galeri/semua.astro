@@ -38,6 +38,16 @@ const startIndex = (validPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const photosToShow = processedPhotos.slice(startIndex, endIndex);
 
+// Debug logs
+console.log('All Gallery page - processedPhotos length:', processedPhotos.length);
+console.log('All Gallery page - itemsPerPage:', itemsPerPage);
+console.log('All Gallery page - totalPages:', totalPages);
+console.log('All Gallery page - currentPage:', currentPage);
+console.log('All Gallery page - validPage:', validPage);
+console.log('All Gallery page - startIndex:', startIndex);
+console.log('All Gallery page - endIndex:', endIndex);
+console.log('All Gallery page - photosToShow length:', photosToShow.length);
+
 const getYouTubeId = (url: string) => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
     return url.match(regex)?.[1] || null;
@@ -104,6 +114,11 @@ const getYouTubeId = (url: string) => {
                         </nav>
                     </div>
                 )}
+                
+                {/* Debug info for pagination */}
+                <div class="mt-4 text-center text-sm text-gray-500">
+                    Page {validPage} of {totalPages} (Current URL: {Astro.url.toString()})
+                </div>
                 
                 {/* Back to Gallery Button */}
                 <div class="flex justify-center mt-8">
