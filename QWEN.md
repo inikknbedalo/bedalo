@@ -91,3 +91,6 @@ This file stores project-specific memories and context for the Qwen Code assista
 - `pariwisata.json`: Tourism page content
 - `peta-situs.json`: Site map content
 - `tentang-kkn.json`: About KKN content
+
+## Qwen Added Memories
+- dont run npm build or npm run

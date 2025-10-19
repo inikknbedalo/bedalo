@@ -80,11 +80,10 @@ const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
 <script>
     // Client-side pagination
     document.addEventListener('DOMContentLoaded', function() {
-        // In a real implementation, we would pass the photo data to the client
-        // For now, we'll use a simple approach
+        // Photo data passed from server
+        const photoData = <!--{JSON.stringify(processedPhotos)}-->;
         const itemsPerPage = 12;
-        const totalItems = 15; // This should come from the server
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const totalPages = Math.ceil(photoData.length / itemsPerPage);
         
         // Get current page from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -96,6 +95,29 @@ const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
             const url = new URL(window.location);
             url.searchParams.set('page', page);
             window.history.replaceState({}, '', url);
+        }
+        
+        // Update gallery content
+        function updateGalleryContent(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const photosToShow = photoData.slice(startIndex, endIndex);
+            
+            // Update the gallery container
+            const galleryContainer = document.getElementById('gallery-container');
+            if (galleryContainer) {
+                // Create HTML for the gallery
+                let galleryHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">';
+                photosToShow.forEach((photo, index) => {
+                    galleryHTML += 
+                        `<a href="${photo.lightboxSrc}" class="glightbox group block w-full overflow-hidden rounded-lg shadow-md aspect-video" data-gallery="gallery-dusun" data-aos="zoom-in" data-aos-delay="${100 + index * 50}">` +
+                        `<img src="${photo.originalSrc.src}" alt="${photo.alt}" width="400" height="225" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />` +
+                        `</a>`;
+                });
+                galleryHTML += '</div>';
+                
+                galleryContainer.innerHTML = galleryHTML;
+            }
         }
         
         // Update pagination controls
@@ -119,6 +141,7 @@ const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
                 button.addEventListener('click', () => {
                     currentPage = i;
                     updateURL(currentPage);
+                    updateGalleryContent(currentPage);
                     updatePagination();
                 });
                 pageButtonsContainer.appendChild(button);
@@ -130,6 +153,7 @@ const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
             if (currentPage > 1) {
                 currentPage--;
                 updateURL(currentPage);
+                updateGalleryContent(currentPage);
                 updatePagination();
             }
         });
@@ -138,11 +162,13 @@ const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
                 updateURL(currentPage);
+                updateGalleryContent(currentPage);
                 updatePagination();
             }
         });
         
         // Initialize
+        updateGalleryContent(currentPage);
         updatePagination();
     });
 </script>
