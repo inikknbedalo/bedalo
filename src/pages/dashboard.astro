@@ -108,10 +108,6 @@ import Footer from '../components/Footer.astro';
     </div>
 </Layout>
 
-    <!-- Import required JS libraries via CDN -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <style is:global>
     @import 'aos/dist/aos.css';
 
@@ -133,12 +129,10 @@ import Footer from '../components/Footer.astro';
     }
 </style>
 
-<script>
-    // Libraries loaded via CDN in the HTML head
-    // gsap, AOS, and chart.js are available globally
-    const { gsap } = window;
-    const { Chart, ChartItem } = window;
-    const AOS = window.AOS;
+<script type="module">
+    import AOS from 'aos';
+    import { gsap } from 'gsap';
+    import { Chart, type ChartItem } from 'chart.js/auto';
 
     // --- Type Definitions ---
     interface Aspirasi {
