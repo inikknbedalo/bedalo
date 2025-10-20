@@ -10,6 +10,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-
+  site: 'https://bedalo.pages.dev',
   integrations: [sitemap()]
 });
