@@ -31,6 +31,8 @@ const { title, description } = Astro.props;
 
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
         body { font-family: 'Poppins', sans-serif; }
         html { scroll-behavior: smooth; }
@@ -39,10 +41,13 @@ const { title, description } = Astro.props;
 <body class="bg-gray-50">
     <slot />
     <script>
-        import AOS from 'aos';
-        AOS.init({
-            duration: 800,
-            once: true,
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                });
+            }
         });
     </script>
 </body>
