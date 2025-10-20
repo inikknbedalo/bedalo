@@ -1,0 +1,217 @@
+{
+  "collections": [
+    {
+      "name": "pengaturan",
+      "label": "⚙️ Pengaturan Situs & Halaman",
+      "description": "Kelola konten halaman utama dan pengaturan global seperti footer.",
+      "files": [
+        {
+          "file": "src/content/profil/index.md",
+          "label": "📖 Halaman Profil & Potensi",
+          "name": "profil_konten",
+          "fields": [
+            { "label": "Judul Halaman", "name": "title", "widget": "string" },
+            { "label": "Visi", "name": "visi", "widget": "text" },
+            {
+              "name": "misi",
+              "label": "Misi",
+              "widget": "list",
+              "field": { "label": "Poin Misi", "name": "poin_misi", "widget": "string" }
+            },
+            { "label": "URL Peta Google Maps (Embed)", "name": "petaUrl", "widget": "string" },
+            {
+              "name": "demografi",
+              "label": "Data Demografi",
+              "widget": "object",
+              "fields": [
+                { "label": "Jumlah Penduduk", "name": "jumlahPenduduk", "widget": "string" },
+                { "label": "Laki-laki", "name": "lakiLaki", "widget": "string" },
+                { "label": "Perempuan", "name": "perempuan", "widget": "string" },
+                {
+                  "name": "mataPencaharian",
+                  "label": "Mata Pencaharian",
+                  "widget": "list",
+                  "field": { "label": "Jenis Pekerjaan", "name": "pekerjaan", "widget": "string" }
+                }
+              ]
+            },
+            {
+              "name": "pertanian",
+              "label": "Seksi Pertanian",
+              "widget": "object",
+              "fields": [
+                { "label": "Gambar Utama", "name": "gambarUrl", "widget": "image" },
+                { "label": "Teks Alternatif", "name": "altText", "widget": "string" },
+                { "label": "Judul", "name": "judul", "widget": "string" },
+                { "label": "Deskripsi", "name": "deskripsi", "widget": "text" },
+                {
+                  "name": "komoditas",
+                  "label": "Daftar Komoditas",
+                  "widget": "list",
+                  "summary": "{{fields.nama}}",
+                  "fields": [
+                    { "label": "Nama Komoditas", "name": "nama", "widget": "string" },
+                    { "label": "Ikon (Font Awesome Class)", "name": "icon", "widget": "string" }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "lainnya",
+              "label": "Seksi Potensi Lainnya",
+              "widget": "list",
+              "summary": "{{fields.judul}}",
+              "fields": [
+                { "label": "Ikon (Font Awesome Class)", "name": "icon", "widget": "string" },
+                { "label": "Judul", "name": "judul", "widget": "string" },
+                { "label": "Deskripsi", "name": "deskripsi", "widget": "text" }
+              ]
+            },
+            { "label": "Sejarah (Konten Utama)", "name": "body", "widget": "markdown" }
+          ]
+        },
+        {
+          "file": "src/data/galeri.json",
+          "label": "🖼️ Galeri (Foto & Video)",
+          "name": "galeri",
+          "fields": [
+            {
+              "name": "foto",
+              "label": "Galeri Foto",
+              "widget": "list",
+              "summary": "{{fields.alt}}",
+              "fields": [
+                { "label": "Gambar", "name": "url", "widget": "image" },
+                { "label": "Keterangan (Alt Text)", "name": "alt", "widget": "string" }
+              ]
+            },
+            {
+              "name": "video",
+              "label": "Galeri Video",
+              "widget": "list",
+              "summary": "{{fields.judul}}",
+              "fields": [
+                { "label": "URL Video", "name": "url", "widget": "string", "hint": "Contoh: https://www.youtube.com/watch?v=xxxxx" },
+                { "label": "Judul Video", "name": "judul", "widget": "string" }
+              ]
+            }
+          ]
+        },
+        {
+          "file": "src/data/footer.json",
+          "label": "🦶 Footer",
+          "name": "footer",
+          "fields": [
+            { "label": "Alamat", "name": "address", "widget": "string" },
+            { "label": "Email", "name": "email", "widget": "string" },
+            { "label": "Telepon", "name": "phone", "widget": "string" },
+            {
+              "name": "mainLinks",
+              "label": "Tautan Utama",
+              "widget": "list",
+              "summary": "{{fields.text}}",
+              "fields": [
+                { "label": "Teks Tautan", "name": "text", "widget": "string" },
+                { "label": "URL", "name": "href", "widget": "string" }
+              ]
+            },
+            {
+              "name": "aboutLinks",
+              "label": "Tautan Tentang",
+              "widget": "list",
+              "summary": "{{fields.text}}",
+              "fields": [
+                { "label": "Teks Tautan", "name": "text", "widget": "string" },
+                { "label": "URL", "name": "href", "widget": "string" }
+              ]
+            },
+            {
+              "name": "socialLinks",
+              "label": "Tautan Media Sosial",
+              "widget": "list",
+              "summary": "{{fields.label}}",
+              "fields": [
+                { "label": "URL", "name": "href", "widget": "string" },
+                { "label": "Label", "name": "label", "widget": "string" },
+                { "label": "Kelas Ikon (Font Awesome)", "name": "iconClass", "widget": "string" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pariwisata",
+      "label": "🏖️ Destinasi Pariwisata",
+      "label_singular": "Destinasi Pariwisata",
+      "folder": "src/content/pariwisata",
+      "create": true,
+      "slug": "{{fields.judul}}",
+      "fields": [
+        { "label": "Judul Destinasi", "name": "judul", "widget": "string" },
+        { "label": "Gambar Utama (Cover)", "name": "coverImage", "widget": "image" },
+        { "label": "Teks Alternatif Gambar Utama", "name": "altText", "widget": "string" },
+        { "label": "Deskripsi Singkat", "name": "deskripsi", "widget": "text" },
+        { "label": "Link Google Maps", "name": "petaLink", "widget": "string" },
+        {
+          "name": "gallery",
+          "label": "Galeri Foto Destinasi",
+          "widget": "list",
+          "summary": "{{fields.alt}}",
+          "fields": [
+            { "label": "Gambar", "name": "url", "widget": "image" },
+            { "label": "Keterangan Gambar (Alt Text)", "name": "alt", "widget": "string" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "potensi",
+      "label": "✨ Potensi & UMKM",
+      "label_singular": "Produk UMKM",
+      "folder": "src/content/potensi",
+      "create": true,
+      "slug": "{{fields.judul}}",
+      "fields": [
+        { "label": "Nama Produk", "name": "judul", "widget": "string" },
+        { "label": "Gambar Produk", "name": "gambarUrl", "widget": "image" },
+        { "label": "Teks Alternatif Gambar", "name": "altText", "widget": "string" },
+        { "label": "Deskripsi Produk", "name": "deskripsi", "widget": "text" },
+        { "label": "Harga", "name": "harga", "widget": "string" },
+        { "label": "Link Kontak (WA)", "name": "kontakLink", "widget": "string" },
+        { "label": "Link Peta (Google Maps)", "name": "petaLink", "widget": "string" }
+      ]
+    },
+    {
+      "name": "struktur",
+      "label": "🏛️ Struktur Pemerintahan",
+      "label_singular": "Perangkat Dusun",
+      "folder": "src/content/struktur",
+      "create": true,
+      "slug": "{{fields.nama}}",
+      "fields": [
+        { "label": "Nama Lengkap", "name": "nama", "widget": "string" },
+        { "label": "Foto", "name": "fotoUrl", "widget": "image" },
+        { "label": "Jabatan", "name": "jabatan", "widget": "string" },
+        { "label": "Urutan Tampil", "name": "order", "widget": "number" }
+      ]
+    },
+    {
+      "name": "kkn",
+      "label": "🎓 Anggota Tim KKN",
+      "label_singular": "Anggota KKN",
+      "folder": "src/content/kkn",
+      "create": true,
+      "slug": "{{fields.nama}}",
+      "fields": [
+        { "label": "Nama Lengkap", "name": "nama", "widget": "string" },
+        { "label": "Foto", "name": "fotoUrl", "widget": "image" },
+        { "label": "Program Studi", "name": "prodi", "widget": "string" },
+        { "label": "URL Instagram (opsional)", "name": "instagramUrl", "widget": "string", "required": false },
+        { "label": "Urutan Tampil", "name": "order", "widget": "number" }
+      ]
+    }
+  ],
+  "media_folder": "src/assets/images",
+  "public_folder": "/assets/images"
+}
