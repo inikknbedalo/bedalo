@@ -108,9 +108,8 @@ import Footer from '../components/Footer.astro';
     </div>
 </Layout>
 
-<style is:global>
+    <style is:global>
     @import 'aos/dist/aos.css';
-</style>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -130,9 +129,9 @@ import Footer from '../components/Footer.astro';
     }
 </style>
 
-<script>
-    import { gsap } from 'gsap';
+<script type="module">
     import AOS from 'aos';
+    import { gsap } from 'gsap';
     import { Chart, type ChartItem } from 'chart.js/auto';
 
     // --- Type Definitions ---

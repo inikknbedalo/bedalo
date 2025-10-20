@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import PhotoGallery from '../../components/PhotoGallery.astro';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import data from '../../data/galeri.json';
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+const processedPhotos = await Promise.all(
+    data.foto.map(async (photo) => {
+        const imagePath = Object.keys(allImages).find(path => path.endsWith(photo.url));
+        if (!imagePath) return null;
+        const originalImage = allImages[imagePath];
+        const lightboxImage = await getImage({ src: originalImage(), width: 1200, format: 'webp' });
+        return {
+            alt: photo.alt,
+            originalSrc: originalImage,
+            lightboxSrc: lightboxImage.src,
+        };
+    })
+).then(results => results.filter(item => item !== null));
+
+// Default to first page for server-side rendering
+const itemsPerPage = 12;
+const defaultPhotos = processedPhotos.slice(0, itemsPerPage);
+---
+
+<Layout 
+    title="Semua Foto Galeri | Website Dusun Bedalo"
+    description="Lihat semua foto dalam galeri Dusun Bedalo."
+>
+    <Header currentPage="Galeri" />
+    <main>
+        <PageBanner 
+            title="Semua Foto Galeri"
+            subtitle="Kumpulan Kenangan Dusun Bedalo"
+            bgColor="bg-teal-600"
+        />
+        <section class="py-20 overflow-hidden bg-white">
+            <div class="container mx-auto px-6">
+                <SectionTitle title="Semua Foto" />
+                
+                <div id="gallery-container">
+                    <PhotoGallery fotoItems={defaultPhotos} />
+                </div>
+                
+                <!-- Pagination Controls -->
+                <div class="flex justify-center mt-8">
+                    <nav class="inline-flex rounded-md shadow">
+                        <button id="prev-button" class="px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 first:rounded-l-md" disabled>
+                            Previous
+                        </button>
+                        <div id="page-buttons" class="flex"></div>
+                        <button id="next-button" class="px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 last:rounded-r-md">
+                            Next
+                        </button>
+                    </nav>
+                </div>
+                
+                <!-- Back to Gallery Button -->
+                <div class="flex justify-center mt-8">
+                    <a 
+                        href="/galeri" 
+                        class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+                    >
+                        Kembali ke Galeri
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
+
+<script>
+    // Client-side pagination
+    document.addEventListener('DOMContentLoaded', function() {
+        // Photo data passed from server
+        const photoData = <!--{JSON.stringify(processedPhotos)}-->;
+        const itemsPerPage = 12;
+        const totalPages = Math.ceil(photoData.length / itemsPerPage);
+        
+        // Get current page from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentPage = parseInt(urlParams.get('page')) || 1;
+        currentPage = Math.max(1, Math.min(currentPage, totalPages));
+        
+        // Update URL
+        function updateURL(page) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.replaceState({}, '', url);
+        }
+        
+        // Update gallery content
+        function updateGalleryContent(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const photosToShow = photoData.slice(startIndex, endIndex);
+            
+            // Update the gallery container
+            const galleryContainer = document.getElementById('gallery-container');
+            if (galleryContainer) {
+                // Create HTML for the gallery
+                let galleryHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">';
+                photosToShow.forEach((photo, index) => {
+                    galleryHTML += 
+                        `<a href="${photo.lightboxSrc}" class="glightbox group block w-full overflow-hidden rounded-lg shadow-md aspect-video" data-gallery="gallery-dusun" data-aos="zoom-in" data-aos-delay="${100 + index * 50}">` +
+                        `<img src="${photo.originalSrc.src}" alt="${photo.alt}" width="400" height="225" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />` +
+                        `</a>`;
+                });
+                galleryHTML += '</div>';
+                
+                galleryContainer.innerHTML = galleryHTML;
+            }
+        }
+        
+        // Update pagination controls
+        function updatePagination() {
+            // Update previous/next buttons
+            document.getElementById('prev-button').disabled = currentPage === 1;
+            document.getElementById('next-button').disabled = currentPage === totalPages;
+            
+            // Generate page buttons
+            const pageButtonsContainer = document.getElementById('page-buttons');
+            pageButtonsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.className = `px-4 py-2 text-sm font-medium border border-gray-300 ${
+                    i === currentPage 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`;
+                button.textContent = i;
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    updateURL(currentPage);
+                    updateGalleryContent(currentPage);
+                    updatePagination();
+                });
+                pageButtonsContainer.appendChild(button);
+            }
+        }
+        
+        // Add event listeners
+        document.getElementById('prev-button').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateURL(currentPage);
+                updateGalleryContent(currentPage);
+                updatePagination();
+            }
+        });
+        
+        document.getElementById('next-button').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateURL(currentPage);
+                updateGalleryContent(currentPage);
+                updatePagination();
+            }
+        });
+        
+        // Initialize
+        updateGalleryContent(currentPage);
+        updatePagination();
+    });
+</script>

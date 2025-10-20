@@ -2,56 +2,84 @@
   "foto": [
     {
       "url": "ngedan.webp",
-      "alt": "Kegiatan Warga"
+      "alt": "Pemandangan Pantai Ngedan"
+    },
+    {
+      "url": "profil.jpg",
+      "alt": "Ruang Publik Dusun"
+    },
+    {
+      "url": "kkn-team.webp",
+      "alt": "Kegiatan Gotong Royong Warga"
+    },
+    {
+      "url": "oyen.webp",
+      "alt": "Anak-anak Bermain di Lapangan"
+    },
+    {
+      "url": "cat.jpg",
+      "alt": "Pelaksanaan Upacara Adat Tradisional"
+    },
+    {
+      "url": "foto.svg",
+      "alt": "Hasil Panen Padi yang Melimpah"
+    },
+    {
+      "url": "foto-600x400.svg",
+      "alt": "Produk UMKM Lokal"
     },
     {
       "url": "ngedan.webp",
-      "alt": "Anak-anak Bermain"
+      "alt": "Pentas Kesenian Lokal"
+    },
+    {
+      "url": "profil.jpg",
+      "alt": "Masjid di Tengah Dusun"
+    },
+    {
+      "url": "kkn-team.webp",
+      "alt": "Sekolah Dasar di Dusun Bedalo"
+    },
+    {
+      "url": "oyen.webp",
+      "alt": "Jembatan Tradisional di Desa"
+    },
+    {
+      "url": "cat.jpg",
+      "alt": "Pasar Tradisional Dusun"
+    },
+    {
+      "url": "foto.svg",
+      "alt": "Koperasi Simpan Pinjam"
+    },
+    {
+      "url": "foto-600x400.svg",
+      "alt": "Tim KKN UIN Sunan Kalijaga"
     },
     {
       "url": "ngedan.webp",
-      "alt": "Pemandangan Sawah"
+      "alt": "Posyandu Desa"
     },
     {
-      "url": "ngedan.webp",
-      "alt": "Upacara Adat"
-    },
-    {
-      "url": "ngedan.webp",
-      "alt": "Hasil Panen"
-    },
-    {
-      "url": "ngedan.webp",
-      "alt": "Produk UMKM"
-    },
-    {
-      "url": "ngedan.webp",
-      "alt": "Kesenian Lokal"
-    },
-    {
-      "url": "ngedan.webp",
-      "alt": "Gotong Royong"
-    },
-    {
-      "url": "/assets/images/cat.jpg",
-      "alt": "Kucing"
+      "url": "profil.jpg",
+      "alt": "Balai Desa"
     }
   ],
   "video": [
     {
-      "url": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "judul": "Profil Singkat Dusun Bedalo"
     },
     {
-      "url": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+      "url": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
       "judul": "Liputan Acara Sedekah Bumi"
     },
     {
-      "url": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+      "url": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
       "judul": "Keseruan Festival Dolanan Anak"
     },
     {
-      "url": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+      "url": "https://www.youtube.com/watch?v=IcrHN2-RqZU",
       "judul": "Pentas Seni Tari Topeng Ireng"
     }
   ]

@@ -15,7 +15,7 @@ const { currentPage } = Astro.props;
             <a href="/potensi" class={currentPage === 'Potensi' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Potensi</a>
             <a href="/pariwisata" class={currentPage === 'Pariwisata' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Pariwisata</a>
             <a href="/galeri" class={currentPage === 'Galeri' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Galeri</a>
-            <a href="/kontak" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">Kontak</a>
+            <a href="/kontak" class={currentPage === 'Kontak' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600 transition duration-300'}>Kontak</a>
         </div>
         <div class="md:hidden">
             <button id="mobile-menu-button" class="text-gray-800 focus:outline-none" aria-label="Buka menu">

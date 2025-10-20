@@ -26,11 +26,22 @@ const processedPhotos = await Promise.all(
     })
 ).then(results => results.filter(item => item !== null));
 
+// Show only first 12 images on main gallery page
+const initialPhotos = processedPhotos.slice(0, 12);
+const hasMorePhotos = processedPhotos.length > 12;
+
+// YouTube ID extractor function
 const getYouTubeId = (url: string) => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?([\w-]{11})/;
     return url.match(regex)?.[1] || null;
 };
+
+// Debug logs
+console.log('Gallery page - processedPhotos length:', processedPhotos.length);
+console.log('Gallery page - initialPhotos length:', initialPhotos.length);
+console.log('Gallery page - hasMorePhotos:', hasMorePhotos);
 ---
+
 <Layout 
     title="Galeri | Website Dusun Bedalo"
     description="Lihat momen dan kenangan dalam bingkai melalui galeri foto dan video."
@@ -45,7 +56,20 @@ const getYouTubeId = (url: string) => {
         <section id="foto" class="py-20 overflow-hidden bg-white">
             <div class="container mx-auto px-6">
                 <SectionTitle title="Galeri Foto" />
-                <PhotoGallery fotoItems={processedPhotos} />
+                
+                <PhotoGallery fotoItems={initialPhotos} />
+                
+                {/* Load More Button */}
+                {hasMorePhotos && (
+                    <div class="flex justify-center mt-8">
+                        <a 
+                            href="/galeri/semua" 
+                            class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+                        >
+                            Lihat Semua Foto
+                        </a>
+                    </div>
+                )}
             </div>
         </section>
         
