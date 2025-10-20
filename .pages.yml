@@ -1,0 +1,232 @@
+# Pages CMS Configuration for Bedalo Village Website
+
+# Media configuration - handles uploaded files
+media:
+  - input: 'src/assets/images'  # Path to media folder relative to repo root
+    output: '/assets/images'    # Path to media folder relative to website root
+    label: 'Images'
+    extensions:
+      - 'jpeg'
+      - 'jpg'
+      - 'png'
+      - 'gif'
+      - 'webp'
+      - 'svg'
+    categories:
+      - image
+
+# Content collections configuration
+content:
+  # Profil collection - village profile information
+  - name: 'profil'
+    label: 'Profil Desa'
+    type: 'file'
+    path: 'src/content/profil/'
+    fields:
+      - name: 'title'
+        label: 'Judul'
+        type: 'string'
+        required: true
+      - name: 'visi'
+        label: 'Visi'
+        type: 'markdown'
+      - name: 'misi'
+        label: 'Misi'
+        type: 'list'
+        item:
+          type: 'string'
+      - name: 'petaUrl'
+        label: 'URL Peta'
+        type: 'url'
+      - name: 'demografi.jumlahPenduduk'
+        label: 'Jumlah Penduduk'
+        type: 'string'
+      - name: 'demografi.lakiLaki'
+        label: 'Jumlah Laki-laki'
+        type: 'string'
+      - name: 'demografi.perempuan'
+        label: 'Jumlah Perempuan'
+        type: 'string'
+      - name: 'demografi.mataPencaharian'
+        label: 'Mata Pencaharian'
+        type: 'list'
+        item:
+          type: 'string'
+      - name: 'pertanian.gambarUrl'
+        label: 'URL Gambar Pertanian'
+        type: 'image'
+      - name: 'pertanian.altText'
+        label: 'Alt Gambar Pertanian'
+        type: 'string'
+      - name: 'pertanian.judul'
+        label: 'Judul Pertanian'
+        type: 'string'
+      - name: 'pertanian.deskripsi'
+        label: 'Deskripsi Pertanian'
+        type: 'markdown'
+      - name: 'pertanian.komoditas'
+        label: 'Komoditas'
+        type: 'list'
+        item:
+          type: 'object'
+          fields:
+            - name: 'nama'
+              label: 'Nama Komoditas'
+              type: 'string'
+            - name: 'icon'
+              label: 'Icon Komoditas'
+              type: 'string'
+      - name: 'lainnya'
+        label: 'Potensi Lainnya'
+        type: 'list'
+        item:
+          type: 'object'
+          fields:
+            - name: 'icon'
+              label: 'Icon'
+              type: 'string'
+            - name: 'judul'
+              label: 'Judul'
+              type: 'string'
+            - name: 'deskripsi'
+              label: 'Deskripsi'
+              type: 'markdown'
+
+  # Potensi (UMKM) collection - village economic potential
+  - name: 'potensi'
+    label: 'Potensi UMKM'
+    type: 'collection'
+    path: 'src/content/potensi/'
+    fields:
+      - name: 'altText'
+        label: 'Alt Text Gambar'
+        type: 'string'
+        required: true
+      - name: 'judul'
+        label: 'Judul'
+        type: 'string'
+        required: true
+      - name: 'deskripsi'
+        label: 'Deskripsi'
+        type: 'markdown'
+        required: true
+      - name: 'harga'
+        label: 'Harga'
+        type: 'string'
+      - name: 'kontakLink'
+        label: 'Link Kontak'
+        type: 'url'
+      - name: 'petaLink'
+        label: 'Link Peta'
+        type: 'url'
+      - name: 'gambarUrl'
+        label: 'URL Gambar'
+        type: 'image'
+
+  # Pariwisata collection - tourism information
+  - name: 'pariwisata'
+    label: 'Pariwisata'
+    type: 'collection'
+    path: 'src/content/pariwisata/'
+    fields:
+      - name: 'altText'
+        label: 'Alt Text Cover'
+        type: 'string'
+        required: true
+      - name: 'judul'
+        label: 'Judul'
+        type: 'string'
+        required: true
+      - name: 'deskripsi'
+        label: 'Deskripsi'
+        type: 'markdown'
+        required: true
+      - name: 'petaLink'
+        label: 'Link Peta'
+        type: 'url'
+      - name: 'coverImage'
+        label: 'Cover Image'
+        type: 'image'
+      - name: 'gallery'
+        label: 'Gallery'
+        type: 'list'
+        item:
+          type: 'object'
+          fields:
+            - name: 'url'
+              label: 'URL Gambar'
+              type: 'image'
+            - name: 'alt'
+              label: 'Alt Text'
+              type: 'string'
+
+  # KKN collection - KKN participant information
+  - name: 'kkn'
+    label: 'Anggota KKN'
+    type: 'collection'
+    path: 'src/content/kkn/'
+    fields:
+      - name: 'nama'
+        label: 'Nama'
+        type: 'string'
+        required: true
+      - name: 'prodi'
+        label: 'Program Studi'
+        type: 'string'
+        required: true
+      - name: 'fotoUrl'
+        label: 'URL Foto'
+        type: 'image'
+      - name: 'instagramUrl'
+        label: 'Instagram URL'
+        type: 'url'
+      - name: 'order'
+        label: 'Urutan'
+        type: 'number'
+
+  # Struktur collection - government structure
+  - name: 'struktur'
+    label: 'Struktur Pemerintahan'
+    type: 'collection'
+    path: 'src/content/struktur/'
+    fields:
+      - name: 'nama'
+        label: 'Nama'
+        type: 'string'
+        required: true
+      - name: 'jabatan'
+        label: 'Jabatan'
+        type: 'string'
+        required: true
+      - name: 'fotoUrl'
+        label: 'URL Foto'
+        type: 'image'
+      - name: 'order'
+        label: 'Urutan'
+        type: 'number'
+
+# Components - reusable field groups
+components:
+  komoditas:
+    label: 'Komoditas'
+    fields:
+      - name: 'nama'
+        label: 'Nama Komoditas'
+        type: 'string'
+      - name: 'icon'
+        label: 'Icon Komoditas'
+        type: 'string'
+  galeriItem:
+    label: 'Item Galeri'
+    fields:
+      - name: 'url'
+        label: 'URL Gambar'
+        type: 'image'
+      - name: 'alt'
+        label: 'Alt Text'
+        type: 'string'
+
+# Global settings
+settings:
+  content:
+    merge: true  # Merge new content with existing instead of overwriting
