@@ -31,7 +31,12 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Based on constitution file, checking for compliance with core principles:
+- Component-Based Architecture: Verify new feature follows reusable component pattern
+- Static Site Generation: Ensure feature integrates with Astro SSG workflow
+- Content Management First: Validate content structure and CMS compatibility
+- Performance Optimization: Confirm feature doesn't degrade performance metrics
+- Accessibility & Modern Standards: Verify accessibility compliance and responsive design
 
 ## Project Structure
 

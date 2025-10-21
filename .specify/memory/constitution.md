@@ -1,50 +1,71 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: 1.0.0 → 1.0.0 (no functional change, just populating template)
+- List of modified principles: None (populating template values)
+- Added sections: All sections (populating template)
+- Removed sections: None
+- Templates requiring updates: N/A (✅ updated / ⚠ pending)
+- Follow-up TODOs: None
+-->
+
+# Website Profil Dusun Bedalo Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Component-Based Architecture
+Every feature starts as a reusable Astro component; Components must be self-contained, independently testable, and properly documented; Clear purpose required - no organizational-only components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Static Site Generation (SSG)
+Every page utilizes Astro's static site generation for maximum performance and security; All content follows the text in/out protocol: data → HTML/CSS/JS output; Support both static JSON content and CMS-driven content.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Content Management First (NON-NEGOTIABLE)
+TDD mandatory: Content structure defined → Admin validated → Components adapt to content changes; All content modifications must be testable through CMS and JSON files.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Performance Optimization
+Focus areas requiring optimization: Image assets, JavaScript bundles, page load times, Core Web Vitals; All assets must be optimized before deployment; Component lazy loading where appropriate.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Accessibility & Modern Standards
+All features must be accessible to users with disabilities; Structured semantic HTML required; Adherence to PWA standards, responsive design, and modern browser compatibility.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Technology Stack Requirements
+- Framework: Astro v5+
+- Styling: Tailwind CSS v4+ 
+- CMS: Decap CMS integration
+- Icons: Font Awesome
+- Animations: AOS (Animate On Scroll)
+- Lightbox: GLightbox
+- Fonts: Poppins (via Fontsource)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Deployment & Hosting Standards
+- Deployed on Cloudflare Pages
+- HTTPS required for all connections
+- CDN usage for all static assets
+- Automated build and deployment pipeline
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+### Code Review Requirements
+- All changes must pass Astro build process
+- CSS changes must be visually inspected across browsers
+- Content schema changes must be validated in CMS
+- Performance metrics must not degrade
+
+### Testing Gates
+- Component functionality verified in browser
+- Cross-browser compatibility tested
+- Mobile responsiveness validated
+- Page speed and accessibility metrics checked
+
+### Quality Standards
+- TypeScript strict mode required
+- ESLint with recommended configuration
+- All links and navigation must function properly
+- SEO and accessibility best practices followed
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+All PRs/reviews must verify compliance with this constitution; All architectural decisions must be justified against principles; Use README.md and project documentation for runtime development guidance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): Date of original constitution adoption | **Last Amended**: 2025-10-21

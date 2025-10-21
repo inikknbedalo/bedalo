@@ -31,7 +31,12 @@ Setup ESLint and fix errors, test and fix build issues, recreate Astro content c
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Based on constitution file, checking for compliance with core principles like test-first development, observability, and simplicity]
+Based on constitution file, checking for compliance with core principles:
+- Component-Based Architecture: Verify new feature follows reusable component pattern
+- Static Site Generation: Ensure feature integrates with Astro SSG workflow
+- Content Management First: Validate content structure and CMS compatibility
+- Performance Optimization: Confirm feature doesn't degrade performance metrics
+- Accessibility & Modern Standards: Verify accessibility compliance and responsive design
 
 ## Project Structure
 
