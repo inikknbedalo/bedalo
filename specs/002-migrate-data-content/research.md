@@ -1,136 +1,108 @@
-# Research: Migrate Data Content to Astro Collections
+# Research: Migrate Remaining Data to Decap CMS Accessible Format
 
 ## Overview
-This research document outlines the approach for migrating existing JSON and MD data files to Astro content collections, ensuring all data is properly organized and accessible through the new system.
+This research document outlines the approach for migrating remaining JSON data files to be accessible through Decap CMS, ensuring all content on the site can be managed via the CMS.
 
 ## Research Findings
 
-### 1. Astro Content Collections Structure
+### 1. Current Content Structure
 
-**Decision**: Organize content collections by type, following Astro 5+ best practices
-**Rationale**: This provides clear separation of concerns and makes content management more predictable
-**Alternatives considered**: 
-- Keep all content in single collection (rejected - doesn't follow Astro patterns)
-- Mix collection and legacy approaches (rejected - doesn't solve consistency issue)
+**CMS-Managed Content** (already accessible via Decap CMS):
+- `src/content/config/site.md` - Contains both footer and index data (newer format)
+- `src/content/profil/index.md` - Profile page content
+- `src/content/pariwisata/*.md` - Tourism content collection
+- `src/content/potensi/*.md` - Potential/UMKM content collection
+- `src/content/struktur/*.md` - Government structure collection
+- `src/content/kkn/*.md` - KKN team members collection
+- `src/content/galeri/index.md` - Gallery content
 
-### 2. Current Data Locations in the Project
-
-**Decision**: Identify and catalog all existing JSON and MD files
-**Rationale**: Need comprehensive understanding of all content that requires migration
-
-**JSON Files Found**:
-- `src/data/index.json` - Homepage content
-- `src/data/footer.json` - Footer information
-- `src/data/galeri.json` - Gallery content
-- `src/data/kebijakan-privasi.json` - Privacy policy
+**Non-CMS Content** (still using JSON files):
+- `src/data/footer.json` - Footer information (duplicate of site.md)
+- `src/data/index.json` - Homepage content (duplicate of site.md)
+- `src/data/galeri.json` - Gallery content (duplicate of galeri/index.md?)
+- `src/data/kebijakan-privasi.json` - Privacy policy content
 - `src/data/kontak.json` - Contact information
 - `src/data/pariwisata.json` - Tourism information
-- `src/data/peta-situs.json` - Sitemap info
+- `src/data/peta-situs.json` - Sitemap information
 - `src/data/tentang-kkn.json` - KKN information
 
-**MD Files Found**:
-- `src/content/profil/index.md` - Profile page content
-- Files in `src/content/pariwisata/` - Tourism content collection
-- Files in `src/content/potensi/` - Potential/UMKM content collection
-- Files in `src/content/struktur/` - Government structure collection
-- Files in `src/content/kkn/` - KKN team members collection
+### 2. Current CMS Configuration
 
-### 3. Astro Content Collection Implementation
+The current `public/admin/config.yml` already has a configuration for site settings that includes both footer and index data, but the actual data files remain in both the new CMS-managed format (site.md) and old JSON format (footer.json, index.json).
 
-**Decision**: Use Astro's content collections API with proper schemas
-**Rationale**: Provides type safety, validation, and follows framework best practices
+### 3. Migration Strategy
+
+**Decision**: Migrate all remaining JSON files to CMS-accessible formats
+**Rationale**: Provides complete content management through CMS as requested by user
 **Alternatives considered**: 
-- Continue using direct file imports (rejected - doesn't solve consistency)
-- Use third-party CMS (rejected - project no longer uses CMS)
+- Keep hybrid approach (rejected - doesn't solve consistency issue)
+- Remove CMS entirely (rejected - contradicts user's goal)
 
-Example collection implementation:
-```javascript
-import { defineCollection, z } from 'astro:content';
+### 4. Content Structure Plan
 
-const profileCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    visi: z.string(),
-    misi: z.array(z.string()),
-    // ... other fields
-  })
-});
-```
+**For existing JSON files, create appropriate CMS collections:**
+- Privacy Policy: Create in content collection or single file
+- Contact Info: Create in content collection or single file
+- Site Map: Create in content collection or single file
+- About KKN: Create in content collection or single file
 
-### 4. Migration Strategy
+**For redundant files:**
+- Remove `src/data/footer.json` (replaced by `src/content/config/site.md`)
+- Remove `src/data/index.json` (replaced by `src/content/config/site.md`)
+- Check if `src/data/galeri.json` is redundant with `src/content/galeri/index.md`
 
-**Decision**: Migrate content in phases, starting with content that has existing collections
-**Rationale**: Allows for gradual migration while maintaining website functionality
-**Alternatives considered**: 
-- Big bang migration (rejected - too risky)
-- Partial migration (rejected - doesn't solve consistency issue)
+### 5. CMS Configuration Update Requirements
 
-**Phased Approach**:
-- Phase 1: Consolidate existing MD-based collections (pariwisata, potensi, struktur, kkn)
-- Phase 2: Migrate JSON files to new collections (index, footer, galeri, etc.)
-- Phase 3: Update all .astro files to use new collection APIs
-
-### 5. Schema Definition for JSON Content
-
-**Decision**: Convert JSON structure to appropriate content collection schemas
-**Rationale**: Provides validation and type safety while maintaining content integrity
-**Alternatives considered**: 
-- Keep loose schemas (rejected - doesn't provide type safety)
-- Overly restrictive schemas (rejected - might break existing content)
+**Decision**: Extend `public/admin/config.yml` with collections for all remaining JSON content
+**Rationale**: Provides centralized content management as requested
+**Implementation approach**:
+- Add new sections to config.yml for each remaining JSON file type
+- Define appropriate schemas and widget configurations
+- Maintain backward compatibility
 
 ### 6. Component Update Requirements
 
-**Decision**: Update all .astro files to use the getCollection API
-**Rationale**: Components must access content through the new collection system
-**Alternatives considered**:
-- Keep dual access methods (rejected - doesn't solve consistency)
-- Update gradually (rejected - can cause mixed data access patterns)
+**Decision**: Update all .astro files to use CMS-managed content
+**Rationale**: Components must access content through the new unified CMS system
+**Alternative**: Keep dual access methods (rejected - doesn't solve consistency issue)
 
-Example component update:
-```javascript
-// Old approach
----
-import homepageData from '../data/index.json';
----
+### 7. File Migration Process
 
-// New approach
----
-import { getCollection } from 'astro:content';
-const homepageContent = await getCollection('homepage');
----
-```
+**Decision**: Create migration plan for each JSON file type:
+1. Create appropriate MD file format with frontmatter
+2. Define schema in CMS configuration
+3. Update component imports
+4. Remove old JSON files after migration
+5. Test for content integrity
 
-### 7. Content Integrity Preservation
+### 8. Content Integrity Preservation
 
 **Decision**: Ensure 100% content preservation during migration
 **Rationale**: No user-facing changes should occur as a result of the technical migration
-**Alternatives considered**: 
-- Accept minor content changes (rejected - violates requirement)
-- Simplify content during migration (rejected - changes user experience)
+**Validation approach**:
+- Before/after comparison of all content
+- Build process verification
+- Manual QA of all pages
 
 ## Technical Implementation Notes
 
-### Astro Content Collections API
+### CMS Configuration Structure
 
-- Use `defineCollection` and `z` from 'astro:content' for schema validation
-- Content files (MD) can have frontmatter with validated fields
-- JSON content can be migrated by creating MD files with frontmatter
-- Use `getCollection` to retrieve content in .astro files
-- Dynamic routes can use `getStaticPaths` with collection data
+The config.yml will need additional collections for:
+- Privacy policy content
+- Contact information
+- Site map content
+- About KKN content
 
-### Migration Path for JSON Content
+### Component Update Process
 
-Since JSON files don't naturally fit the MD-based collections, we'll:
-
-1. Create MD files with empty body and content in frontmatter
-2. Define appropriate schemas for each content type
-3. Update component imports to use the collection API
-4. Ensure all functionality remains the same
+All components currently importing from src/data/ will need to be updated to access CMS-managed content via getCollection or direct file imports.
 
 ## Next Steps
 
-1. Define schemas for all content types
-2. Create MD files for JSON-based content
-3. Update all .astro files to use new collections
-4. Verify all content displays correctly after migration
+1. Create CMS collections for all remaining JSON content
+2. Update the config.yml file with appropriate configurations
+3. Migrate data from JSON files to CMS-managed formats
+4. Update all .astro files to use new content sources
+5. Remove redundant JSON files
+6. Test all functionality to ensure content integrity

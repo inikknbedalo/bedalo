@@ -1,209 +1,315 @@
-# Data Model: Migrate Data Content to Astro Collections
+# Data Model: Migrate Remaining Data to Decap CMS Accessible Format
 
 ## Overview
-This document outlines the data models for the migrated Astro content collections, defining schemas and relationships for each content type.
+This document outlines the data models for content that needs to be made accessible through Decap CMS, including schemas for previously JSON-only content.
 
 ## Content Collections Schema
 
-### 1. Profile Collection (`profil`)
-**Source**: `src/content/profil/index.md`
+### 1. Privacy Policy Collection (`privacy-policy`)
+**Source**: `src/data/kebijakan-privasi.json`
 
 **Schema**:
-```typescript
-{
-  title: string,           // Page title
-  visi: string,            // Vision statement
-  misi: string[],          // Array of mission points
-  petaUrl: string,         // Google Maps embed URL
-  demografi: {
-    jumlahPenduduk: string, // Total population
-    lakiLaki: string,       // Male population
-    perempuan: string,      // Female population
-    mataPencaharian: string[] // Occupations array
-  },
-  pertanian: {
-    gambarUrl: string,     // Main image
-    altText: string,       // Alt text
-    judul: string,         // Title
-    deskripsi: string,     // Description
-    komoditas: Array<{
-      nama: string,        // Commodity name
-      icon: string         // Font Awesome class
-    }>
-  },
-  lainnya: Array<{
-    icon: string,          // Icon class
-    judul: string,         // Title
-    deskripsi: string      // Description
-  }>
-}
+```yaml
+type: object
+fields:
+  - name: "judul"
+    label: "Judul Kebijakan Privasi"
+    widget: "string"
+  - name: "isiKebijakan"
+    label: "Isi Kebijakan Privasi"
+    widget: "markdown"
+  - name: "tanggalUpdate"
+    label: "Tanggal Update"
+    widget: "datetime"
 ```
 
-### 2. Tourism Collection (`pariwisata`)
-**Source**: `src/content/pariwisata/*.md`
+### 2. Contact Information Collection (`contact`)
+**Source**: `src/data/kontak.json`
 
 **Schema**:
-```typescript
-{
-  judul: string,           // Destination title
-  coverImage: string,      // Main cover image
-  altText: string,         // Image alt text
-  deskripsi: string,       // Brief description
-  petaLink: string,        // Google Maps link
-  gallery: Array<{
-    url: string,           // Image URL
-    alt: string            // Alt text
-  }>
-}
+```yaml
+type: object
+fields:
+  - name: "judul"
+    label: "Judul Halaman Kontak"
+    widget: "string"
+  - name: "deskripsi"
+    label: "Deskripsi Halaman Kontak"
+    widget: "text"
+  - name: "informasiKontak"
+    label: "Informasi Kontak"
+    widget: "object"
+    fields:
+      - name: "alamat"
+        label: "Alamat"
+        widget: "text"
+      - name: "email"
+        label: "Email"
+        widget: "string"
+      - name: "telepon"
+        label: "Telepon"
+        widget: "string"
+      - name: "mapsUrl"
+        label: "URL Peta Google Maps"
+        widget: "string"
+  - name: "formKontak"
+    label: "Formulir Kontak"
+    widget: "object"
+    fields:
+      - name: "judulForm"
+        label: "Judul Formulir"
+        widget: "string"
+      - name: "deskripsiForm"
+        label: "Deskripsi Formulir"
+        widget: "text"
 ```
 
-### 3. Potentials/UMKM Collection (`potensi`)
-**Source**: `src/content/potensi/*.md`
+### 3. Sitemap Collection (`sitemap`)
+**Source**: `src/data/peta-situs.json`
 
 **Schema**:
-```typescript
-{
-  judul: string,           // Product name
-  gambarUrl: string,       // Product image
-  altText: string,         // Image alt text
-  deskripsi: string,       // Product description
-  harga: string,           // Price
-  kontakLink: string,      // Contact link
-  petaLink: string         // Map link
-}
+```yaml
+type: object
+fields:
+  - name: "judul"
+    label: "Judul Halaman Peta Situs"
+    widget: "string"
+  - name: "deskripsi"
+    label: "Deskripsi Halaman Peta Situs"
+    widget: "text"
+  - name: "tautanSitemap"
+    label: "Tautan Peta Situs"
+    widget: "list"
+    fields:
+      - name: "judul"
+        label: "Judul Tautan"
+        widget: "string"
+      - name: "url"
+        label: "URL"
+        widget: "string"
+      - name: "deskripsi"
+        label: "Deskripsi"
+        widget: "text"
 ```
 
-### 4. Government Structure Collection (`struktur`)
-**Source**: `src/content/struktur/*.md`
+### 4. About KKN Collection (`about-kkn`)
+**Source**: `src/data/tentang-kkn.json`
 
 **Schema**:
-```typescript
-{
-  nama: string,            // Full name
-  fotoUrl: string,         // Photo URL
-  jabatan: string,         // Position
-  order: number            // Display order
-}
+```yaml
+type: object
+fields:
+  - name: "judul"
+    label: "Judul Halaman Tentang KKN"
+    widget: "string"
+  - name: "deskripsi"
+    label: "Deskripsi Halaman"
+    widget: "text"
+  - name: "informasiKKN"
+    label: "Informasi KKN"
+    widget: "object"
+    fields:
+      - name: "judulInfo"
+        label: "Judul Informasi"
+        widget: "string"
+      - name: "isiInfo"
+        label: "Isi Informasi"
+        widget: "markdown"
+      - name: "timKKN"
+        label: "Tim KKN"
+        widget: "list"
+        fields:
+          - name: "nama"
+            label: "Nama"
+            widget: "string"
+          - name: "jabatan"
+            label: "Jabatan"
+            widget: "string"
 ```
 
-### 5. KKN Team Collection (`kkn`)
-**Source**: `src/content/kkn/*.md`
+### 5. Updated Site Configuration Schema (consolidated)
+**Sources**: `src/data/footer.json`, `src/data/index.json`, `src/content/config/site.md` (consolidating all into one)
 
 **Schema**:
-```typescript
-{
-  nama: string,            // Full name
-  fotoUrl: string,         // Photo URL
-  prodi: string,           // Study program
-  instagramUrl: string,    // Instagram URL (optional)
-  order: number            // Display order
-}
+```yaml
+type: object
+fields:
+  - name: "footer"
+    label: "Footer Configuration"
+    widget: "object"
+    fields:
+      - name: "address"
+        label: "Alamat"
+        widget: "text"
+      - name: "email"
+        label: "Email"
+        widget: "string"
+      - name: "phone"
+        label: "Telepon"
+        widget: "string"
+      - name: "mainLinks"
+        label: "Tautan Utama"
+        widget: "list"
+        fields:
+          - name: "text"
+            label: "Teks Tautan"
+            widget: "string"
+          - name: "href"
+            label: "URL"
+            widget: "string"
+      - name: "aboutLinks"
+        label: "Tautan Tentang"
+        widget: "list"
+        fields:
+          - name: "text"
+            label: "Teks Tautan"
+            widget: "string"
+          - name: "href"
+            label: "URL"
+            widget: "string"
+      - name: "socialLinks"
+        label: "Tautan Media Sosial"
+        widget: "list"
+        fields:
+          - name: "href"
+            label: "URL"
+            widget: "string"
+          - name: "label"
+            label: "Label"
+            widget: "string"
+          - name: "iconClass"
+            label: "Kelas Ikon (Font Awesome)"
+            widget: "string"
+  - name: "index"
+    label: "Homepage Configuration"
+    widget: "object"
+    fields:
+      - name: "hero"
+        label: "Bagian Hero"
+        widget: "object"
+        fields:
+          - name: "image"
+            label: "Gambar"
+            widget: "image"
+          - name: "imageAlt"
+            label: "Teks Alternatif Gambar"
+            widget: "string"
+          - name: "judul"
+            label: "Judul"
+            widget: "string"
+          - name: "subjudul"
+            label: "Subjudul"
+            widget: "text"
+      - name: "profilSingkat"
+        label: "Profil Singkat"
+        widget: "object"
+        fields:
+          - name: "fotoUrl"
+            label: "Gambar"
+            widget: "image"
+          - name: "namaKepalaDusun"
+            label: "Nama Kepala Dusun"
+            widget: "string"
+          - name: "jabatan"
+            label: "Jabatan"
+            widget: "string"
+          - name: "sambutan"
+            label: "Sambutan"
+            widget: "list"
+            field:
+              label: "Kalimat Sambutan"
+              name: "sambutan"
+              widget: "text"
+      - name: "potensiUnggulan"
+        label: "Potensi Unggulan"
+        widget: "list"
+        summary: "{{fields.judul}}"
+        fields:
+          - name: "judul"
+            label: "Judul"
+            widget: "string"
+          - name: "deskripsi"
+            label: "Deskripsi"
+            widget: "text"
+          - name: "link"
+            label: "Link"
+            widget: "string"
+      - name: "pariwisata"
+        label: "Bagian Pariwisata"
+        widget: "object"
+        fields:
+          - name: "deskripsi"
+            label: "Deskripsi"
+            widget: "text"
+          - name: "gambar"
+            label: "Gambar-Gambar"
+            widget: "list"
+            summary: "{{fields.alt}}"
+            fields:
+              - name: "url"
+                label: "Gambar"
+                widget: "image"
+              - name: "alt"
+                label: "Teks Alternatif"
+                widget: "string"
+      - name: "galeri"
+        label: "Gambar-Gambar Galeri"
+        widget: "list"
+        summary: "{{fields.alt}}"
+        fields:
+          - name: "url"
+            label: "Gambar"
+            widget: "image"
+          - name: "alt"
+            label: "Teks Alternatif"
+            widget: "string"
+  - name: "galeri"
+    label: "Galeri Configuration"
+    widget: "object"
+    fields:
+      - name: "foto"
+        label: "Galeri Foto"
+        widget: "list"
+        summary: "{{fields.alt}}"
+        fields:
+          - name: "url"
+            label: "Gambar"
+            widget: "image"
+          - name: "alt"
+            label: "Keterangan (Alt Text)"
+            widget: "string"
+      - name: "video"
+        label: "Galeri Video"
+        widget: "list"
+        summary: "{{fields.judul}}"
+        fields:
+          - name: "url"
+            label: "URL Video"
+            widget: "string"
+            hint: "Contoh: https://www.youtube.com/watch?v=xxxxx"
+          - name: "judul"
+            label: "Judul Video"
+            widget: "string"
 ```
-
-### 6. Gallery Collection (`galeri`)
-**Source**: `src/data/galeri.json`
-
-**Schema**:
-```typescript
-{
-  foto: Array<{
-    url: string,           // Image URL
-    alt: string            // Alt text
-  }>,
-  video: Array<{
-    url: string,           // Video URL
-    judul: string          // Video title
-  }>
-}
-```
-
-### 7. Homepage Collection (`homepage`)
-**Source**: `src/data/index.json`
-
-**Schema**:
-```typescript
-{
-  hero: {
-    image: string,         // Hero image
-    imageAlt: string,      // Alt text
-    judul: string,         // Title
-    subjudul: string       // Subtitle
-  },
-  profilSingkat: {
-    fotoUrl: string,       // Headman photo
-    namaKepalaDusun: string, // Headman name
-    jabatan: string,       // Position
-    sambutan: string[]     // Welcome message array
-  },
-  potensiUnggulan: Array<{
-    judul: string,         // Potential title
-    deskripsi: string,     // Description
-    link: string           // Link
-  }>,
-  pariwisata: {
-    deskripsi: string,     // Tourism description
-    gambar: Array<{
-      url: string,         // Image
-      alt: string          // Alt text
-    }>
-  },
-  galeri: Array<{
-    url: string,           // Gallery image
-    alt: string            // Alt text
-  }>
-}
-```
-
-### 8. Footer Collection (`footer`)
-**Source**: `src/data/footer.json`
-
-**Schema**:
-```typescript
-{
-  address: string,         // Address
-  email: string,           // Email
-  phone: string,           // Phone
-  mainLinks: Array<{
-    text: string,          // Link text
-    href: string           // Link URL
-  }>,
-  aboutLinks: Array<{
-    text: string,          // Link text
-    href: string           // Link URL
-  }>,
-  socialLinks: Array<{
-    href: string,          // Link URL
-    label: string,         // Label
-    iconClass: string      // Icon class
-  }>
-}
-```
-
-### 9. Page Content Collections
-**Sources**: Various JSON files that contain page content
-
-- `privacy-policy` collection (from `src/data/kebijakan-privasi.json`)
-- `contact` collection (from `src/data/kontak.json`)
-- `sitemap` collection (from `src/data/peta-situs.json`)
-- `kkn-about` collection (from `src/data/tentang-kkn.json`)
 
 ## Relationships
 
-- Tourism, Potentials, Structure, and KKN collections are individual content items
-- Gallery, Homepage, and Footer collections will have single items per type
-- Each collection provides type-safe access to content through Astro's content API
+- All content is organized by purpose and accessibility needs
+- Site configuration consolidates multiple content types for easier management
+- Individual content collections maintain their specific purpose
 
 ## Validation Rules
 
 1. All text fields must be properly sanitized
 2. URL fields must follow proper URL format
 3. Image fields must reference valid assets
-4. Array fields must have minimum and maximum item counts where appropriate
+4. Array fields have appropriate minimum and maximum item counts
 5. All required fields must be present
 
 ## Migration Path
 
-1. Create MD files with frontmatter for JSON-based content
-2. Define schemas using Zod validation
-3. Update components to use `getCollection` API
-4. Ensure backward compatibility with existing functionality
+1. Create CMS collection schemas for all remaining JSON-based content
+2. Update `public/admin/config.yml` with new collections
+3. Create initial data files in appropriate format
+4. Update components to access new content sources
+5. Remove redundant JSON files after verification
