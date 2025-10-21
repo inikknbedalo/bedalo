@@ -64,12 +64,14 @@ This is a static website for Dusun Bedalo village profile, created as part of th
 
 ## CMS Configuration
 
-The `.pages.yml` file defines the Decap CMS configuration with collections for:
+The project was previously configured with Decap CMS using a .pages.yml file that defined collections for:
 - Site settings and pages (profil, galeri, footer)
 - Tourism destinations (pariwisata) 
 - Potentials & UMKM products (potensi)
 - Government structure (struktur)
 - KKN team members (kkn)
+
+Note: The .pages.yml configuration file has been removed from the project.
 
 Content is stored in:
 - Markdown files in `src/content/` for complex pages
