@@ -91,8 +91,15 @@ const configSchema = z.object({
 // Skema Privacy Policy
 const privacySchema = z.object({
     judul: z.string(),
-    isiKebijakan: z.string(),
     tanggalUpdate: z.string(),
+    pembuka: z.string().optional(),  // This can contain HTML
+    sections: z.array(z.object({
+        judul: z.string(),
+        icon: z.string(),
+        konten: z.string(),  // This can contain HTML
+    })).optional(),
+    // Keep the old field for backward compatibility
+    isiKebijakan: z.string().optional(),
 });
 
 // Skema Contact Information

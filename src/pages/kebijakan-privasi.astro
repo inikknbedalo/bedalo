@@ -4,38 +4,122 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-// Try to fetch privacy policy page content from the pages collection
+// Fetch privacy policy page content from the pages collection
 const allPages = await getCollection('pages');
-const privacyPageContent = allPages.find(page => page.slug.includes('kebijakan-privasi'));
-const data = privacyPageContent ? privacyPageContent.data : {
+
+// Find the privacy policy page
+let privacyData = null;
+for (const page of allPages) {
+  if (page.slug.includes('kebijakan-privasi') && 'judul' in page.data) {
+    privacyData = page.data;
+    break;
+  }
+}
+
+// Find the sitemap page specifically
+let sitemapData = null;
+for (const page of allPages) {
+  if (page.slug.includes('peta-situs') && 'tautanSitemap' in page.data) {
+    sitemapData = page.data;
+    break;
+  }
+}
+
+// Set default data
+const data = privacyData || {
   judul: "Kebijakan Privasi",
-  isiKebijakan: "",
-  tanggalUpdate: "01 Januari 2025"
+  tanggalUpdate: "2025-01-01",
+  pembuka: "",
+  sections: []
 };
+
+// Get the privacy policy icon from sitemap
+let privacyIcon = "fas fa-shield-alt"; // default icon
+
+// Only try to access sitemap data if it exists and has the required properties
+if (sitemapData && typeof sitemapData === 'object' && 'tautanSitemap' in sitemapData) {
+  const tautanSitemap = (sitemapData as any).tautanSitemap;
+  if (Array.isArray(tautanSitemap)) {
+    for (const category of tautanSitemap) {
+      if (category.pages && Array.isArray(category.pages)) {
+        for (const page of category.pages) {
+          if (page.url === '/kebijakan-privasi') {
+            privacyIcon = page.icon || privacyIcon;
+            break;
+          }
+        }
+      }
+    }
+  }
+}
 ---
+
 <Layout 
-    title="Kebijakan Privasi | Website Dusun Bedalo"
-    description="Pahami bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda."
+  title={`${('judul' in data && data.judul) || "Kebijakan Privasi"} | Website Dusun Bedalo`}
+  description="Pahami bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda."
 >
-    <Header currentPage="Kebijakan Privasi" />
+  <Header currentPage="Kebijakan Privasi" />
 
-    <main>
-        <section class="bg-slate-700 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">{data.judul}</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">Privasi dan keamanan data Anda adalah prioritas kami.</p>
+  <main>
+    <section class="bg-gradient-to-br from-slate-800 to-slate-700 text-white py-16">
+      <div class="container mx-auto px-6 text-center">
+        <div class="flex justify-center items-center mb-6">
+          <div class="bg-blue-500 p-4 rounded-full shadow-lg">
+            <i class={`${privacyIcon} text-3xl`}></i>
+          </div>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-down">{('judul' in data && data.judul) || "Kebijakan Privasi"}</h1>
+        <p class="text-lg text-slate-200 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Privasi dan keamanan data Anda adalah prioritas kami.</p>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-b from-slate-50 to-white">
+      <div class="container mx-auto px-4 max-w-6xl">
+        {/* Information Card */}
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 transform transition duration-500 hover:shadow-2xl" data-aos="fade-up">
+          <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-7">
+            <div class="flex items-center">
+              <i class={`${privacyIcon} text-2xl text-white mr-4`}></i>
+              <h2 class="text-2xl font-bold text-white">Tanggal Efektif</h2>
             </div>
-        </section>
+          </div>
+          <div class="p-8">
+            <div class="bg-blue-50 rounded-lg p-4 mb-6 inline-block">
+              <p class="text-blue-800 font-semibold flex items-center">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                {('tanggalUpdate' in data && data.tanggalUpdate) || "2025-01-01"}
+              </p>
+            </div>
+            
+            {'pembuka' in data && typeof data.pembuka === 'string' && data.pembuka && (
+              <div class="prose prose-lg max-w-none border-t border-gray-200 pt-6 mt-6">
+                <div class="text-gray-700 leading-relaxed" set:html={data.pembuka} />
+              </div>
+            )}
+          </div>
+        </div>
 
-        <section class="py-20">
-            <div class="container mx-auto px-6 max-w-4xl">
-                
-                <div class="bg-white p-8 rounded-2xl shadow-lg mb-8" data-aos="fade-up">
-                    <p class="text-center text-gray-500"><strong>Tanggal Efektif:</strong> {data.tanggalUpdate}</p>
-                    <div class="mt-4 text-center text-lg text-gray-700 leading-relaxed" set:html={data.isiKebijakan} />
+        {/* Privacy Policy Sections */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {'sections' in data && Array.isArray(data.sections) && data.sections.length > 0 && 
+            data.sections.map((section: any, index: number) => (
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition duration-500 hover:shadow-xl hover:-translate-y-1 flex flex-col" data-aos="fade-up" data-aos-delay={index * 100} id={`section-${index}`}>
+              <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
+                <div class="flex items-center">
+                  <div class="bg-white/20 p-3 rounded-lg mr-4">
+                    <i class={`${section.icon} text-2xl text-white`}></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{section.judul}</h3>
                 </div>
+              </div>
+              <div class="p-6 bg-gray-50 flex-grow">
+                <div class="prose prose-blue max-w-none bg-white p-5 rounded-lg shadow-sm prose-headings:mb-4 prose-headings:mt-6 prose-p:mb-4 prose-ul:mb-4 prose-ol:mb-4 prose-li:mb-2 prose-li:pl-5 prose-li:relative prose-li:text-gray-700 prose-li:before:content-['•'] prose-li:before:absolute prose-li:before:left-0 prose-li:before:text-gray-700 prose-a:text-blue-600 prose-a:font-bold prose-a:no-underline hover:prose-a:underline" set:html={section.konten} />
+              </div>
             </div>
-        </section>
-    </main>
-    <Footer />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
 </Layout>
