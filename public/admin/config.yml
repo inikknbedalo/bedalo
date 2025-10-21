@@ -245,7 +245,7 @@ collections:
           - { label: "Teks Alternatif", name: "altText", widget: "string" }
           - { label: "Judul", name: "judul", widget: "string" }
           - name: "deskripsi"
-            label: "Deskripsi", 
+            label: "Deskripsi"
             widget: "list"
             field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
       - name: "kesenian"
@@ -256,7 +256,7 @@ collections:
           - { label: "Teks Alternatif", name: "altText", widget: "string" }
           - { label: "Judul", name: "judul", widget: "string" }
           - name: "deskripsi"
-            label: "Deskripsi", 
+            label: "Deskripsi"
             widget: "list"
             field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
       - name: "kalender"
