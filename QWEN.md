@@ -115,169 +115,35 @@ The project uses Astro content collections defined in `src/content/config.ts`:
 ├── astro.config.mjs
 ├── eslint.config.js
 ├── package.json
-├── package-lock.json
-├── QWEN.md
 ├── README.md
 ├── tailwind.config.mjs
 ├── tsconfig.json
-├── .astro/
-│   ├── collections/
-│   │   ├── config.schema.json
-│   │   ├── galeri.schema.json
-│   │   ├── info.schema.json
-│   │   ├── kebijakan-privasi.schema.json
-│   │   ├── kkn.schema.json
-│   │   ├── kontak.schema.json
-│   │   ├── pages.schema.json
-│   │   ├── pariwisata-info.schema.json
-│   │   ├── pariwisata.schema.json
-│   │   ├── peta-situs.schema.json
-│   │   ├── potensi.schema.json
-│   │   ├── profiles.schema.json
-│   │   ├── profil.schema.json
-│   │   ├── struktur.schema.json
-│   │   ├── tentang-kkn.schema.json
-│   │   ├── tourism.schema.json
-│   │   └── ...
-│   ├── content-assets.mjs
-│   ├── content.d.ts
-│   ├── content-modules.mjs
-│   ├── data-store.json
-│   ├── settings.json
-│   └── types.d.ts
-├── .gitignore
 ├── backup/
-│   └── json_files/
-│       ├── footer.json
-│       ├── galeri.json
-│       ├── index.json
-│       ├── kebijakan-privasi.json
-│       ├── kontak.json
-│       ├── pariwisata.json
-│       ├── peta-situs.json
-│       └── tentang-kkn.json
+│   └── json_files/ (backup JSON files)
 ├── dist/ (build output)
 ├── functions/
-│   └── api/
-│       ├── auth.js
-│       └── callback.js
-├── node_modules/ (dependencies)
+│   └── api/ (Cloudflare functions for GitHub OAuth)
 ├── public/
-│   ├── admin/
-│   │   ├── config.yml
-│   │   └── index.html
-│   ├── assets/
-│   │   └── images/
-│   │       ├── foto.svg
-│   │       └── placeholder.svg
-│   ├── fonts/
-│   │   ├── fa-brands-400.woff2
-│   │   └── fa-solid-900.woff2
-│   ├── google966f6e79bc232f79.html
-│   ├── icon.svg
+│   ├── admin/ (CMS configuration)
+│   ├── assets/ (public assets)
+│   ├── fonts/ (font files)
 │   └── robots.txt
-├── .qwen/
-├── .specify/
-├── specs/
-│   ├── 001-refactor-dummy-data-source/
-│   └── 002-migrate-data-content/
 ├── src/
-│   ├── assets/
-│   │   └── images/
-│   │       ├── cat.jpg
-│   │       ├── foto-600x400.svg
-│   │       ├── foto.svg
-│   │       ├── kkn-team.webp
-│   │       ├── ngedan.webp
-│   │       └── profil.jpg
-│   ├── components/
-│   │   ├── Card.astro
-│   │   ├── ContactForm.astro
-│   │   ├── ContactPersonCard.astro
-│   │   ├── ContentImageSection.astro
-│   │   ├── Footer.astro
-│   │   ├── Header.astro
-│   │   ├── LiteYouTube.astro
-│   │   ├── MemberCard.astro
-│   │   ├── PageBanner.astro
-│   │   ├── PersonCard.astro
-│   │   ├── PhotoGallery.astro
-│   │   ├── SectionTitle.astro
-│   │   ├── StatCard.astro
-│   │   └── home/
-│   │       ├── FeaturedGallery.astro
-│   │       ├── FeaturedPotentials.astro
-│   │       ├── FeaturedTourism.astro
-│   │       ├── HeroSection.astro
-│   │       └── WelcomeSection.astro
-│   ├── content/
-│   │   ├── config/
-│   │   │   └── site.md
-│   │   ├── config.ts
-│   │   ├── galeri/
-│   │   │   └── index.md
-│   │   ├── info/
-│   │   │   └── pariwisata.md
-│   │   ├── kkn/
-│   │   │   ├── alisya-putri-rahmadhiani.md
-│   │   │   ├── ardiandi-deya-shidiq.md
-│   │   │   ├── asyadu-rahman.md
-│   │   │   ├── atha-aulia-nur-syafitri.md
-│   │   │   ├── dika-izki-fadillah.md
-│   │   │   ├── embun-lahfah-el-khalieqy.md
-│   │   │   ├── hartini-berma-ningsi.md
-│   │   │   ├── meta-indiyasari.md
-│   │   │   ├── muhammad-aditya.md
-│   │   │   └── titi-prihartati.md
-│   │   ├── pages/
-│   │   │   ├── kebijakan-privasi.md
-│   │   │   ├── kontak.md
-│   │   │   ├── peta-situs.md
-│   │   │   └── tentang-kkn.md
-│   │   ├── pariwisata/
-│   │   │   ├── pantai-ngedan copy 2.md
-│   │   │   ├── pantai-ngedan copy 3.md
-│   │   │   ├── pantai-ngedan copy.md
-│   │   │   ├── pantai-ngedan.md
-│   │   │   └── pantai-ngluwen.md
-│   │   ├── potensi/
-│   │   │   ├── gaplek copy.md
-│   │   │   ├── gaplek.md
-│   │   │   ├── gula-aren-asli.md
-│   │   │   └── keripik-singkong.md
-│   │   ├── profil/
-│   │   │   ├── data.json
-│   │   │   └── index.md
-│   │   └── struktur/
-│   │       ├── kepala-dusun.md
-│   │       ├── pak-rt-01.md
-│   │       ├── pak-rt-02.md
-│   │       ├── pak-rt-03.md
-│   │       └── pak-rw.md
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   ├── 404.astro
-│   │   ├── dashboard.astro
-│   │   ├── galeri.astro
-│   │   ├── index.astro
-│   │   ├── kebijakan-privasi.astro
-│   │   ├── kontak.astro
-│   │   ├── pariwisata.astro
-│   │   ├── pariwisata/[slug].astro
-│   │   ├── peta-situs.astro
-│   │   ├── potensi.astro
-│   │   ├── potensi/[slug].astro
-│   │   ├── profil.astro
-│   │   ├── survei.astro
-│   │   └── tentang-kkn.astro
-│   ├── styles/
-│   │   ├── fonts.css
-│   │   └── global.css
-│   └── utils/
-│       └── config.ts
-├── .vscode/
-│   ├── extensions.json
-│   └── launch.json
+│   ├── assets/ (project assets)
+│   ├── components/ (Astro UI components)
+│   ├── content/ (content collections)
+│   │   ├── config/ (content config)
+│   │   ├── galeri/ (gallery content)
+│   │   ├── info/ (info content)
+│   │   ├── kkn/ (KKN team members)
+│   │   ├── pages/ (static pages)
+│   │   ├── pariwisata/ (tourism content)
+│   │   ├── potensi/ (potential/UMKM content)
+│   │   ├── profil/ (profile content)
+│   │   └── struktur/ (village structure)
+│   ├── layouts/ (layout components)
+│   ├── pages/ (routing pages)
+│   ├── styles/ (CSS files)
+│   └── utils/ (utility functions)
 └── ...
 ```
