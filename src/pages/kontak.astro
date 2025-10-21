@@ -6,8 +6,29 @@ import PageBanner from '../components/PageBanner.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import ContactForm from '../components/ContactForm.astro';
 import ContactPersonCard from '../components/ContactPersonCard.astro'; // <-- Import new component
-import data from '../data/kontak.json';
+import { getCollection } from 'astro:content';
 import type { ImageMetadata } from 'astro';
+
+// Fetch contact page content from the pages collection
+const allPages = await getCollection('pages');
+const contactPageContent = allPages.find(page => page.slug.includes('kontak'));
+const data = contactPageContent ? contactPageContent.data : {
+  judul: "Kontak",
+  deskripsi: "Hubungi perangkat dusun atau kirimkan aspirasi Anda",
+  informasiKontak: {
+    alamat: "",
+    email: "",
+    telepon: "",
+    mapsUrl: "",
+    formAspirasi: {
+      judul: "",
+      deskripsi: "",
+      formActionUrl: "",
+      entry: {}
+    },
+    kontakPemerintah: []
+  }
+};
 
 // Use the correctly typed glob import for dynamic images
 const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
@@ -29,7 +50,7 @@ const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/asset
             <div class="container mx-auto px-6">
                 <SectionTitle title="Kontak Perangkat Dusun" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {data.kontakPemerintah.map((item, index) => (
+                    {data.informasiKontak.kontakPemerintah.map((item, index) => (
                         <div data-aos="fade-up" data-aos-delay={100 + index * 100}>
                             {/* Use the new component */}
                             <ContactPersonCard item={item} allImages={allImages} />
@@ -43,7 +64,7 @@ const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/asset
             <div class="container mx-auto px-6">
                 {/* The ContactForm component can remain as is, but now it's paired with a SectionTitle */}
                 <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    <ContactForm formData={data.formAspirasi} />
+                    <ContactForm formData={data.informasiKontak.formAspirasi} />
                 </div>
             </div>
         </section>

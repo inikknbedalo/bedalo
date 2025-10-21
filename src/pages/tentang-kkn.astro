@@ -2,14 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import data from '../data/tentang-kkn.json';
 import MemberCard from '../components/MemberCard.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { getCollection } from 'astro:content';
 
+// Fetch KKN page content from the pages collection
+const allPages = await getCollection('pages');
+const kknPageContent = allPages.find(page => page.slug.includes('tentang-kkn'));
+const data = kknPageContent ? kknPageContent.data : {
+  judul: "Tentang KKN Reguler Periode 117",
+  deskripsi: "Tentang tim pengembang website dari KKN UIN Sunan Kalijaga",
+  informasiKKN: {
+    judulInfo: "Tim Pengembang Website",
+    isiInfo: "Website ini merupakan bagian dari program KKN...",
+    gambarUrl: "default-image.jpg",
+    timKKN: []
+  }
+};
+
 const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
-const introImagePath = Object.keys(allImages).find(path => path.endsWith(data.pengantar.gambarUrl));
+const introImagePath = Object.keys(allImages).find(path => path.endsWith(data.informasiKKN.gambarUrl || 'kkn-team.webp'));
 
 // Fetch and sort the KKN members by the 'order' field
 const kknMembers = (await getCollection('kkn')).sort((a, b) => a.data.order - b.data.order);
@@ -22,8 +35,8 @@ const kknMembers = (await getCollection('kkn')).sort((a, b) => a.data.order - b.
     <main>
         <section class="bg-orange-500 text-white py-12">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold" data-aos="fade-down">{data.judulHalaman.judul}</h1>
-                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">{data.judulHalaman.universitas}</p>
+                <h1 class="text-4xl font-bold" data-aos="fade-down">{data.judul}</h1>
+                <p class="mt-2 text-lg" data-aos="fade-up" data-aos-delay="100">{data.deskripsi}</p>
             </div>
         </section>
         <section class="py-20 bg-white">
@@ -42,8 +55,8 @@ const kknMembers = (await getCollection('kkn')).sort((a, b) => a.data.order - b.
                         ) : <div class="rounded-xl shadow-lg w-full aspect-video bg-gray-200"></div>}
                     </div>
                     <div data-aos="fade-left" data-aos-delay="100">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">{data.pengantar.judul}</h2>
-                        <p class="text-gray-600 leading-relaxed">{data.pengantar.deskripsi}</p>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">{data.informasiKKN.judulInfo}</h2>
+                        <p class="text-gray-600 leading-relaxed">{data.informasiKKN.isiInfo}</p>
                     </div>
                 </div>
            </div>
@@ -51,7 +64,7 @@ const kknMembers = (await getCollection('kkn')).sort((a, b) => a.data.order - b.
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">{data.anggota.judul}</h2>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">Anggota Kelompok 129 - Bedalo</h2>
                     <p class="text-gray-600 mb-12" data-aos="fade-up" data-aos-delay="100">
                         Kami adalah tim mahasiswa yang berdedikasi untuk memberikan kontribusi positif kepada masyarakat Dusun Bedalo.
                     </p>

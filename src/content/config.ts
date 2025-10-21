@@ -88,6 +88,101 @@ const configSchema = z.object({
     }),
 });
 
+// Skema Privacy Policy
+const privacySchema = z.object({
+    judul: z.string(),
+    isiKebijakan: z.string(),
+    tanggalUpdate: z.string(),
+});
+
+// Skema Contact Information
+const contactSchema = z.object({
+    judul: z.string(),
+    deskripsi: z.string(),
+    informasiKontak: z.object({
+        alamat: z.string(),
+        email: z.string(),
+        telepon: z.string(),
+        mapsUrl: z.string(),
+        formAspirasi: z.object({
+            judul: z.string(),
+            deskripsi: z.string(),
+            formActionUrl: z.string(),
+            entry: z.object({
+                nama: z.string(),
+                kontak: z.string(),
+                subjek: z.string(),
+                pesan: z.string(),
+            })
+        }),
+        kontakPemerintah: z.array(z.object({
+            fotoUrl: z.string(),
+            nama: z.string(),
+            jabatan: z.string(),
+            telepon: z.string(),
+        }))
+    })
+});
+
+// Skema Sitemap
+const sitemapSchema = z.object({
+    judul: z.string(),
+    deskripsi: z.string(),
+    tautanSitemap: z.array(z.object({
+        category: z.string(),
+        pages: z.array(z.object({
+            url: z.string(),
+            title: z.string(),
+            description: z.string(),
+            icon: z.string(),
+        }))
+    }))
+});
+
+// Skema About KKN
+const aboutKKNSchema = z.object({
+    judul: z.string(),
+    deskripsi: z.string(),
+    informasiKKN: z.object({
+        judulInfo: z.string(),
+        isiInfo: z.string(),
+        gambarUrl: z.string(),
+        timKKN: z.array(z.object({
+            nama: z.string(),
+            prodi: z.string(),
+            jabatan: z.string(),
+        }))
+    })
+});
+
+// Skema Pariwisata Info
+const pariwisataInfoSchema = z.object({
+    destinasi: z.array(z.object({
+        gambarUrl: z.string(),
+        altText: z.string(),
+        judul: z.string(),
+        deskripsi: z.string(),
+        petaLink: z.string(),
+    })),
+    tradisi: z.array(z.object({
+        gambarUrl: z.string(),
+        altText: z.string(),
+        judul: z.string(),
+        deskripsi: z.array(z.string()),
+    })),
+    kesenian: z.array(z.object({
+        gambarUrl: z.string(),
+        altText: z.string(),
+        judul: z.string(),
+        deskripsi: z.array(z.string()),
+    })),
+    kalender: z.array(z.object({
+        acara: z.string(),
+        deskripsi: z.string(),
+        tanggal: z.string(),
+    }))
+});
+
 // --- PERUBAHAN DI SINI ---
 // Skema untuk konten halaman profil
 const profilSchema = z.object({
@@ -154,8 +249,7 @@ const profilCollection = defineCollection({
     schema: profilSchema,
 });
 
-
-// Ekspor semua koleksi
+// Ekspor semua koleksi - hanya untuk direktori eksplisit, bukan untuk file tunggal
 export const collections = {
   'potensi': potensiCollection,
   'pariwisata': pariwisataCollection,
@@ -164,4 +258,6 @@ export const collections = {
   'profil': profilCollection,
   'kkn': kknCollection,
   'struktur': strukturCollection,
+  // NOTE: The 'pages' and 'info' collections are auto-generated since they're single files in directories
+  // These don't need explicit definitions in this export as they'll be auto-discovered
 };

@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
 
-// Import the page data from our new JSON file
-import sitePages from '../data/peta-situs.json';
+// Fetch sitemap page content from the pages collection
+const allPages = await getCollection('pages');
+const sitemapPageContent = allPages.find(page => page.slug.includes('peta-situs'));
+const sitePages = sitemapPageContent ? sitemapPageContent.data.tautanSitemap : [];
 ---
 <Layout 
     title="Peta Situs | Website Dusun Bedalo"

@@ -71,7 +71,7 @@ const { formData } = Astro.props;
             // The 'form' variable is now guaranteed to be an HTMLFormElement inside this block,
             // so we can safely access its 'action' property.
             if (form.action.includes('YOUR_GOOGLE_FORM') || form.action === '') {
-                alert("Form action URL has not been configured. Please update kontak.json.");
+                alert("Form action URL has not been configured. Please update contact information through CMS.");
                 return;
             }
 

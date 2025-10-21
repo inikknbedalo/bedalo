@@ -31,12 +31,13 @@ Location in CMS: Individual collection sections
 - **🎓 Anggota Tim KKN**: Add and edit KKN team members
 
 ### 3. New Content Collections (added)
-Location in CMS: Additional sections to be added
+Location in CMS: Additional individual collections
 
-- **Privacy Policy**: Manage privacy policy content
-- **Contact Information**: Manage contact page content
-- **Sitemap**: Manage sitemap content
-- **About KKN**: Manage KKN information
+- **📋 Kebijakan Privasi**: Manage privacy policy content in `src/content/pages/kebijakan-privasi.md`
+- **📞 Halaman Kontak**: Manage contact page content in `src/content/pages/kontak.md`
+- **🗺️ Peta Situs**: Manage sitemap content in `src/content/pages/peta-situs.md`
+- **🎓 Tentang KKN**: Manage KKN information in `src/content/pages/tentang-kkn.md`
+- **🏞️ Informasi Pariwisata**: Manage additional tourism info (traditions, arts, calendar) in `src/content/info/pariwisata.md`
 
 ## Adding New Content
 
@@ -46,14 +47,14 @@ Location in CMS: Additional sections to be added
 3. Edit the appropriate section (footer, index, galeri)
 4. Save and publish changes
 
-### For Privacy Policy
-1. Navigate to the Privacy Policy collection (newly added)
+### For Static Pages (Privacy Policy, Contact, etc.)
+1. Navigate to the appropriate collection in the CMS sidebar
 2. Edit the content using the appropriate widgets
 3. Save and publish changes
 
-### For Contact Information
-1. Navigate to the Contact Information collection (newly added)
-2. Edit the content using the appropriate widgets
+### For Tourism Information (Traditions, Arts, Calendar)
+1. Go to **🏞️ Informasi Pariwisata** collection
+2. Edit the `pariwisata.md` file content
 3. Save and publish changes
 
 ## Content Structure
@@ -97,7 +98,7 @@ index:
 
 For each type of dynamic content:
 1. Use the appropriate CMS collection
-2. Create new entries using the "Add" button
+2. Create new entries using the "Add" button (for collections that allow creation)
 3. Fill in all required fields
 4. Save and publish to see changes on the live site
 
@@ -109,6 +110,7 @@ For each type of dynamic content:
 - **Images not showing**: Verify image paths are correct in the CMS
 - **Links not working**: Check that URLs follow proper format (include http:// or https://)
 - **Build errors**: Contact developer if CMS changes cause site build failures
+- **Footer or homepage content missing**: Check that `src/content/config/site.md` has all required fields
 
 ## Next Steps
 

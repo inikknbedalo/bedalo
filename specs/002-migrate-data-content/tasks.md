@@ -24,9 +24,9 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Review existing content structure to understand current JSON/MD file layout
-- [ ] T002 [P] Verify the current Decap CMS configuration in `public/admin/config.yml`
-- [ ] T003 [P] Identify all remaining JSON files that need CMS accessibility in `src/data/`
+- [x] T001 Review existing content structure to understand current JSON/MD file layout
+- [x] T002 [P] Verify the current Decap CMS configuration in `public/admin/config.yml`
+- [x] T003 [P] Identify all remaining JSON files that need CMS accessibility in `src/data/`
 
 ---
 
@@ -36,11 +36,11 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Update Decap CMS configuration to support additional content collections
-- [ ] T005 [P] Create content schemas for privacy policy, contact, sitemap, and about KKN content
-- [ ] T006 [P] Ensure build process supports new content collection structure
-- [ ] T007 Backup existing JSON files before migration process
-- [ ] T008 [P] Create consolidated site configuration in `src/content/config/site.md`
+- [x] T004 Update Decap CMS configuration to support additional content collections
+- [x] T005 [P] Create content schemas for privacy policy, contact, sitemap, and about KKN content
+- [x] T006 [P] Ensure build process supports new content collection structure
+- [x] T007 Backup existing JSON files before migration process
+- [x] T008 [P] Create consolidated site configuration in `src/content/config/site.md`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -54,14 +54,14 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 ### Implementation for User Story 1
 
-- [ ] T009 [P] [US1] Consolidate `src/data/footer.json` into `src/content/config/site.md`
-- [ ] T010 [P] [US1] Consolidate `src/data/index.json` into `src/content/config/site.md`
-- [ ] T011 [US1] Update `public/admin/config.yml` with privacy policy collection
-- [ ] T012 [US1] Create content file for privacy policy in `src/content/pages/kebijakan-privasi.md`
-- [ ] T013 [US1] Update `public/admin/config.yml` with contact information collection
-- [ ] T014 [US1] Create content file for contact information in `src/content/pages/kontak.md`
-- [ ] T015 [US1] Update .astro components to read from consolidated site config
-- [ ] T016 [US1] Verify build process works with new content structure
+- [x] T009 [P] [US1] Consolidate `src/data/footer.json` into `src/content/config/site.md`
+- [x] T010 [P] [US1] Consolidate `src/data/index.json` into `src/content/config/site.md`
+- [x] T011 [US1] Update `public/admin/config.yml` with privacy policy collection
+- [x] T012 [US1] Create content file for privacy policy in `src/content/pages/kebijakan-privasi.md`
+- [x] T013 [US1] Update `public/admin/config.yml` with contact information collection
+- [x] T014 [US1] Create content file for contact information in `src/content/pages/kontak.md`
+- [x] T015 [US1] Update .astro components to read from consolidated site config
+- [x] T016 [US1] Verify build process works with new content structure
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -75,16 +75,16 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 ### Implementation for User Story 2
 
-- [ ] T017 [P] [US2] Update footer component to source data from CMS-configured site.md
-- [ ] T018 [P] [US2] Update homepage component to source data from CMS-configured site.md
-- [ ] T019 [US2] Create content file for sitemap in `src/content/pages/peta-situs.md`
-- [ ] T020 [US2] Update `public/admin/config.yml` with sitemap collection
-- [ ] T021 [US2] Create content file for about KKN in `src/content/pages/tentang-kkn.md`
-- [ ] T022 [US2] Update `public/admin/config.yml` with about KKN collection
-- [ ] T023 [US2] Update contact page to source data from CMS-configured content
-- [ ] T024 [US2] Update privacy policy page to source data from CMS-configured content
-- [ ] T025 [US2] Update sitemap page to source data from CMS-configured content
-- [ ] T026 [US2] Update about KKN page to source data from CMS-configured content
+- [x] T017 [P] [US2] Update footer component to source data from CMS-configured site.md
+- [x] T018 [P] [US2] Update homepage component to source data from CMS-configured site.md
+- [x] T019 [US2] Create content file for sitemap in `src/content/pages/peta-situs.md`
+- [x] T020 [US2] Update `public/admin/config.yml` with sitemap collection
+- [x] T021 [US2] Create content file for about KKN in `src/content/pages/tentang-kkn.md`
+- [x] T022 [US2] Update `public/admin/config.yml` with about KKN collection
+- [x] T023 [US2] Update contact page to source data from CMS-configured content
+- [x] T024 [US2] Update privacy policy page to source data from CMS-configured content
+- [x] T025 [US2] Update sitemap page to source data from CMS-configured content
+- [x] T026 [US2] Update about KKN page to source data from CMS-configured content
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -98,13 +98,13 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 ### Implementation for User Story 3
 
-- [ ] T027 [US3] Update remaining .astro files to use CMS-configured content instead of JSON imports
-- [ ] T028 [US3] Update gallery content to use CMS-configured collection format
-- [ ] T029 [US3] Validate that all content schemas prevent invalid content structure
-- [ ] T030 [US3] Verify type checking and IDE support for new content access patterns
-- [ ] T031 [US3] Update quickstart guide with new content management procedures
-- [ ] T032 [US3] Document the new content structure for future developers
-- [ ] T033 [US3] Validate that new content can be added through the CMS interface
+- [x] T027 [US3] Update remaining .astro files to use CMS-configured content instead of JSON imports
+- [x] T028 [US3] Update gallery content to use CMS-configured collection format
+- [x] T029 [US3] Validate that all content schemas prevent invalid content structure
+- [x] T030 [US3] Verify type checking and IDE support for new content access patterns
+- [x] T031 [US3] Update quickstart guide with new content management procedures
+- [x] T032 [US3] Document the new content structure for future developers
+- [x] T033 [US3] Validate that new content can be added through the CMS interface
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -114,13 +114,13 @@ description: "Task list for migrating site content to Decap CMS accessibility"
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T034 [P] Remove redundant JSON files after CMS migration verification
-- [ ] T035 [P] Update documentation to reflect new content structure
-- [ ] T036 Run build validation to ensure no content-related errors
-- [ ] T037 [P] Update component imports to use new content access patterns consistently
-- [ ] T038 Verify all website pages load with identical content as before migration
-- [ ] T039 Test content creation through CMS interface for all new collections
-- [ ] T040 Run quickstart.md validation
+- [x] T034 [P] Remove redundant JSON files after CMS migration verification
+- [x] T035 [P] Update documentation to reflect new content structure
+- [x] T036 Run build validation to ensure no content-related errors
+- [x] T037 [P] Update component imports to use new content access patterns consistently
+- [x] T038 Verify all website pages load with identical content as before migration
+- [x] T039 Test content creation through CMS interface for all new collections
+- [x] T040 Run quickstart.md validation
 
 ---
 

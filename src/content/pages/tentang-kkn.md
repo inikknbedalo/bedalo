@@ -1,0 +1,45 @@
+---
+judul: "Tentang KKN Reguler Periode 117"
+deskripsi: "Tentang tim pengembang website dari KKN UIN Sunan Kalijaga"
+informasiKKN:
+  judulInfo: "Tim Pengembang Website"
+  isiInfo: |
+    Website ini merupakan salah satu program kerja utama dari tim Kuliah Kerja Nyata (KKN) Reguler Periode 117 Kelompok 129 dari Universitas Islam Negeri Sunan Kalijaga Yogyakarta. Kami berupaya mendigitalisasi informasi dan potensi Dusun Bedalo agar dapat diakses oleh masyarakat luas.
+  gambarUrl: "kkn-team.webp"
+  timKKN:
+    - nama: "Dika Izki Fadillah"
+      prodi: "Komunikasi dan Penyiaran Islam"
+      jabatan: "Anggota"
+    - nama: "Embun Lahfah El Khalieqy"
+      prodi: "Ilmu Hukum"
+      jabatan: "Anggota"
+    - nama: "Ardiandi Deya Shidiq"
+      prodi: "Ilmu Hukum"
+      jabatan: "Anggota"
+    - nama: "Atha Aulia Nur Syafitri"
+      prodi: "Pendidikan Agama Islam"
+      jabatan: "Anggota"
+    - nama: "Hartini Berma Ningsi"
+      prodi: "Manajemen Pendidikan Islam"
+      jabatan: "Anggota"
+    - nama: "Titi Prihartati"
+      prodi: "Matematika"
+      jabatan: "Anggota"
+    - nama: "Asyadu Rahman"
+      prodi: "Psikologi"
+      jabatan: "Anggota"
+    - nama: "Muhammad Aditya"
+      prodi: "Perbankan Syari'ah"
+      jabatan: "Anggota"
+    - nama: "Alisya Putri Rahmadhiani"
+      prodi: "Perbankan Syari'ah"
+      jabatan: "Anggota"
+    - nama: "Meta Indiyasari"
+      prodi: "Akuntansi Syari'ah"
+      jabatan: "Anggota"
+    - nama: "Ardi lagi"
+      prodi: "Informatematika"
+      jabatan: "Anggota"
+---
+
+Tentang KKN Dusun Bedalo
