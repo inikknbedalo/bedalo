@@ -1,0 +1,80 @@
+---
+footer:
+  address: "Desa Krambilsawit, Kec. Saptosari, Kab. Gunungkidul, Daerah Istimewa Yogyakarta."
+  email: "inikknbedalo@gmail.com"
+  phone: "+62 831-0758-1144"
+  mainLinks:
+    - href: "/kontak#kontak-perangkat"
+      text: "Kontak Perangkat"
+    - href: "/profil#peta"
+      text: "Peta Wilayah"
+    - href: "/galeri"
+      text: "Galeri"
+  aboutLinks:
+    - href: "/tentang-kkn"
+      text: "Tentang KKN 117"
+    - href: "/peta-situs"
+      text: "Peta Situs"
+    - href: "/kebijakan-privasi"
+      text: "Kebijakan Privasi"
+  socialLinks:
+    - href: "https://instagram.com/your-username"
+      label: "Instagram"
+      iconClass: "fa-brands fa-instagram"
+    - href: "https://youtube.com/your-channel"
+      label: "YouTube"
+      iconClass: "fa-brands fa-youtube"
+    - href: "https://tiktok.com/@your-username"
+      label: "TikTok"
+      iconClass: "fa-brands fa-tiktok"
+    - href: "https://facebook.com/your-profile"
+      label: "Facebook"
+      iconClass: "fa-brands fa-facebook"
+    - href: "https://x.com/your-handle"
+      label: "X (Twitter)"
+      iconClass: "fa-brands fa-twitter"
+index:
+  hero:
+    image: "ngedan.webp"
+    imageAlt: "Pemandangan Pantai Ngedan di Dusun Bedalo"
+    judul: "Selamat Datang di Dusun Bedalo"
+    subjudul: "Menjelajahi Keindahan, Kearifan Lokal, dan Potensi Tersembunyi di Jantung Dusun."
+  profilSingkat:
+    fotoUrl: "cat.jpg"
+    namaKepalaDusun: "Sumindar"
+    jabatan: "Kepala Dusun Bedalo"
+    sambutan:
+      - "Assalamu'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Tuhan Yang Maha Esa, kami dapat menghadirkan website resmi Dusun Bedalo. Website ini merupakan wujud komitmen kami untuk memberikan informasi yang transparan dan membuka pintu bagi siapa saja yang ingin mengenal dusun kami lebih dekat."
+      - "Kami berharap, melalui media digital ini, potensi-potensi yang kami miliki, baik dari keindahan alam, kekayaan budaya, hingga kreativitas warga, dapat dikenal lebih luas. Kami mengundang Anda untuk menjelajahi setiap sudut informasi di website ini dan merasakan kehangatan Dusun Bedalo. Selamat datang!"
+  potensiUnggulan:
+    - judul: "UMKM & Produk Lokal"
+      deskripsi: "Temukan berbagai produk kreatif dan olahan pangan hasil karya tangan-tangan terampil warga."
+      link: "/potensi#umkm"
+    - judul: "Pertanian & Perkebunan"
+      deskripsi: "Lahan subur yang menjadi sumber utama komoditas pangan berkualitas di dusun kami."
+      link: "/potensi#pertanian"
+    - judul: "Pariwisata Alam"
+      deskripsi: "Jelajahi destinasi alam yang masih asri dan memukau, cocok untuk melepas penat."
+      link: "/pariwisata#destinasi"
+  pariwisata:
+    deskripsi: "Dari pemandangan alam yang memukau hingga tradisi yang lestari, Dusun Bedalo menawarkan pengalaman yang tak terlupakan. Temukan destinasi wisata unik dan ikuti kalender acara budaya kami."
+    gambar:
+      - url: "ngedan.webp"
+        alt: "Destinasi Wisata 1"
+      - url: "ngedan.webp"
+        alt: "Kesenian Budaya"
+      - url: "ngedan.webp"
+        alt: "Destinasi Wisata 2"
+      - url: "ngedan.webp"
+        alt: "Tradisi Lokal"
+  galeri:
+    - url: "ngedan.webp"
+      alt: "Galeri Kegiatan Warga"
+    - url: "ngedan.webp"
+      alt: "Galeri Anak-anak"
+    - url: "ngedan.webp"
+      alt: "Galeri Pemandangan"
+    - url: "ngedan.webp"
+      alt: "Galeri Upacara Adat"
+---
+Site configuration

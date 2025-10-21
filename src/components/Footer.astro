@@ -1,6 +1,8 @@
 ---
 // 1. Impor data dari file JSON terpusat
-import data from '../data/footer.json';
+import { getConfig } from '../utils/config';
+
+const { footer } = await getConfig();
 
 const copyrightYear = new Date().getFullYear();
 ---
@@ -12,7 +14,7 @@ const copyrightYear = new Date().getFullYear();
             <div class="text-center md:text-left">
                 <h2 class="text-3xl font-bold text-white">Dusun Bedalo</h2>
                 <p class="mt-2 max-w-md text-slate-400">
-                    {data.address}
+                    {footer.address}
                 </p>
             </div>
             <div>
@@ -26,7 +28,7 @@ const copyrightYear = new Date().getFullYear();
             <div>
                 <h3 class="text-base font-semibold tracking-wider text-white">Tautan Langsung</h3>
                  <ul class="mt-4 space-y-3">
-                    {data.mainLinks.map(link => (
+                    {footer.mainLinks.map(link => (
                         <li>
                             <a href={link.href} class="hover:text-blue-400 transition-colors duration-300">{link.text}</a>
                          </li>
@@ -37,7 +39,7 @@ const copyrightYear = new Date().getFullYear();
             <div>
                 <h3 class="text-base font-semibold tracking-wider text-white">Tentang Kami</h3>
                  <ul class="mt-4 space-y-3">
-                    {data.aboutLinks.map(link => (
+                    {footer.aboutLinks.map(link => (
                         <li>
                             <a href={link.href} class="hover:text-blue-400 transition-colors duration-300">{link.text}</a>
                          </li>
@@ -50,11 +52,11 @@ const copyrightYear = new Date().getFullYear();
                  <ul class="mt-4 space-y-4">
                     <li class="flex items-center gap-x-3">
                         <i class="fa-solid fa-envelope w-5 text-center text-slate-400"></i>
-                        <a href={`mailto:${data.email}`} class="hover:text-blue-400 transition-colors duration-300">{data.email}</a>
+                        <a href={`mailto:${footer.email}`} class="hover:text-blue-400 transition-colors duration-300">{footer.email}</a>
                      </li>
                     <li class="flex items-center gap-x-3">
                         <i class="fa-solid fa-phone w-5 text-center text-slate-400"></i>
-                        <span>{data.phone}</span>
+                        <span>{footer.phone}</span>
                      </li>
                 </ul>
             </div>
@@ -62,7 +64,7 @@ const copyrightYear = new Date().getFullYear();
         
         <div class="mt-8 border-t border-slate-700 pt-8 text-center">
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-4">
-                {data.socialLinks.map(social => (
+                {footer.socialLinks.map(social => (
                     <a href={social.href} aria-label={social.label} class="text-slate-400 transition-all duration-300 hover:scale-110 hover:text-blue-400">
                         <i class={`${social.iconClass} text-2xl`}></i>
                     </a>

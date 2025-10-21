@@ -8,7 +8,13 @@ import LiteYouTube from '../components/LiteYouTube.astro';
 import PhotoGallery from '../components/PhotoGallery.astro';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import data from '../data/galeri.json';
+import { getCollection } from 'astro:content';
+
+const galeriCollection = await getCollection('galeri');
+const data = galeriCollection.length > 0 ? galeriCollection[0].data : { 
+  foto: [], 
+  video: [] 
+};
 
 const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
 

@@ -41,7 +41,7 @@ const { photos } = Astro.props;
   import 'glightbox/dist/css/glightbox.min.css';
 
   // Initialize GLightbox for this specific gallery
-  const lightbox = GLightbox({
+  GLightbox({
     selector: '[data-gallery="featured-gallery"]',
     touchNavigation: true,
     loop: true,

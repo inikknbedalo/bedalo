@@ -24,6 +24,70 @@ const pariwisataSchema = z.object({
     })).optional(),
 });
 
+// Skema Galeri
+const galeriSchema = z.object({
+    foto: z.array(z.object({
+        url: z.string(),
+        alt: z.string(),
+    })),
+    video: z.array(z.object({
+        url: z.string(),
+        judul: z.string(),
+    })).optional(),
+});
+
+// Skema Konfigurasi Situs
+const configSchema = z.object({
+    footer: z.object({
+        address: z.string(),
+        email: z.string().email().optional().or(z.string().regex(/^$/)), // Allow empty string
+        phone: z.string(),
+        mainLinks: z.array(z.object({
+            href: z.string(),
+            text: z.string(),
+        })),
+        aboutLinks: z.array(z.object({
+            href: z.string(),
+            text: z.string(),
+        })),
+        socialLinks: z.array(z.object({
+            href: z.string(),
+            label: z.string(),
+            iconClass: z.string(),
+        })),
+    }),
+    index: z.object({
+        hero: z.object({
+            image: z.string(),
+            imageAlt: z.string(),
+            judul: z.string(),
+            subjudul: z.string(),
+        }),
+        profilSingkat: z.object({
+            fotoUrl: z.string(),
+            namaKepalaDusun: z.string(),
+            jabatan: z.string(),
+            sambutan: z.array(z.string()),
+        }),
+        potensiUnggulan: z.array(z.object({
+            judul: z.string(),
+            deskripsi: z.string(),
+            link: z.string(),
+        })),
+        pariwisata: z.object({
+            deskripsi: z.string(),
+            gambar: z.array(z.object({
+                url: z.string(),
+                alt: z.string(),
+            })),
+        }),
+        galeri: z.array(z.object({
+            url: z.string(),
+            alt: z.string(),
+        })),
+    }),
+});
+
 // --- PERUBAHAN DI SINI ---
 // Skema untuk konten halaman profil
 const profilSchema = z.object({
@@ -78,6 +142,8 @@ const strukturSchema = z.object({
 // Definisikan semua koleksi
 const potensiCollection = defineCollection({ type: 'content', schema: umkmSchema });
 const pariwisataCollection = defineCollection({ type: 'content', schema: pariwisataSchema });
+const galeriCollection = defineCollection({ type: 'content', schema: galeriSchema });
+const configCollection = defineCollection({ type: 'content', schema: configSchema });
 const kknCollection = defineCollection({ type: 'content', schema: kknSchema });
 const strukturCollection = defineCollection({ type: 'content', schema: strukturSchema });
 
@@ -93,6 +159,8 @@ const profilCollection = defineCollection({
 export const collections = {
   'potensi': potensiCollection,
   'pariwisata': pariwisataCollection,
+  'galeri': galeriCollection,
+  'config': configCollection,
   'profil': profilCollection,
   'kkn': kknCollection,
   'struktur': strukturCollection,

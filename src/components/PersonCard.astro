@@ -8,7 +8,8 @@ const { nama, jabatan, fotoUrl, allImages } = Astro.props;
 const imagePath = Object.keys(allImages).find(path => path.endsWith(fotoUrl));
 
 if (!imagePath) {
-  console.error(`Image not found for ${fotoUrl}`);
+  // Log image not found error during development
+  // console.error(`Image not found for ${fotoUrl}`); 
 }
 ---
 <div class="bg-white p-6 rounded-lg shadow-lg text-center transition-transform transform hover:-translate-y-2">

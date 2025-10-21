@@ -66,7 +66,7 @@ collections:
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Deskripsi", name: "deskripsi", widget: "text" }
           - { label: "Sejarah (Konten Utama)", name: "body", widget: "markdown" }
-      - file: "src/data/galeri.json"
+      - file: "src/content/galeri/index.md"
         label: "🖼️ Galeri (Foto & Video)"
         name: "galeri"
         fields:
@@ -84,35 +84,89 @@ collections:
             fields:
               - { label: "URL Video", name: "url", widget: "string", hint: "Contoh: https://www.youtube.com/watch?v=xxxxx" }
               - { label: "Judul Video", name: "judul", widget: "string" }
-      - file: "src/data/footer.json"
-        label: "🦶 Footer"
-        name: "footer"
+      - file: "src/content/config/site.yaml"
+        label: "⚙️ Konfigurasi Situs"
+        name: "site_config"
         fields:
-          - { label: "Alamat", name: "address", widget: "string" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Telepon", name: "phone", widget: "string" }
-          - name: "mainLinks"
-            label: "Tautan Utama"
-            widget: "list"
-            summary: "{{fields.text}}"
+          - name: "footer"
+            label: "Footer"
+            widget: "object"
             fields:
-              - { label: "Teks Tautan", name: "text", widget: "string" }
-              - { label: "URL", name: "href", widget: "string" }
-          - name: "aboutLinks"
-            label: "Tautan Tentang"
-            widget: "list"
-            summary: "{{fields.text}}"
+              - { label: "Alamat", name: "address", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Telepon", name: "phone", widget: "string" }
+              - name: "mainLinks"
+                label: "Tautan Utama"
+                widget: "list"
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Teks Tautan", name: "text", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - name: "aboutLinks"
+                label: "Tautan Tentang"
+                widget: "list"
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Teks Tautan", name: "text", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - name: "socialLinks"
+                label: "Tautan Media Sosial"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "URL", name: "href", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Kelas Ikon (Font Awesome)", name: "iconClass", widget: "string" }
+          - name: "index"
+            label: "Konfigurasi Halaman Utama"
+            widget: "object"
             fields:
-              - { label: "Teks Tautan", name: "text", widget: "string" }
-              - { label: "URL", name: "href", widget: "string" }
-          - name: "socialLinks"
-            label: "Tautan Media Sosial"
-            widget: "list"
-            summary: "{{fields.label}}"
-            fields:
-              - { label: "URL", name: "href", widget: "string" }
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Kelas Ikon (Font Awesome)", name: "iconClass", widget: "string" }
+              - name: "hero"
+                label: "Bagian Hero"
+                widget: "object"
+                fields:
+                  - { label: "Gambar", name: "image", widget: "image" }
+                  - { label: "Teks Alternatif Gambar", name: "imageAlt", widget: "string" }
+                  - { label: "Judul", name: "judul", widget: "string" }
+                  - { label: "Subjudul", name: "subjudul", widget: "text" }
+              - name: "profilSingkat"
+                label: "Profil Singkat"
+                widget: "object"
+                fields:
+                  - { label: "Gambar", name: "fotoUrl", widget: "image" }
+                  - { label: "Nama Kepala Dusun", name: "namaKepalaDusun", widget: "string" }
+                  - { label: "Jabatan", name: "jabatan", widget: "string" }
+                  - name: "sambutan"
+                    label: "Sambutan"
+                    widget: "list"
+                    field: { label: "Kalimat Sambutan", name: "sambutan", widget: "text" }
+              - name: "potensiUnggulan"
+                label: "Potensi Unggulan"
+                widget: "list"
+                summary: "{{fields.judul}}"
+                fields:
+                  - { label: "Judul", name: "judul", widget: "string" }
+                  - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+                  - { label: "Link", name: "link", widget: "string" }
+              - name: "pariwisata"
+                label: "Bagian Pariwisata"
+                widget: "object"
+                fields:
+                  - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+                  - name: "gambar"
+                    label: "Gambar-Gambar"
+                    widget: "list"
+                    summary: "{{fields.alt}}"
+                    fields:
+                      - { label: "Gambar", name: "url", widget: "image" }
+                      - { label: "Teks Alternatif", name: "alt", widget: "string" }
+              - name: "galeri"
+                label: "Gambar-Gambar Galeri"
+                widget: "list"
+                summary: "{{fields.alt}}"
+                fields:
+                  - { label: "Gambar", name: "url", widget: "image" }
+                  - { label: "Teks Alternatif", name: "alt", widget: "string" }
 
   # ===================================================================
   # Koleksi Konten Dinamis
