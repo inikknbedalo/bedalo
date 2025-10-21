@@ -249,7 +249,24 @@ const profilCollection = defineCollection({
     schema: profilSchema,
 });
 
-// Ekspor semua koleksi - hanya untuk direktori eksplisit, bukan untuk file tunggal
+// Define the 'pages' collection for single files in the src/content/pages directory
+const pagesCollection = defineCollection({
+  type: 'content',
+  schema: z.union([
+    privacySchema,
+    contactSchema,
+    sitemapSchema,
+    aboutKKNSchema
+  ])
+});
+
+// Define the 'info' collection for single files in the src/content/info directory
+const infoCollection = defineCollection({
+  type: 'content',
+  schema: pariwisataInfoSchema
+});
+
+// Ekspor semua koleksi - termasuk yang didefinisikan secara eksplisit
 export const collections = {
   'potensi': potensiCollection,
   'pariwisata': pariwisataCollection,
@@ -258,6 +275,6 @@ export const collections = {
   'profil': profilCollection,
   'kkn': kknCollection,
   'struktur': strukturCollection,
-  // NOTE: The 'pages' and 'info' collections are auto-generated since they're single files in directories
-  // These don't need explicit definitions in this export as they'll be auto-discovered
+  'pages': pagesCollection,
+  'info': infoCollection
 };
