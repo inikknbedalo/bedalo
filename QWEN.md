@@ -1,149 +1,154 @@
-# Qwen Code Assistant Memory
+# Project Analysis: Website Dusun Bedalo
 
-This file contains persistent information about the Bedalo3 project to maintain context across Qwen Code sessions.
+## Overview
+This is a website profile for Dusun Bedalo, built with Astro and Tailwind CSS as part of the KKN UIN Sunan Kalijaga program. The project is a static site that includes information about the village, its tourism potential, and other relevant content.
 
-## Project Overview
-
-- **Directory**: `/home/rd/project/bedalo3`
-- **Project Name**: website-dusun-bedalo
-- **Type**: Astro-based static site for Dusun Bedalo profile website
-- **Description**: Website profil untuk Dusun Bedalo, dibangun dengan Astro dan Tailwind CSS sebagai bagian dari program KKN UIN Sunan Kalijaga
-- **Key Technologies**: TypeScript, Tailwind CSS, Astro, CMS (Decap CMS), Cloudflare Pages
-
-## Project Purpose
-
-This is a static website for Dusun Bedalo village profile, created as part of the Community Service Learning (KKN) program by UIN Sunan Kalijaga Yogyakarta students. The website aims to digitize village information in a modern, fast, and accessible format, fully integrated with Decap CMS for easy content management.
-
-## Key Features
-
-- Static Site Generation (SSG) with Astro for maximum performance and high security
-- Modern styling with Tailwind CSS
-- Easy content management via Decap CMS
-- Automatic image optimization using `astro:assets` 
-- Interactive photo & video gallery with GLightbox
-- Optimized YouTube videos with Lite YouTube Embed technique
-- Smooth scroll animations with AOS (Animate On Scroll)
-- Component-based architecture that is modular and easy to maintain
-
-## Deployment
-
-- Site URL: https://bedalo.pages.dev
-- Deployed on Cloudflare Pages
-- Admin access available at https://bedalo.pages.dev/admin
+## Project Structure
+```
+/home/rd/project/bedalo3/
+├── .astro/                 # Astro framework cache and internal files
+├── .git/                   # Git repository metadata
+├── .vscode/                # VS Code settings
+│   ├── extensions.json     # Recommended VS Code extensions
+│   └── launch.json         # Debug configuration
+├── dist/                   # Build output directory
+├── functions/              # Serverless functions (API routes)
+│   └── api/                # API endpoint functions
+├── node_modules/           # NPM dependencies
+├── public/                 # Static assets
+│   ├── admin/              # Admin-related assets
+│   ├── assets/             # General public assets (images, etc.)
+│   ├── fonts/              # Font files
+│   ├── google966f6e79bc232f79.html # Google Search Console verification
+│   ├── icon.svg            # Site icon
+│   └── robots.txt          # Search engine crawling rules
+└── src/                    # Source code
+    ├── assets/             # Asset files (images, icons, etc.)
+    ├── components/         # Reusable Astro components
+    │   ├── home/           # Homepage-specific components
+    │   ├── Card.astro      # General card component
+    │   ├── ContactForm.astro # Contact form component
+    │   ├── ContactPersonCard.astro # Contact person component
+    │   ├── ContentImageSection.astro # Content with image section
+    │   ├── Footer.astro    # Site footer component
+    │   ├── Header.astro    # Site header component
+    │   ├── LiteYouTube.astro # YouTube video embedding
+    │   ├── MemberCard.astro # Member display component
+    │   ├── PageBanner.astro # Page banner component
+    │   ├── PersonCard.astro # Person profile component
+    │   ├── PhotoGallery.astro # Photo gallery component
+    │   ├── SectionTitle.astro # Section title component
+    │   └── StatCard.astro  # Statistics card component
+    ├── content/            # Content collections (Markdown/MDX files)
+    │   ├── config/         # Content collection configurations
+    │   ├── galeri/         # Gallery content
+    │   ├── info/           # Information content
+    │   ├── kkn/            # KKN (Community Service Program) related content
+    │   ├── pages/          # Page content
+    │   ├── pariwisata/     # Tourism content
+    │   ├── potensi/        # Potential/resources content
+    │   ├── profil/         # Profile content
+    │   ├── struktur/       # Organizational structure content
+    │   └── config.ts       # Content collection configuration
+    ├── layouts/            # Layout components
+    │   └── Layout.astro    # Main layout component
+    ├── pages/              # Route pages
+    │   ├── pariwisata/     # Tourism sub-pages
+    │   ├── potensi/        # Potential sub-pages
+    │   ├── 404.astro       # 404 error page
+    │   ├── dashboard.astro # Dashboard page
+    │   ├── galeri.astro    # Gallery page
+    │   ├── index.astro     # Homepage
+    │   ├── kebijakan-privasi.astro # Privacy policy page
+    │   ├── kontak.astro    # Contact page
+    │   ├── pariwisata.astro # Tourism page
+    │   ├── peta-situs.astro # Sitemap page
+    │   ├── potensi.astro   # Potential page
+    │   ├── profil.astro    # Profile page
+    │   ├── survei.astro    # Survey page
+    │   └── tentang-kkn.astro # About KKN page
+    ├── styles/             # CSS styles
+    └── utils/              # Utility functions
+├── .gitignore              # Git ignore patterns
+├── astro.config.mjs        # Astro framework configuration
+├── eslint.config.js        # ESLint configuration
+├── package-lock.json       # NPM dependency lock file
+├── package.json            # NPM package manifest
+├── tailwind.config.mjs     # Tailwind CSS configuration
+└── tsconfig.json           # TypeScript configuration
+```
 
 ## Tech Stack
 
-### Dependencies
-- astro: ^5.13.3
-- @astrojs/sitemap: ^3.5.1
-- @tailwindcss/vite: ^4.1.12
-- tailwindcss: ^4.1.12
-- aos: ^2.3.4
-- glightbox: ^3.3.1
-- gsap: ^3.13.0
-- chart.js: ^4.5.0
-- countup.js: ^2.9.0
-- @fontsource/poppins: ^5.2.6
-- @fortawesome/fontawesome-free: ^7.0.0
+### Framework & Build Tools
+- **Astro**: v5.13.3 - Static site builder for content-focused websites with excellent performance
+- **@tailwindcss/vite**: v4.1.12 - Vite plugin for Tailwind CSS
+- **Vite**: Next-generation frontend build tool (used internally by Astro)
+- **TypeScript**: Type-safe JavaScript for improved development experience
+- **ESLint**: v9.38.0 - Code linting and quality assurance
+- **@eslint/js**: v9.38.0 - ESLint JavaScript configuration
+- **@typescript-eslint/eslint-plugin**: v8.46.2 - TypeScript ESLint plugin
+- **@typescript-eslint/parser**: v8.46.2 - TypeScript parser for ESLint
+- **typescript-eslint**: v8.46.2 - Monorepo for all TypeScript-ESLint packages
 
-### Dev Dependencies
-- Typescript with strict configuration
-- ESLint with typescript-eslint
+### Styling & Design
+- **Tailwind CSS**: v4.1.12 - Utility-first CSS framework for rapid UI development
+- **@tailwindcss/typography**: v0.5.16 - Typography plugin for beautiful content styling
+- **CSS**: Custom styles alongside Tailwind
 
-## Directory Structure
+### Content Management
+- **Markdown/MDX**: Content authoring format for documentation and pages
+- **Content Collections**: Astro's content collection API for structured data
 
-- `src/pages/` - Contains Astro page components (.astro files)
-- `src/components/` - Reusable Astro components
-- `src/layouts/` - Layout components
-- `src/content/` - Content collection for CMS (pariwisata, potensi, profil, struktur, kkn, galeri)
-- `src/styles/` - Global styles, fonts, and CSS configuration
-- `src/assets/` - Images and other static assets
-- `src/utils/` - Utility functions
-- `functions/` - Cloudflare worker functions for GitHub OAuth
+### Frontend Libraries & Components
+- **Font Awesome**: v7.0.0 - Icon library via `@fortawesome/fontawesome-free`
+- **Google Fonts**: v5.2.6 - Poppins font via `@fontsource/poppins`
+- **AOS (Animate On Scroll)**: v2.3.4 - Scroll animation library
+- **Chart.js**: v4.5.0 - Interactive chart and data visualization library
+- **CountUp.js**: v2.9.0 - Animated number counters
+- **GLightbox**: v3.3.1 - Lightbox gallery functionality
+- **GSAP**: v3.13.0 - Professional-grade animation library
 
-## CMS Configuration
+### SEO & Performance
+- **@astrojs/sitemap**: v3.5.1 - Automatic sitemap generation for SEO
+- **Meta Tags**: Built-in SEO functionality
 
-The project was previously configured with Decap CMS using a .pages.yml file that defined collections for:
-- Site settings and pages (profil, galeri, footer)
-- Tourism destinations (pariwisata) 
-- Potentials & UMKM products (potensi)
-- Government structure (struktur)
-- KKN team members (kkn)
+### API & Serverless
+- **Astro Functions**: Server-side API routes in the `functions/api` directory
 
-Note: The .pages.yml configuration file has been removed from the project.
+### Development Tools
+- **npm**: Package management
+- **tsconfig/strict**: Strict TypeScript configuration
 
-Content is stored in:
-- Markdown files in `src/content/` for complex pages
-- JSON files in `src/content/profil/data.json` for profile content
-- JSON files in backup directory for reference content
+## Project Features
+- Sitemap generation via `@astrojs/sitemap`
+- Responsive design with Tailwind CSS
+- SEO-friendly with proper meta tags
+- Content collections for structured content
+- Component-based architecture
+- Google Analytics ready (implied from verification file)
+- Gallery functionality
+- Contact forms
+- Statistics display
+- YouTube video embedding
+- Lightbox gallery functionality (Glightbox)
+- Animation capabilities (GSAP)
+- Chart visualization (Chart.js)
 
-## Server-side Functions
+## Configuration Files
+- `astro.config.mjs`: Astro configuration with Tailwind CSS integration and sitemap generation
+- `tailwind.config.mjs`: Tailwind CSS configuration with typography plugin
+- `tsconfig.json`: TypeScript strict configuration
+- `eslint.config.js`: ESLint configuration for code linting
+- `package.json`: NPM package manifest with dependencies and scripts
 
-The project includes Cloudflare worker functions for GitHub OAuth authentication:
-- `functions/api/auth.js` - Handles GitHub OAuth flow
-- `functions/api/callback.js` - Handles GitHub OAuth callback
+## Build Scripts
+- `npm run dev`: Start development server
+- `npm run build`: Build the site for production
+- `npm run preview`: Preview the built site locally
+- `npm run lint`: Lint source files
+- `npm run lint:fix`: Fix linting issues automatically
+- `npm run type-check`: Run TypeScript type checking
 
-## Content Management
-
-Content can be edited in two ways:
-1. Through Decap CMS admin interface (recommended) - available at https://bedalo.pages.dev/admin
-2. Manually by editing Markdown files in `src/content/` or JSON files in backup directory
-
-## Content Collections Structure
-
-The project uses Astro content collections defined in `src/content/config.ts`:
-- `potensi`: UMKM/potential products with schema for title, description, price, contact and map links
-- `pariwisata`: Tourism destinations with cover image, description, map link, and gallery
-- `galeri`: Photo and video gallery items
-- `config`: Site configuration including footer and homepage data
-- `profil`: Profile page content including vision, mission, demographics, and other information
-- `kkn`: KKN team member data
-- `struktur`: Village government structure
-- `pages`: Special pages like privacy policy, contact, sitemap
-- `info`: Tourism information
-
-## Current Status
-
-- Date: Tuesday, October 21, 2025
-- OS: Linux
-- The project is a complete village profile website with CMS integration
-- Includes pages for home, profile, tourism, UMKM/potentials, contact, surveys, etc.
-
-## Project Tree
-
-```
-├── astro.config.mjs
-├── eslint.config.js
-├── package.json
-├── README.md
-├── tailwind.config.mjs
-├── tsconfig.json
-├── backup/
-│   └── json_files/ (backup JSON files)
-├── dist/ (build output)
-├── functions/
-│   └── api/ (Cloudflare functions for GitHub OAuth)
-├── public/
-│   ├── admin/ (CMS configuration)
-│   ├── assets/ (public assets)
-│   ├── fonts/ (font files)
-│   └── robots.txt
-├── src/
-│   ├── assets/ (project assets)
-│   ├── components/ (Astro UI components)
-│   ├── content/ (content collections)
-│   │   ├── config/ (content config)
-│   │   ├── galeri/ (gallery content)
-│   │   ├── info/ (info content)
-│   │   ├── kkn/ (KKN team members)
-│   │   ├── pages/ (static pages)
-│   │   ├── pariwisata/ (tourism content)
-│   │   ├── potensi/ (potential/UMKM content)
-│   │   ├── profil/ (profile content)
-│   │   └── struktur/ (village structure)
-│   ├── layouts/ (layout components)
-│   ├── pages/ (routing pages)
-│   ├── styles/ (CSS files)
-│   └── utils/ (utility functions)
-└── ...
-```
+## Deployment
+The site is configured for deployment to Cloudflare Pages with the site URL set to 'https://bedalo.pages.dev'.

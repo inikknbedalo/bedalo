@@ -1,99 +1,130 @@
-# Website Profil Dusun Bedalo
+# Website Dusun Bedalo
 
-![Astro](https://img.shields.io/badge/Astro-4.9.2-FF5D01?logo=astro)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.3-38B2AC?logo=tailwind-css)
-![Decap CMS](https://img.shields.io/badge/Decap_CMS-2.10.19-563D7C?logo=decap-cms)
+Website profil untuk Dusun Bedalo, dibangun dengan Astro dan Tailwind CSS sebagai bagian dari program KKN UIN Sunan Kalijaga.
 
-Ini adalah repositori untuk website profil **Dusun Bedalo**, dibangun menggunakan Astro. Proyek ini dibuat sebagai bagian dari program Kuliah Kerja Nyata (KKN) oleh mahasiswa UIN Sunan Kalijaga Yogyakarta.
+## Deskripsi
 
-Tujuannya adalah untuk mendigitalisasi informasi dusun dan menyajikannya dalam format yang modern, cepat, dan mudah diakses. Website ini sepenuhnya terintegrasi dengan **Decap CMS** untuk manajemen konten yang mudah oleh perangkat dusun.
+Website ini merupakan bagian dari program Kuliah Kerja Nyata (KKN) dari UIN Sunan Kalijaga yang bertujuan untuk membuat profil digital bagi Dusun Bedalo. Website ini menyediakan informasi tentang potensi wisata, struktur organisasi, profil dusun, galeri foto, dan informasi lainnya yang relevan dengan komunitas lokal.
 
-***
+## Teknologi yang Digunakan
 
-## 🚀 Fitur Utama
+### Framework & Build Tools
+- **Astro**: v5.13.3 - Static site builder untuk website berbasis konten
+- **Vite**: Build tool modern untuk pengalaman pengembangan yang cepat
+- **TypeScript**: Superset dari JavaScript dengan type checking
+- **ESLint**: v9.38.0 - Linting untuk kualitas kode
 
-* **Static Site Generation (SSG)** dengan Astro untuk performa maksimal dan keamanan tinggi.
-* **Styling Modern** dengan Tailwind CSS.
-* **Manajemen Konten Mudah** melalui Decap CMS (sebelumnya Netlify CMS), memungkinkan pengeditan konten tanpa perlu menyentuh kode.
-* **Optimasi Gambar Otomatis** menggunakan `astro:assets` untuk menyajikan gambar yang responsif dan cepat dimuat.
-* **Galeri Foto & Video Interaktif** dengan GLightbox.
-* **Optimasi Video YouTube** dengan teknik *Lite YouTube Embed* untuk loading halaman yang sangat cepat.
-* **Animasi Scroll** yang halus dengan AOS (Animate On Scroll).
-* **Arsitektur Berbasis Komponen** yang modular dan mudah dikelola.
+### Styling & Design
+- **Tailwind CSS**: v4.1.12 - Framework CSS utility-first
+- **@tailwindcss/typography**: v0.5.16 - Plugin untuk styling konten
 
-***
+### Frontend Libraries
+- **Font Awesome**: v7.0.0 - Koleksi ikon
+- **Google Fonts (Poppins)**: v5.2.6 - Font yang digunakan
+- **AOS (Animate On Scroll)**: v2.3.4 - Animasi saat scroll
+- **Chart.js**: v4.5.0 - Visualisasi data dan grafik
+- **CountUp.js**: v2.9.0 - Animasi penjumlahan angka
+- **GLightbox**: v3.3.1 - Lightbox untuk galeri foto
+- **GSAP**: v3.13.0 - Animasi profesional
 
-## 🛠️ Teknologi yang Digunakan
+### SEO & Performance
+- **@astrojs/sitemap**: v3.5.1 - Otomatisasi pembuatan sitemap
 
-* **Framework**: [Astro](https://astro.build/)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-* **CMS**: [Decap CMS](https://decapcms.org/)
-* **Lightbox**: [GLightbox](https://biati-digital.github.io/glightbox/)
-* **Animasi**: [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/)
-* **Icons**: [Font Awesome](https://fontawesome.com/)
+## Struktur Proyek
 
-***
+```
+/home/rd/project/bedalo3/
+├── public/                 # Aset statis
+│   ├── admin/              # Aset terkait admin
+│   ├── assets/             # Gambar dan aset umum
+│   └── fonts/              # File font
+├── src/                    # Kode sumber
+│   ├── components/         # Komponen Astro yang dapat digunakan kembali
+│   ├── content/            # File konten (Markdown/MDX)
+│   ├── layouts/            # Layout komponen
+│   ├── pages/              # Halaman rute
+│   ├── styles/             # File CSS
+│   └── utils/              # Fungsi utilitas
+├── functions/              # Fungsi serverless (API routes)
+│   └── api/
+├── astro.config.mjs        # Konfigurasi Astro
+├── package.json            # Dependensi dan skrip
+└── tailwind.config.mjs     # Konfigurasi Tailwind CSS
+```
 
-## ⚙️ Instalasi dan Menjalankan Proyek
+## Fitur-fitur
 
-Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
+- Desain responsif menggunakan Tailwind CSS
+- SEO-friendly dengan meta tags dan sitemap otomatis
+- Galeri foto interaktif
+- Formulir kontak
+- Tampilan statistik dengan Chart.js
+- Animasi halus menggunakan GSAP
+- Konten terstruktur menggunakan Markdown/MDX
+- Galeri foto dengan efek lightbox
+- Typography yang indah dengan plugin typography
 
-1.  **Clone repositori ini:**
-    ```bash
-    git clone https://github.com/inikknbedalo/bedalo.git
-    cd bedalo
-    ```
+## Instalasi
 
-2.  **Instal dependensi:**
-    ```bash
-    npm install
-    ```
+1. Clone repository ini:
+   ```bash
+   git clone <repository-url>
+   ```
 
-3.  **Jalankan server pengembangan:**
-    ```bash
-    npm run dev
-    ```
-    Buka `http://localhost:4321` di browser Anda untuk melihat hasilnya.
+2. Masuk ke direktori proyek:
+   ```bash
+   cd bedalo3
+   ```
 
-4.  **Build untuk produksi:**
-    ```bash
-    npm run build
-    ```
-    Perintah ini akan membuat versi statis dari website di dalam folder `dist/`.
+3. Install dependensi:
+   ```bash
+   npm install
+   ```
 
-***
+## Penggunaan
 
-## 🎨 Kustomisasi Konten
+### Menjalankan Server Pengembangan
+```bash
+npm run dev
+```
+Server pengembangan akan berjalan di `http://localhost:4321`
 
-Ada dua cara utama untuk mengedit konten website ini:
+### Membangun Proyek untuk Produksi
+```bash
+npm run build
+```
+File build akan ditempatkan di folder `dist/`
 
-### 1. Melalui Decap CMS (Direkomendasikan)
+### Menjalankan Server Preview Lokal
+```bash
+npm run preview
+```
 
-Setelah website di-deploy ke platform seperti Netlify, Anda dapat mengakses antarmuka admin dengan mengunjungi `https://bedalo.pages.dev/admin`. Dari sana, Anda dapat mengedit semua teks, gambar, dan data lainnya secara visual.
+### Linting dan Type Checking
+- Lint kode: `npm run lint`
+- Perbaiki linting otomatis: `npm run lint:fix`
+- Cek type TypeScript: `npm run type-check`
 
-### 2. Secara Manual (Mengedit File JSON)
+## Deployment
 
-Semua konten teks dan referensi gambar untuk setiap halaman disimpan dalam file JSON di dalam direktori `src/data/`. Anda dapat mengedit file-file ini secara langsung jika Anda merasa nyaman bekerja dengan kode.
+Proyek ini dikonfigurasi untuk deployment ke Cloudflare Pages dengan URL situs: https://bedalo.pages.dev
 
-* `src/data/index.json` - Konten Halaman Beranda
-* `src/data/profil.json` - Konten Halaman Profil
-* `src/data/pariwisata.json` - Konten Halaman Pariwisata
-* ...dan seterusnya.
+## Kontribusi
 
-***
+1. Fork repository ini
+2. Buat branch fitur (`git checkout -b fitur/AwesomeFeature`)
+3. Commit perubahan (`git commit -m 'Add some AwesomeFeature'`)
+4. Push ke branch (`git push origin fitur/AwesomeFeature`)
+5. Buka Pull Request
 
-## 🤝 Kontribusi
+## Lisensi
 
-Kontribusi, isu, dan permintaan fitur sangat kami hargai! Jangan ragu untuk memeriksa halaman isu jika Anda ingin membantu.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## 📄 Lisensi
+## Author
 
-Proyek ini dilisensikan di bawah Lisensi MIT.
+KKN 117 UIN SUKA Kelompok 129
 
-## 🙏 Ucapan Terima Kasih
+## Contact
 
-* Segenap perangkat dan warga Dusun Bedalo.
-* Universitas Islam Negeri Sunan Kalijaga Yogyakarta.
-* Teman-teman yang terlibat selama KKN di Dusun Bedalo.
-
-<p align="right">(<a href="#website-profil-dusun-bedalo">kembali ke atas</a>)</p>
+Jika Anda memiliki pertanyaan tentang proyek ini, silakan hubungi tim pengembang melalui fitur kontak di website.
