@@ -9,7 +9,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint src --ext .js,.ts,.astro",
+    "lint:fix": "eslint src --ext .js,.ts,.astro --fix",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.5.1",

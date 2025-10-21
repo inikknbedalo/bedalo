@@ -48,7 +48,7 @@ This is a static website for Dusun Bedalo village profile, created as part of th
 
 ### Dev Dependencies
 - Typescript with strict configuration
-- ESLint with @typescript-eslint
+- ESLint with typescript-eslint
 
 ## Directory Structure
 
@@ -56,7 +56,6 @@ This is a static website for Dusun Bedalo village profile, created as part of th
 - `src/components/` - Reusable Astro components
 - `src/layouts/` - Layout components
 - `src/content/` - Content collection for CMS (pariwisata, potensi, profil, struktur, kkn, galeri)
-- `src/data/` - JSON files for content (index, footer, galeri, etc.)
 - `src/styles/` - Global styles, fonts, and CSS configuration
 - `src/assets/` - Images and other static assets
 - `src/utils/` - Utility functions
@@ -75,7 +74,8 @@ Note: The .pages.yml configuration file has been removed from the project.
 
 Content is stored in:
 - Markdown files in `src/content/` for complex pages
-- JSON files in `src/data/` for structured content
+- JSON files in `src/content/profil/data.json` for profile content
+- JSON files in backup directory for reference content
 
 ## Server-side Functions
 
@@ -86,8 +86,21 @@ The project includes Cloudflare worker functions for GitHub OAuth authentication
 ## Content Management
 
 Content can be edited in two ways:
-1. Through Decap CMS admin interface (recommended)
-2. Manually by editing JSON files in `src/data/` or Markdown files in `src/content/`
+1. Through Decap CMS admin interface (recommended) - available at https://bedalo.pages.dev/admin
+2. Manually by editing Markdown files in `src/content/` or JSON files in backup directory
+
+## Content Collections Structure
+
+The project uses Astro content collections defined in `src/content/config.ts`:
+- `potensi`: UMKM/potential products with schema for title, description, price, contact and map links
+- `pariwisata`: Tourism destinations with cover image, description, map link, and gallery
+- `galeri`: Photo and video gallery items
+- `config`: Site configuration including footer and homepage data
+- `profil`: Profile page content including vision, mission, demographics, and other information
+- `kkn`: KKN team member data
+- `struktur`: Village government structure
+- `pages`: Special pages like privacy policy, contact, sitemap
+- `info`: Tourism information
 
 ## Current Status
 
@@ -95,3 +108,176 @@ Content can be edited in two ways:
 - OS: Linux
 - The project is a complete village profile website with CMS integration
 - Includes pages for home, profile, tourism, UMKM/potentials, contact, surveys, etc.
+
+## Project Tree
+
+```
+├── astro.config.mjs
+├── eslint.config.js
+├── package.json
+├── package-lock.json
+├── QWEN.md
+├── README.md
+├── tailwind.config.mjs
+├── tsconfig.json
+├── .astro/
+│   ├── collections/
+│   │   ├── config.schema.json
+│   │   ├── galeri.schema.json
+│   │   ├── info.schema.json
+│   │   ├── kebijakan-privasi.schema.json
+│   │   ├── kkn.schema.json
+│   │   ├── kontak.schema.json
+│   │   ├── pages.schema.json
+│   │   ├── pariwisata-info.schema.json
+│   │   ├── pariwisata.schema.json
+│   │   ├── peta-situs.schema.json
+│   │   ├── potensi.schema.json
+│   │   ├── profiles.schema.json
+│   │   ├── profil.schema.json
+│   │   ├── struktur.schema.json
+│   │   ├── tentang-kkn.schema.json
+│   │   ├── tourism.schema.json
+│   │   └── ...
+│   ├── content-assets.mjs
+│   ├── content.d.ts
+│   ├── content-modules.mjs
+│   ├── data-store.json
+│   ├── settings.json
+│   └── types.d.ts
+├── .gitignore
+├── backup/
+│   └── json_files/
+│       ├── footer.json
+│       ├── galeri.json
+│       ├── index.json
+│       ├── kebijakan-privasi.json
+│       ├── kontak.json
+│       ├── pariwisata.json
+│       ├── peta-situs.json
+│       └── tentang-kkn.json
+├── dist/ (build output)
+├── functions/
+│   └── api/
+│       ├── auth.js
+│       └── callback.js
+├── node_modules/ (dependencies)
+├── public/
+│   ├── admin/
+│   │   ├── config.yml
+│   │   └── index.html
+│   ├── assets/
+│   │   └── images/
+│   │       ├── foto.svg
+│   │       └── placeholder.svg
+│   ├── fonts/
+│   │   ├── fa-brands-400.woff2
+│   │   └── fa-solid-900.woff2
+│   ├── google966f6e79bc232f79.html
+│   ├── icon.svg
+│   └── robots.txt
+├── .qwen/
+├── .specify/
+├── specs/
+│   ├── 001-refactor-dummy-data-source/
+│   └── 002-migrate-data-content/
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   │       ├── cat.jpg
+│   │       ├── foto-600x400.svg
+│   │       ├── foto.svg
+│   │       ├── kkn-team.webp
+│   │       ├── ngedan.webp
+│   │       └── profil.jpg
+│   ├── components/
+│   │   ├── Card.astro
+│   │   ├── ContactForm.astro
+│   │   ├── ContactPersonCard.astro
+│   │   ├── ContentImageSection.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   ├── LiteYouTube.astro
+│   │   ├── MemberCard.astro
+│   │   ├── PageBanner.astro
+│   │   ├── PersonCard.astro
+│   │   ├── PhotoGallery.astro
+│   │   ├── SectionTitle.astro
+│   │   ├── StatCard.astro
+│   │   └── home/
+│   │       ├── FeaturedGallery.astro
+│   │       ├── FeaturedPotentials.astro
+│   │       ├── FeaturedTourism.astro
+│   │       ├── HeroSection.astro
+│   │       └── WelcomeSection.astro
+│   ├── content/
+│   │   ├── config/
+│   │   │   └── site.md
+│   │   ├── config.ts
+│   │   ├── galeri/
+│   │   │   └── index.md
+│   │   ├── info/
+│   │   │   └── pariwisata.md
+│   │   ├── kkn/
+│   │   │   ├── alisya-putri-rahmadhiani.md
+│   │   │   ├── ardiandi-deya-shidiq.md
+│   │   │   ├── asyadu-rahman.md
+│   │   │   ├── atha-aulia-nur-syafitri.md
+│   │   │   ├── dika-izki-fadillah.md
+│   │   │   ├── embun-lahfah-el-khalieqy.md
+│   │   │   ├── hartini-berma-ningsi.md
+│   │   │   ├── meta-indiyasari.md
+│   │   │   ├── muhammad-aditya.md
+│   │   │   └── titi-prihartati.md
+│   │   ├── pages/
+│   │   │   ├── kebijakan-privasi.md
+│   │   │   ├── kontak.md
+│   │   │   ├── peta-situs.md
+│   │   │   └── tentang-kkn.md
+│   │   ├── pariwisata/
+│   │   │   ├── pantai-ngedan copy 2.md
+│   │   │   ├── pantai-ngedan copy 3.md
+│   │   │   ├── pantai-ngedan copy.md
+│   │   │   ├── pantai-ngedan.md
+│   │   │   └── pantai-ngluwen.md
+│   │   ├── potensi/
+│   │   │   ├── gaplek copy.md
+│   │   │   ├── gaplek.md
+│   │   │   ├── gula-aren-asli.md
+│   │   │   └── keripik-singkong.md
+│   │   ├── profil/
+│   │   │   ├── data.json
+│   │   │   └── index.md
+│   │   └── struktur/
+│   │       ├── kepala-dusun.md
+│   │       ├── pak-rt-01.md
+│   │       ├── pak-rt-02.md
+│   │       ├── pak-rt-03.md
+│   │       └── pak-rw.md
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── 404.astro
+│   │   ├── dashboard.astro
+│   │   ├── galeri.astro
+│   │   ├── index.astro
+│   │   ├── kebijakan-privasi.astro
+│   │   ├── kontak.astro
+│   │   ├── pariwisata.astro
+│   │   ├── pariwisata/[slug].astro
+│   │   ├── peta-situs.astro
+│   │   ├── potensi.astro
+│   │   ├── potensi/[slug].astro
+│   │   ├── profil.astro
+│   │   ├── survei.astro
+│   │   └── tentang-kkn.astro
+│   ├── styles/
+│   │   ├── fonts.css
+│   │   └── global.css
+│   └── utils/
+│       └── config.ts
+├── .vscode/
+│   ├── extensions.json
+│   └── launch.json
+└── ...
+```

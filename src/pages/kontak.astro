@@ -12,23 +12,61 @@ import type { ImageMetadata } from 'astro';
 // Fetch contact page content from the pages collection
 const allPages = await getCollection('pages');
 const contactPageContent = allPages.find(page => page.slug.includes('kontak'));
-const data = contactPageContent ? contactPageContent.data : {
-  judul: "Kontak",
-  deskripsi: "Hubungi perangkat dusun atau kirimkan aspirasi Anda",
+
+// Type guard to check if the content has informasiKontak property
+const hasInformasiKontak = (data: any): data is {
+  judul: string;
+  deskripsi: string;
   informasiKontak: {
-    alamat: "",
-    email: "",
-    telepon: "",
-    mapsUrl: "",
+    alamat: string;
+    email: string;
+    telepon: string;
+    mapsUrl: string;
     formAspirasi: {
-      judul: "",
-      deskripsi: "",
-      formActionUrl: "",
-      entry: {}
-    },
-    kontakPemerintah: []
-  }
+      judul: string;
+      deskripsi: string;
+      formActionUrl: string;
+      entry: {
+        nama: string;
+        kontak: string;
+        subjek: string;
+        pesan: string;
+      };
+    };
+    kontakPemerintah: {
+      fotoUrl: string;
+      nama: string;
+      jabatan: string;
+      telepon: string;
+    }[];
+  };
+} => {
+  return data && typeof data === 'object' && 'informasiKontak' in data;
 };
+
+const data = contactPageContent && hasInformasiKontak(contactPageContent.data) ? 
+  contactPageContent.data : {
+    judul: "Kontak",
+    deskripsi: "Hubungi perangkat dusun atau kirimkan aspirasi Anda",
+    informasiKontak: {
+      alamat: "",
+      email: "",
+      telepon: "",
+      mapsUrl: "",
+      formAspirasi: {
+        judul: "",
+        deskripsi: "",
+        formActionUrl: "",
+        entry: {
+          nama: "",
+          kontak: "",
+          subjek: "",
+          pesan: ""
+        }
+      },
+      kontakPemerintah: []
+    }
+  };
 
 // Use the correctly typed glob import for dynamic images
 const allImages = await import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif,webp,svg}');
