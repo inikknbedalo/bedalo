@@ -169,103 +169,138 @@ collections:
                   - { label: "Teks Alternatif", name: "alt", widget: "string" }
   - name: "kebijakan-privasi"
     label: "📋 Kebijakan Privasi"
-    folder: "src/content/pages"
-    create: false  # Single file configuration
-    fields:
-      - { label: "Judul", name: "judul", widget: "string" }
-      - { label: "Isi Kebijakan", name: "isiKebijakan", widget: "markdown" }
-      - { label: "Tanggal Update", name: "tanggalUpdate", widget: "datetime" }
+    files:
+      - file: "src/content/pages/kebijakan-privasi.md"
+        label: "Kebijakan Privasi"
+        name: "kebijakan_privasi"
+        fields:
+          - { label: "Judul", name: "judul", widget: "string" }
+          - { label: "Isi Kebijakan", name: "isiKebijakan", widget: "markdown" }
+          - { label: "Tanggal Update", name: "tanggalUpdate", widget: "datetime" }
   - name: "kontak"
     label: "📞 Halaman Kontak"
-    folder: "src/content/pages"
-    create: false  # Single file configuration
-    fields:
-      - { label: "Judul", name: "judul", widget: "string" }
-      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-      - name: "informasiKontak"
-        label: "Informasi Kontak"
-        widget: "object"
+    files:
+      - file: "src/content/pages/kontak.md"
+        label: "Kontak"
+        name: "kontak"
         fields:
-          - { label: "Alamat", name: "alamat", widget: "text" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Telepon", name: "telepon", widget: "string" }
-          - { label: "URL Peta", name: "mapsUrl", widget: "string" }
+          - { label: "Judul", name: "judul", widget: "string" }
+          - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+          - name: "informasiKontak"
+            label: "Informasi Kontak"
+            widget: "object"
+            fields:
+              - { label: "Alamat", name: "alamat", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Telepon", name: "telepon", widget: "string" }
+              - { label: "URL Peta", name: "mapsUrl", widget: "string" }
+              - name: "formAspirasi"
+                label: "Formulir Aspirasi"
+                widget: "object"
+                fields:
+                  - { label: "Judul Formulir", name: "judul", widget: "string" }
+                  - { label: "Deskripsi Formulir", name: "deskripsi", widget: "text" }
+                  - { label: "URL Action Form", name: "formActionUrl", widget: "string" }
+                  - name: "entry"
+                    label: "Field Names"
+                    widget: "object"
+                    fields:
+                      - { label: "Nama Field", name: "nama", widget: "string" }
+                      - { label: "Kontak Field", name: "kontak", widget: "string" }
+                      - { label: "Subjek Field", name: "subjek", widget: "string" }
+                      - { label: "Pesan Field", name: "pesan", widget: "string" }
+              - name: "kontakPemerintah"
+                label: "Kontak Perangkat Dusun"
+                widget: "list"
+                summary: "{{fields.nama}}"
+                fields:
+                  - { label: "Foto", name: "fotoUrl", widget: "image" }
+                  - { label: "Nama", name: "nama", widget: "string" }
+                  - { label: "Jabatan", name: "jabatan", widget: "string" }
+                  - { label: "Telepon", name: "telepon", widget: "string" }
   - name: "peta-situs"
     label: "🗺️ Peta Situs"
-    folder: "src/content/pages"
-    create: false  # Single file configuration
-    fields:
-      - { label: "Judul", name: "judul", widget: "string" }
-      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-      - name: "tautanSitemap"
-        label: "Tautan Peta Situs"
-        widget: "list"
+    files:
+      - file: "src/content/pages/peta-situs.md"
+        label: "Peta Situs"
+        name: "peta_situs"
         fields:
-          - { label: "Judul Tautan", name: "judul", widget: "string" }
-          - { label: "URL", name: "url", widget: "string" }
+          - { label: "Judul", name: "judul", widget: "string" }
           - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-  - name: "tentang-kkn"
-    label: "🎓 Tentang KKN"
-    folder: "src/content/pages"
-    create: false  # Single file configuration
-    fields:
-      - { label: "Judul", name: "judul", widget: "string" }
-      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-      - name: "informasiKKN"
-        label: "Informasi KKN"
-        widget: "object"
-        fields:
-          - { label: "Judul Informasi", name: "judulInfo", widget: "string" }
-          - { label: "Isi Informasi", name: "isiInfo", widget: "markdown" }
-          - name: "timKKN"
-            label: "Tim KKN"
+          - name: "tautanSitemap"
+            label: "Tautan Peta Situs"
             widget: "list"
             fields:
-              - { label: "Nama", name: "nama", widget: "string" }
-              - { label: "Jabatan", name: "jabatan", widget: "string" }
+              - { label: "Judul Tautan", name: "judul", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+  - name: "tentang-kkn"
+    label: "🎓 Tentang KKN"
+    files:
+      - file: "src/content/pages/tentang-kkn.md"
+        label: "Tentang KKN"
+        name: "tentang_kkn"
+        fields:
+          - { label: "Judul", name: "judul", widget: "string" }
+          - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+          - name: "informasiKKN"
+            label: "Informasi KKN"
+            widget: "object"
+            fields:
+              - { label: "Judul Informasi", name: "judulInfo", widget: "string" }
+              - { label: "Isi Informasi", name: "isiInfo", widget: "markdown" }
+              - { label: "Gambar", name: "gambarUrl", widget: "image" }
+              - name: "timKKN"
+                label: "Tim KKN"
+                widget: "list"
+                fields:
+                  - { label: "Nama", name: "nama", widget: "string" }
+                  - { label: "Jabatan", name: "jabatan", widget: "string" }
   - name: "pariwisata-info"
     label: "🏞️ Informasi Pariwisata"
-    folder: "src/content/info"
-    create: false  # Single file configuration
-    fields:
-      - name: "destinasi"
-        label: "Destinasi Wisata"
-        widget: "list"
+    files:
+      - file: "src/content/info/pariwisata.md"
+        label: "Informasi Pariwisata"
+        name: "pariwisata_info"
         fields:
-          - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
-          - { label: "Teks Alternatif", name: "altText", widget: "string" }
-          - { label: "Judul", name: "judul", widget: "string" }
-          - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-          - { label: "Link Peta", name: "petaLink", widget: "string" }
-      - name: "tradisi"
-        label: "Tradisi"
-        widget: "list"
-        fields:
-          - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
-          - { label: "Teks Alternatif", name: "altText", widget: "string" }
-          - { label: "Judul", name: "judul", widget: "string" }
-          - name: "deskripsi"
-            label: "Deskripsi"
+          - name: "destinasi"
+            label: "Destinasi Wisata"
             widget: "list"
-            field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
-      - name: "kesenian"
-        label: "Kesenian"
-        widget: "list"
-        fields:
-          - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
-          - { label: "Teks Alternatif", name: "altText", widget: "string" }
-          - { label: "Judul", name: "judul", widget: "string" }
-          - name: "deskripsi"
-            label: "Deskripsi"
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
+              - { label: "Teks Alternatif", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Link Peta", name: "petaLink", widget: "string" }
+          - name: "tradisi"
+            label: "Tradisi"
             widget: "list"
-            field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
-      - name: "kalender"
-        label: "Kalender Acara"
-        widget: "list"
-        fields:
-          - { label: "Acara", name: "acara", widget: "string" }
-          - { label: "Deskripsi", name: "deskripsi", widget: "text" }
-          - { label: "Tanggal", name: "tanggal", widget: "string" }
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
+              - { label: "Teks Alternatif", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - name: "deskripsi"
+                label: "Deskripsi"
+                widget: "list"
+                field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
+          - name: "kesenian"
+            label: "Kesenian"
+            widget: "list"
+            fields:
+              - { label: "URL Gambar", name: "gambarUrl", widget: "image" }
+              - { label: "Teks Alternatif", name: "altText", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - name: "deskripsi"
+                label: "Deskripsi"
+                widget: "list"
+                field: { label: "Paragraf Deskripsi", name: "deskripsi", widget: "text" }
+          - name: "kalender"
+            label: "Kalender Acara"
+            widget: "list"
+            fields:
+              - { label: "Acara", name: "acara", widget: "string" }
+              - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+              - { label: "Tanggal", name: "tanggal", widget: "string" }
 
   # ===================================================================
   # Koleksi Konten Dinamis
